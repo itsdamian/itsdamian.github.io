@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林書弘 - Senior PHP Developer</title>
+    <meta name="description" content="林書弘的個人履歷 - 資深後端工程師，專精於PHP、Python開發">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-xl font-bold text-blue-600">林書弘</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="nav-link" data-lang-key="nav.about">關於我</a>
+                    <a href="#experience" class="nav-link" data-lang-key="nav.experience">工作經驗</a>
+                    <a href="#skills" class="nav-link" data-lang-key="nav.skills">技能專長</a>
+                    <a href="#projects" class="nav-link" data-lang-key="nav.projects">專案作品</a>
+                    <a href="#education" class="nav-link" data-lang-key="nav.education">教育背景</a>
+                    <a href="#contact" class="nav-link" data-lang-key="nav.contact">聯絡資訊</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="zh">中文</button>
+                        <button class="lang-btn" data-lang="en">English</button>
+                        <button class="lang-btn" data-lang="ko">한국어</button>
+                    </div>
+                    <button class="md:hidden" id="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-4 py-2 space-y-2 bg-gray-50">
+                <a href="#about" class="block py-2 nav-link" data-lang-key="nav.about">關於我</a>
+                <a href="#experience" class="block py-2 nav-link" data-lang-key="nav.experience">工作經驗</a>
+                <a href="#skills" class="block py-2 nav-link" data-lang-key="nav.skills">技能專長</a>
+                <a href="#projects" class="block py-2 nav-link" data-lang-key="nav.projects">專案作品</a>
+                <a href="#education" class="block py-2 nav-link" data-lang-key="nav.education">教育背景</a>
+                <a href="#contact" class="block py-2 nav-link" data-lang-key="nav.contact">聯絡資訊</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-8 lg:mb-0">
+                    <h1 class="text-4xl lg:text-6xl font-bold text-gray-800 mb-4">
+                        <span data-lang-key="hero.greeting">你好，我是</span>
+                        <span class="text-blue-600">林書弘</span>
+                    </h1>
+                    <h2 class="text-2xl lg:text-3xl text-gray-600 mb-6" data-lang-key="hero.title">Senior PHP Developer</h2>
+                    <p class="text-lg text-gray-700 mb-8 leading-relaxed" data-lang-key="hero.description">
+                        熟悉PHP, Python的後端工程師，也具有前端基礎技術包含HTML, JS JQuery等。專注於建立高效能、可擴展的網路應用程式。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors" data-lang-key="hero.contact">聯絡我</a>
+                        <a href="#projects" class="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors" data-lang-key="hero.projects">查看作品</a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex justify-center">
+                    <img src="image.jpg" alt="林書弘" class="w-64 h-64 rounded-full object-cover shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12" data-lang-key="about.title">關於我</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6" data-lang-key="about.subtitle">專業背景</h3>
+                    <p class="text-gray-700 leading-relaxed mb-6" data-lang-key="about.description">
+                        我是一名資深的後端工程師，擁有豐富的PHP和Python開發經驗。專注於建立高效能、可擴展的網路應用程式，並具備完整的前端技術基礎。
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
+                            <span data-lang-key="about.location">New Taipei City, Taiwan</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-blue-600 mr-3"></i>
+                            <a href="mailto:greetinitsdamian@gmail.com" class="text-blue-600 hover:underline">greetinitsdamian@gmail.com</a>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-blue-600 mr-3"></i>
+                            <a href="tel:+886978609130" class="text-blue-600 hover:underline">+886 978 609 130</a>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fab fa-github text-blue-600 mr-3"></i>
+                            <a href="https://github.com/itsdamian" target="_blank" class="text-blue-600 hover:underline">github.com/itsdamian</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-6" data-lang-key="about.languages">語言能力</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span data-lang-key="about.chinese">中文</span>
+                                <span class="text-sm text-gray-600" data-lang-key="about.native">母語</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span data-lang-key="about.english">英文</span>
+                                <span class="text-sm text-gray-600" data-lang-key="about.fluent">精通</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span data-lang-key="about.korean">韓文</span>
+                                <span class="text-sm text-gray-600" data-lang-key="about.readable">可讀可說</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12" data-lang-key="experience.title">工作經驗</h2>
+            <div class="space-y-8">
+                <!-- Current Job -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border-l-4 border-blue-600">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold" data-lang-key="experience.current.title">Full Stack Engineer</h3>
+                            <p class="text-blue-600 font-medium">YFLD Health Co., Ltd</p>
+                        </div>
+                        <span class="text-gray-600 mt-2 md:mt-0" data-lang-key="experience.current.period">May 2025 - Present</span>
+                    </div>
+                    <p class="text-gray-700" data-lang-key="experience.current.description">全端工程師，負責開發和維護健康相關的網路應用程式。</p>
+                </div>
+
+                <!-- Previous Jobs -->
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold" data-lang-key="experience.astral.title">資深後端工程師</h3>
+                            <p class="text-blue-600 font-medium">AstralWeb</p>
+                        </div>
+                        <span class="text-gray-600 mt-2 md:mt-0" data-lang-key="experience.astral.period">Feb 2024 - Apr 2025</span>
+                    </div>
+                    <p class="text-gray-700" data-lang-key="experience.astral.description">負責後端系統開發和維護，專注於高效能應用程式的建構。</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold" data-lang-key="experience.twhg.title">Web Developer</h3>
+                            <p class="text-blue-600 font-medium">TWHG IT Department</p>
+                        </div>
+                        <span class="text-gray-600 mt-2 md:mt-0" data-lang-key="experience.twhg.period">Aug 2018 - May 2019</span>
+                    </div>
+                    <p class="text-gray-700" data-lang-key="experience.twhg.description">網頁開發工程師，負責企業內部系統的開發和維護。</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold" data-lang-key="experience.adbert.title">Backend Engineer</h3>
+                            <p class="text-blue-600 font-medium">ADBERT</p>
+                        </div>
+                        <span class="text-gray-600 mt-2 md:mt-0" data-lang-key="experience.adbert.period">Dec 2017 - Jul 2018</span>
+                    </div>
+                    <p class="text-gray-700" data-lang-key="experience.adbert.description">後端工程師，負責廣告系統的後端開發和API設計。</p>
+                </div>
+
+                <!-- Career Transition -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border-l-4 border-green-600">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold" data-lang-key="experience.educator.title">English & Math Educator</h3>
+                            <p class="text-green-600 font-medium" data-lang-key="experience.educator.company">Creativity Kindergarten & Creativity Cram School (Kaohsiung)</p>
+                        </div>
+                        <span class="text-gray-600 mt-2 md:mt-0" data-lang-key="experience.educator.period">Apr 2020 - Nov 2023</span>
+                    </div>
+                    <ul class="text-gray-700 space-y-2">
+                        <li data-lang-key="experience.educator.achievement1">• 設計幼兒和中等教育的模組化英語和數學課程計劃</li>
+                        <li data-lang-key="experience.educator.achievement2">• 運用工程思維開發課程地圖和個性化學習系統</li>
+                        <li data-lang-key="experience.educator.achievement3">• 使用試算表和視覺化進行跨群組績效分析</li>
+                        <li data-lang-key="experience.educator.achievement4">• 完成早期教育方法和學習心理學課程</li>
+                        <li data-lang-key="experience.educator.achievement5">• 通過個人專案和線上學習保持兼職編程技能</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12" data-lang-key="skills.title">技能專長</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600" data-lang-key="skills.programming">程式語言</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span>Python</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>PHP</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>JavaScript</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="far fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600" data-lang-key="skills.testing">測試框架</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span>Pytest</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>PHPUnit</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600" data-lang-key="skills.tools">開發工具</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span>Docker</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Git</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600" data-lang-key="skills.api">API 技術</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span>RESTful API</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>GraphQL</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="far fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600" data-lang-key="skills.web">前端技術</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span>HTML/CSS</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="far fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>jQuery</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="far fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600" data-lang-key="skills.certification">認證</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 rounded-lg">
+                            <div class="font-medium text-sm" data-lang-key="skills.cert1.title">Prompt Design in Vertex AI</div>
+                            <div class="text-xs text-gray-600" data-lang-key="skills.cert1.issuer">Google Cloud Skills Boost</div>
+                            <div class="text-xs text-gray-500">July 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12" data-lang-key="projects.title">專案作品</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" data-lang-key="projects.scan.title">掃描覆核專案</h3>
+                        <p class="text-gray-700 mb-4" data-lang-key="projects.scan.description">開發文件掃描和覆核系統，提升工作效率和準確性。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">PHP</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" data-lang-key="projects.review.title">商品評論專案</h3>
+                        <p class="text-gray-700 mb-4" data-lang-key="projects.review.description">建立商品評論管理系統，包含評分、回覆和統計分析功能。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">PHP</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" data-lang-key="projects.social.title">Social Login模組</h3>
+                        <p class="text-gray-700 mb-4" data-lang-key="projects.social.description">整合多種社交媒體登入功能，提供便捷的用戶認證體驗。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">PHP</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">OAuth</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" data-lang-key="projects.linebot.title">LineBot + AI LLM Modal</h3>
+                        <p class="text-gray-700 mb-4" data-lang-key="projects.linebot.description">結合Line機器人和AI語言模型，提供智能對話服務。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Line API</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">AI/LLM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3" data-lang-key="projects.capstone.title">畢業專案：視覺輔助系統</h3>
+                        <p class="text-gray-700 mb-4" data-lang-key="projects.capstone.description">開發圖像識別行動系統，協助視障用戶識別物體和環境。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Computer Vision</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12" data-lang-key="education.title">教育背景</h2>
+            <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold" data-lang-key="education.degree">資訊管理學士</h3>
+                        <p class="text-blue-600 font-medium" data-lang-key="education.school">國立高雄大學</p>
+                        <p class="text-gray-600" data-lang-key="education.location">台灣</p>
+                    </div>
+                    <span class="text-gray-600 mt-2 md:mt-0" data-lang-key="education.period">2013 - 2017</span>
+                </div>
+                <div class="border-l-4 border-blue-600 pl-6">
+                    <h4 class="text-lg font-semibold mb-3" data-lang-key="education.capstone.title">畢業專案</h4>
+                    <p class="text-gray-700" data-lang-key="education.capstone.description">
+                        開發圖像識別行動系統，協助視障用戶識別物體和環境。運用機器學習和電腦視覺技術，為視障人士提供實用的輔助工具。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12" data-lang-key="contact.title">聯絡資訊</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6" data-lang-key="contact.subtitle">讓我們開始合作</h3>
+                    <p class="text-gray-700 mb-8" data-lang-key="contact.description">
+                        如果您對我的技能和經驗感興趣，或者有任何專案需要討論，請隨時與我聯絡。我很樂意與您討論如何為您的專案帶來價值。
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-blue-600 mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-medium" data-lang-key="contact.email.label">電子郵件</p>
+                                <a href="mailto:greetinitsdamian@gmail.com" class="text-blue-600 hover:underline">greetinitsdamian@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-blue-600 mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-medium" data-lang-key="contact.phone.label">電話</p>
+                                <a href="tel:+886978609130" class="text-blue-600 hover:underline">+886 978 609 130</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fab fa-github text-blue-600 mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-medium" data-lang-key="contact.github.label">GitHub</p>
+                                <a href="https://github.com/itsdamian" target="_blank" class="text-blue-600 hover:underline">github.com/itsdamian</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-medium" data-lang-key="contact.location.label">所在地</p>
+                                <p data-lang-key="contact.location.value">New Taipei City, Taiwan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-6" data-lang-key="contact.form.title">發送訊息</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2" data-lang-key="contact.form.name">姓名</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2" data-lang-key="contact.form.email">電子郵件</label>
+                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2" data-lang-key="contact.form.message">訊息</label>
+                            <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors" data-lang-key="contact.form.submit">發送訊息</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p>&copy; 2025 林書弘. <span data-lang-key="footer.rights">保留所有權利。</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
