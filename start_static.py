@@ -27,8 +27,11 @@ def start_static_server():
         print("   請確認 index.html 文件在 static/ 目錄中")
         return
     
-    # 切換到 static 目錄
-    os.chdir('static')
+    # 檢查是否在正確的目錄
+    if not os.path.exists('index.html'):
+        print("❌ Error: index.html 不存在！")
+        print("   請確認 index.html 文件在當前目錄中")
+        return
     
     # 設置端口
     PORT = 8000
@@ -39,7 +42,7 @@ def start_static_server():
     try:
         with socketserver.TCPServer(("", PORT), Handler) as httpd:
             print("🚀 Starting Static File Server...")
-            print("📁 Serving files from: static/")
+            print("📁 Serving files from: current directory")
             print("🌐 Server URL: http://localhost:8000")
             print("📧 Contact form: Formspree (no backend needed)")
             print("\n⚠️  Remember to:")

@@ -40,7 +40,7 @@ cd profolio_damian
    - 創建新的表單並獲取表單 ID
 
 2. **更新表單 ID**
-   - 在 `static/index.html` 中找到聯絡表單
+   - 在 `index.html` 中找到聯絡表單
    - 將 `YOUR_FORM_ID` 替換為您的實際表單 ID
 
 ### 3. 啟動本地服務器
@@ -52,7 +52,6 @@ python start_static.py
 或使用 Python 內建服務器：
 
 ```bash
-cd static
 python -m http.server 8000
 ```
 
@@ -64,14 +63,13 @@ python -m http.server 8000
 
 ```
 profolio_damian/
-├── start_static.py     # 靜態文件服務器
+├── index.html         # 主頁面
+├── styles.css         # 自定義樣式
+├── script.js          # JavaScript 功能
+├── image.jpg          # 個人照片
+├── start_static.py    # 靜態文件服務器
 ├── deploy.md          # 部署說明
 ├── README.md          # 專案說明
-├── static/            # 靜態文件
-│   ├── index.html     # 主頁面
-│   ├── styles.css     # 自定義樣式
-│   ├── script.js      # JavaScript 功能
-│   └── image.jpg      # 個人照片
 └── app.py             # Flask 後端 (可選)
 ```
 
@@ -113,20 +111,20 @@ python start_static.py
 ## 自定義配置
 
 ### 修改個人資訊
-編輯 `static/index.html` 中的內容：
+編輯 `index.html` 中的內容：
 - 個人資料
 - 工作經驗
 - 技能專長
 - 專案作品
 
 ### 修改樣式
-編輯 `static/styles.css` 來自定義：
+編輯 `styles.css` 來自定義：
 - 顏色主題
 - 字體樣式
 - 動畫效果
 
 ### 修改功能
-編輯 `static/script.js` 來調整：
+編輯 `script.js` 來調整：
 - 語言翻譯
 - 動畫效果
 - 表單處理
@@ -141,7 +139,7 @@ python start_static.py
    - 確認表單欄位名稱正確
 
 2. **靜態文件無法載入**
-   - 確認文件在 `static/` 目錄中
+   - 確認所有文件都在根目錄中
    - 檢查文件權限
    - 清除瀏覽器快取
 
@@ -164,4 +162,4 @@ MIT License
 
 ---
 
-**注意**：請記得更新 `static/index.html` 中的 Formspree 表單 ID 才能正常使用聯絡表單功能。 
+**注意**：請記得更新 `index.html` 中的 Formspree 表單 ID 才能正常使用聯絡表單功能。 

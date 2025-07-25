@@ -13,8 +13,8 @@ CORS(app)  # 允許跨域請求
 # 配置
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SENDER_EMAIL = "your-email@gmail.com"  # 替換為您的 Gmail
-SENDER_PASSWORD = "your-app-password"  # 替換為您的應用密碼
+SENDER_EMAIL = "greetinitsdamian@gmail.com"  # 替換為您的 Gmail
+SENDER_PASSWORD = "greetinitsdamian"  # 替換為您的應用密碼
 RECIPIENT_EMAIL = "greetinitsdamian@gmail.com"
 
 def validate_email(email):
