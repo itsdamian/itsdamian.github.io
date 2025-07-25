@@ -86,6 +86,7 @@ const translations = {
         'projects.social.description': '整合 Facebook、Line、Google 等多種社交媒體登入功能，提供便捷的用戶認證體驗。',
         'projects.linebot.title': 'LineBot + AI LLM Modal',
         'projects.linebot.description': '使用 Laravel 框架開發 LineBot，結合 AI 語言模型，提供智能對話服務。',
+        'projects.linebot.docs': '查看開發文件',
         'projects.capstone.title': '畢業專案：視覺輔助系統',
         'projects.capstone.description': '開發圖像識別行動系統，協助視障用戶識別物體和環境。',
         
@@ -203,6 +204,7 @@ const translations = {
         'projects.social.description': 'Integrated Facebook, Line, Google and other social media login features to provide convenient user authentication experience.',
         'projects.linebot.title': 'LineBot + AI LLM Modal',
         'projects.linebot.description': 'Developed LineBot using Laravel framework combined with AI language model to provide intelligent conversation services.',
+        'projects.linebot.docs': 'View Documentation',
         'projects.capstone.title': 'Capstone Project: Visual Assistance System',
         'projects.capstone.description': 'Developed image recognition mobile system to assist visually impaired users in identifying objects and environments.',
         
@@ -320,6 +322,7 @@ const translations = {
         'projects.social.description': 'Facebook, Line, Google 및 기타 소셜 미디어 로그인 기능을 통합하여 편리한 사용자 인증 경험을 제공합니다.',
         'projects.linebot.title': 'LineBot + AI LLM Modal',
         'projects.linebot.description': 'Laravel 프레임워크를 사용하여 LineBot을 개발하고 AI 언어 모델과 결합하여 지능형 대화 서비스를 제공합니다.',
+        'projects.linebot.docs': '문서 보기',
         'projects.capstone.title': '졸업 프로젝트: 시각 보조 시스템',
         'projects.capstone.description': '시각 장애 사용자가 물체와 환경을 식별하는 데 도움이 되는 이미지 인식 모바일 시스템을 개발했습니다.',
         
@@ -454,8 +457,9 @@ function initializeScrollIndicator() {
     });
 }
 
-// Smooth scrolling for navigation links
+// Smooth scrolling for navigation links and hero buttons
 function initializeSmoothScrolling() {
+    // Navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -468,6 +472,34 @@ function initializeSmoothScrolling() {
             }
         });
     });
+    
+    // Hero section buttons
+    const aboutBtn = document.getElementById('about-btn');
+    const projectsBtn = document.getElementById('projects-btn');
+    
+    if (aboutBtn) {
+        aboutBtn.addEventListener('click', function() {
+            const target = document.getElementById('about');
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
+    
+    if (projectsBtn) {
+        projectsBtn.addEventListener('click', function() {
+            const target = document.getElementById('projects');
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
 }
 
 // Add loading animation to skill bars
