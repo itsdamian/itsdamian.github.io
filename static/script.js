@@ -253,7 +253,7 @@ const translations = {
         // About Section
         'about.title': '소개',
         'about.subtitle': '전문 배경',
-        'about.description': 'PHP와 Python 개발에 풍부한 경험을 가진 시니어 백엔드 엔지니어입니다. 견고한 프론트엔드 기술 기반으로 고성능, 확장 가능한 웹 애플리케이션 구축에 중점을 둡니다.',
+        'about.description': 'PHP와 Python 개발에 풍부한 경험을 가진 시니어 백엔드 엔지니어입니다. 고성능, 확장 가능한 웹 애플리케이션 구축에 중점을 두며 견고한 프론트엔드 기술 기반을 갖추고 있습니다.',
         'about.location': 'New Taipei City, Taiwan',
         'about.languages': '언어 능력',
         'about.chinese': '중국어',
@@ -261,42 +261,42 @@ const translations = {
         'about.english': '영어',
         'about.fluent': '유창함',
         'about.korean': '한국어',
-        'about.readable': '읽기/말하기 가능',
+        'about.readable': '읽기 및 말하기 가능',
         
         // Experience Section
         'experience.title': '경력',
-        'experience.current.title': '풀스택 엔지니어',
+        'experience.current.title': 'Full Stack Engineer',
         'experience.current.period': '2025년 5월 - 현재',
         'experience.current.achievement1': '• PHP + Laravel + Python 기술 스택을 사용한 풀스택 개발',
-        'experience.current.achievement2': '• VSCode SFTP 설정을 자동으로 생성하거나 업데이트하는 Python 도구 개발, 원격 배포 프로세스 간소화',
-        'experience.current.achievement3': '• 바코드 스캐너 작업 흐름과 결합된 기업 내부 "출하 검토 관리 시스템" 개발, 출하 효율성 및 정확성 향상',
-        'experience.current.achievement4': '• 기능 모듈화 아키텍처 설계로 코드 유지보수성 및 확장성 향상',
-        'experience.current.achievement5': '• Git 버전 관리 도입 및 Docker 컨테이너화 배포 통합',
-        'experience.current.achievement6': '• 시스템 출시 후 출하 오류율 50% 이상 감소, 워크플로우 최적화 및 인적 오류 감소',
+        'experience.current.achievement2': '• VSCode SFTP 설정을 자동으로 생성하거나 업데이트하는 Python 도구 개발',
+        'experience.current.achievement3': '• 바코드 스캐너 통합으로 기업 내부 "출하 검토 관리 시스템" 개발',
+        'experience.current.achievement4': '• 코드 유지보수성과 확장성을 향상시키는 모듈형 기능 아키텍처 설계',
+        'experience.current.achievement5': '• Git 버전 관리 구현 및 Docker 컨테이너화 배포 통합',
+        'experience.current.achievement6': '• 시스템 출시 후 출하 오류율 50% 이상 감소',
         'experience.astral.title': '시니어 백엔드 엔지니어',
         'experience.astral.period': '2024년 2월 - 2025년 4월',
-        'experience.astral.achievement1': '• 고트래픽 Magento 2 전자상거래 시스템에서 20+ 모듈화 기능 개발 주도, 확장성 및 유지보수성 최적화',
-        'experience.astral.achievement2': '• 재사용 가능한 OAuth 기반 소셜 로그인 모듈 설계 및 구현, 제3자 의존성 비용 대폭 감소',
-        'experience.astral.achievement3': '• 인프라 팀과 협력하여 Docker를 통한 서비스 컨테이너화 및 GitHub Actions CI/CD 파이프라인 구현',
-        'experience.astral.achievement4': '• Magento 2 네이티브 cron 기능을 사용한 스케줄 작업 자동화 및 SMS 게이트웨이 등 제3자 API 통합',
-        'experience.astral.achievement5': '• Redis 기반 속도 제한 및 캐싱 레이어 통합, 피크 부하 시 시스템 복원력 보장, 주요 엔드포인트에서 최대 30% 지연 시간 감소',
+        'experience.astral.achievement1': '• 고트래픽 Magento 2 전자상거래 시스템에서 20+ 모듈형 기능 개발',
+        'experience.astral.achievement2': '• 재사용 가능한 OAuth 기반 소셜 로그인 모듈 설계 및 구현',
+        'experience.astral.achievement3': '• Docker를 통한 서비스 컨테이너화 및 GitHub Actions CI/CD 파이프라인 구현',
+        'experience.astral.achievement4': '• Magento 2 네이티브 cron 기능을 사용한 자동화된 예약 작업',
+        'experience.astral.achievement5': '• Redis 기반 속도 제한 및 캐싱 레이어 통합',
         'experience.twhg.title': '웹 개발자',
         'experience.twhg.period': '2018년 8월 - 2019년 5월',
-        'experience.twhg.achievement1': '• 레거시 시스템을 Laravel 프레임워크로 마이그레이션, 유지보수성 및 성능 향상',
-        'experience.twhg.achievement2': '• MySQL을 사용한 부동산 관리 플랫폼 재구축, 쿼리 효율성 및 검색 순위 로직 향상',
+        'experience.twhg.achievement1': '• 레거시 시스템을 Laravel 프레임워크로 마이그레이션',
+        'experience.twhg.achievement2': '• MySQL을 사용한 부동산 관리 플랫폼 재구축',
         'experience.twhg.achievement3': '• 자동화된 상호작용을 위한 LineBot 생성 및 배포',
         'experience.adbert.title': '백엔드 엔지니어',
         'experience.adbert.period': '2017년 12월 - 2018년 7월',
-        'experience.adbert.achievement1': '• Laravel 및 RESTful API 설계를 사용한 통신 광고 플랫폼 백엔드 개발',
-        'experience.adbert.achievement2': '• 실시간 이벤트 데이터 처리 및 사용자 세분화를 위한 Redis 및 MongoDB 활용',
-        'experience.adbert.achievement3': '• 원시 백엔드 로그에서 사용자 행동 인사이트를 생성하기 위해 분석가와 협력',
-        'experience.educator.title': '영어 & 수학 교육자',
+        'experience.adbert.achievement1': '• Laravel과 RESTful API 설계를 사용한 통신 광고 플랫폼 백엔드 개발',
+        'experience.adbert.achievement2': '• 실시간 이벤트 데이터 처리 및 사용자 세분화를 위한 Redis와 MongoDB 활용',
+        'experience.adbert.achievement3': '• 원시 백엔드 로그에서 사용자 행동 인사이트 생성',
+        'experience.educator.title': '영어 및 수학 교육자',
         'experience.educator.company': 'Creativity Kindergarten & Creativity Cram School (Kaohsiung)',
         'experience.educator.period': '2020년 4월 - 2023년 11월',
-        'experience.educator.achievement1': '• 유아 및 중등 교육을 위한 모듈화된 영어 및 수학 수업 계획 설계',
-        'experience.educator.achievement2': '• 엔지니어링 마인드셋을 활용하여 커리큘럼 맵과 개인화 학습 시스템 개발',
+        'experience.educator.achievement1': '• 유아 및 중등 교육을 위한 모듈형 영어 및 수학 수업 계획 설계',
+        'experience.educator.achievement2': '• 커리큘럼 맵과 개인화된 학습 시스템 개발을 위한 엔지니어링 사고 활용',
         'experience.educator.achievement3': '• 스프레드시트와 시각화를 사용한 코호트 간 성과 분석 수행',
-        'experience.educator.achievement4': '• 조기 교육 방법론 및 학습 심리학 과정 수료',
+        'experience.educator.achievement4': '• 조기 교육 방법론 및 학습 심리학 과정 완료',
         'experience.educator.achievement5': '• 개인 프로젝트와 온라인 학습을 통한 파트타임 코딩 기술 유지',
         
         // Skills Section
@@ -313,15 +313,15 @@ const translations = {
         // Projects Section
         'projects.title': '프로젝트',
         'projects.scan.title': '스캔 검토 프로젝트',
-        'projects.scan.description': 'PHP + Laravel을 사용하여 작업 효율성과 정확성을 향상시키는 문서 스캔 및 검토 시스템 개발',
+        'projects.scan.description': 'PHP + Laravel을 사용하여 문서 스캔 및 검토 시스템을 개발하여 작업 효율성과 정확성을 향상시켰습니다.',
         'projects.review.title': '상품 리뷰 프로젝트',
-        'projects.review.description': 'PHP + MySQL + Magento 2를 사용하여 평점, 답글, 통계 분석 기능을 포함한 상품 리뷰 관리 시스템 구축',
+        'projects.review.description': 'PHP + MySQL + Magento 2를 사용하여 평점, 답변 및 통계 분석 기능이 포함된 상품 리뷰 관리 시스템을 구축했습니다.',
         'projects.social.title': '소셜 로그인 모듈',
-        'projects.social.description': 'Facebook, Line, Google 등 다양한 소셜 미디어 로그인 기능을 통합하여 편리한 사용자 인증 경험 제공',
+        'projects.social.description': 'Facebook, Line, Google 및 기타 소셜 미디어 로그인 기능을 통합하여 편리한 사용자 인증 경험을 제공합니다.',
         'projects.linebot.title': 'LineBot + AI LLM Modal',
-        'projects.linebot.description': 'Laravel 프레임워크를 사용하여 LineBot을 개발하고 AI 언어 모델과 결합하여 지능형 대화 서비스 제공',
+        'projects.linebot.description': 'Laravel 프레임워크를 사용하여 LineBot을 개발하고 AI 언어 모델과 결합하여 지능형 대화 서비스를 제공합니다.',
         'projects.capstone.title': '졸업 프로젝트: 시각 보조 시스템',
-        'projects.capstone.description': '시각 장애인이 물체와 환경을 식별하는 데 도움을 주는 이미지 인식 모바일 시스템 개발',
+        'projects.capstone.description': '시각 장애 사용자가 물체와 환경을 식별하는 데 도움이 되는 이미지 인식 모바일 시스템을 개발했습니다.',
         
         // Education Section
         'education.title': '학력',
@@ -330,12 +330,12 @@ const translations = {
         'education.location': '대만',
         'education.period': '2013 - 2017',
         'education.capstone.title': '졸업 프로젝트',
-        'education.capstone.description': '시각 장애인이 물체와 환경을 식별하는 데 도움을 주는 이미지 인식 모바일 시스템을 개발했습니다. 머신러닝과 컴퓨터 비전 기술을 적용하여 시각 장애인을 위한 실용적인 보조 도구를 제공합니다.',
+        'education.capstone.description': '시각 장애 사용자가 물체와 환경을 식별하는 데 도움이 되는 이미지 인식 모바일 시스템을 개발했습니다. 머신 러닝과 컴퓨터 비전 기술을 적용하여 시각 장애인을 위한 실용적인 보조 도구를 제공합니다.',
         
         // Contact Section
         'contact.title': '연락처 정보',
-        'contact.subtitle': '협업을 시작해보세요',
-        'contact.description': '제 기술과 경험에 관심이 있으시거나 논의할 프로젝트가 있으시면 언제든 연락해 주세요. 귀하의 프로젝트에 가치를 더할 수 있는 방법에 대해 논의하는 것을 기쁘게 생각합니다.',
+        'contact.subtitle': '협업을 시작해보겠습니다',
+        'contact.description': '제 기술과 경험에 관심이 있거나 논의할 프로젝트가 있다면 언제든지 연락해 주세요. 귀하의 프로젝트에 가치를 가져올 수 있는 방법에 대해 논의하는 것을 기쁘게 생각합니다.',
         'contact.email.label': '이메일',
         'contact.phone.label': '전화',
         'contact.github.label': 'GitHub',
@@ -367,6 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeScrollAnimations();
     initializeContactForm();
     initializeScrollIndicator();
+    initializeSmoothScrolling();
 });
 
 // Language switching functionality
@@ -439,31 +440,32 @@ function initializeScrollAnimations() {
 
 // Contact form functionality
 function initializeContactForm() {
-    const form = document.querySelector('form');
+    const form = document.getElementById('contact-form');
     if (form) {
         form.addEventListener('submit', function(e) {
-            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
             
-            const formData = new FormData(form);
-            const name = formData.get('name') || form.querySelector('input[type="text"]').value;
-            const email = formData.get('email') || form.querySelector('input[type="email"]').value;
-            const message = formData.get('message') || form.querySelector('textarea').value;
+            // Show loading state
+            submitBtn.textContent = currentLang === 'zh' ? '發送中...' : 
+                                   currentLang === 'en' ? 'Sending...' : 
+                                   '전송 중...';
+            submitBtn.disabled = true;
             
-            // Simple validation
-            if (!name || !email || !message) {
-                alert(currentLang === 'zh' ? '請填寫所有欄位' : 
-                      currentLang === 'en' ? 'Please fill in all fields' : 
-                      '모든 필드를 입력해주세요');
-                return;
-            }
-            
-            // Here you would typically send the form data to a server
-            // For now, we'll just show a success message
-            alert(currentLang === 'zh' ? '訊息已發送！' : 
-                  currentLang === 'en' ? 'Message sent!' : 
-                  '메시지가 전송되었습니다!');
-            
-            form.reset();
+            // Formspree will handle the submission automatically
+            // We just need to show a success message after a delay
+            setTimeout(() => {
+                alert(currentLang === 'zh' ? '訊息已成功發送！' : 
+                      currentLang === 'en' ? 'Message sent successfully!' : 
+                      '메시지가 성공적으로 전송되었습니다!');
+                
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Reset form
+                form.reset();
+            }, 1000);
         });
     }
 }
@@ -483,18 +485,20 @@ function initializeScrollIndicator() {
 }
 
 // Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+function initializeSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
-});
+}
 
 // Add loading animation to skill bars
 function animateSkillBars() {

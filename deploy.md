@@ -1,154 +1,248 @@
-# GitHub Pages 部署指南
+# 部署說明
 
-## 步驟 1: 建立 GitHub 倉庫
+## Formspree 聯絡表單設置 (推薦 - 最簡單)
 
-1. 前往 [GitHub](https://github.com) 並登入您的帳號
-2. 點擊右上角的 "+" 按鈕，選擇 "New repository"
-3. 倉庫名稱建議使用：`portfolio` 或 `resume`
-4. 選擇 "Public" (GitHub Pages 需要公開倉庫)
-5. 不要勾選 "Add a README file" (我們已經有了)
-6. 點擊 "Create repository"
+### 1. 註冊 Formspree 帳號
 
-## 步驟 2: 上傳檔案到 GitHub
+1. **前往 [Formspree](https://formspree.io/) 註冊免費帳號**
+2. **創建新的表單**
+   - 點擊 "New Form"
+   - 輸入表單名稱（如：Portfolio Contact）
+   - 選擇接收郵件的郵箱地址
 
-### 方法 A: 使用 GitHub Desktop (推薦)
+3. **獲取表單 ID**
+   - 創建完成後，您會得到一個表單 ID
+   - 格式類似：`xrgjqjqj`
 
-1. 下載並安裝 [GitHub Desktop](https://desktop.github.com/)
-2. 登入您的 GitHub 帳號
-3. 點擊 "Clone a repository from the Internet"
-4. 選擇您剛建立的倉庫
-5. 選擇本地儲存位置
-6. 將所有專案檔案複製到該資料夾
-7. 在 GitHub Desktop 中提交變更並推送到 GitHub
+4. **更新 HTML 代碼**
+   - 在 `static/index.html` 中找到聯絡表單
+   - 將 `YOUR_FORM_ID` 替換為您的實際表單 ID：
+   ```html
+   <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+   ```
 
-### 方法 B: 使用 Git 命令列
+### 2. 測試表單
+
+1. **本地測試**
+   ```bash
+   # 使用 Python 簡單服務器
+   cd static
+   python -m http.server 8000
+   ```
+
+2. **訪問網站**
+   - 打開瀏覽器訪問：http://localhost:8000
+   - 測試聯絡表單功能
+
+### 3. 部署到 GitHub Pages
+
+1. **上傳到 GitHub**
+   ```bash
+   git add .
+   git commit -m "Add portfolio website with Formspree contact form"
+   git push origin main
+   ```
+
+2. **啟用 GitHub Pages**
+   - 在 GitHub 倉庫設定中啟用 Pages
+   - 選擇 main 分支作為來源
+
+3. **訪問您的網站**
+   - 您的網站將在 `https://yourusername.github.io/your-repo-name` 上線
+
+## 其他部署方案
+
+### 方案一：Python Flask 後端 (進階)
+
+### 1. 安裝 Python 依賴
 
 ```bash
-# 初始化 Git 倉庫
-git init
-
-# 新增所有檔案
-git add .
-
-# 提交變更
-git commit -m "Initial commit: Personal portfolio website"
-
-# 新增遠端倉庫 (替換 YOUR_USERNAME 和 YOUR_REPO_NAME)
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-
-# 推送到 GitHub
-git push -u origin main
+pip install -r requirements.txt
 ```
 
-### 方法 C: 直接上傳 (最簡單)
+### 2. 設置 Gmail 應用密碼
 
-1. 在您的 GitHub 倉庫頁面
-2. 點擊 "uploading an existing file"
-3. 拖拽所有專案檔案到上傳區域
-4. 點擊 "Commit changes"
+1. **啟用 Gmail 兩步驟驗證**
+   - 前往 [Google Account Settings](https://myaccount.google.com/security)
+   - 啟用「兩步驟驗證」
 
-## 步驟 3: 啟用 GitHub Pages
+2. **生成應用密碼**
+   - 在安全設定中找到「應用程式密碼」
+   - 選擇「其他」並輸入名稱（如：Portfolio Website）
+   - 複製生成的 16 位密碼
 
-1. 在您的 GitHub 倉庫頁面
-2. 點擊 "Settings" 標籤
-3. 在左側選單中找到 "Pages"
-4. 在 "Source" 部分：
-   - 選擇 "Deploy from a branch"
-   - Branch 選擇 "main"
-   - Folder 選擇 "/ (root)"
-5. 點擊 "Save"
+3. **更新 app.py 配置**
+   ```python
+   SENDER_EMAIL = "your-email@gmail.com"  # 替換為您的 Gmail
+   SENDER_PASSWORD = "your-app-password"  # 替換為您的應用密碼
+   ```
 
-## 步驟 4: 等待部署
+### 3. 啟動服務器
 
-- GitHub Pages 通常需要 1-5 分鐘來部署您的網站
-- 您可以在 "Pages" 設定頁面看到部署狀態
-- 部署完成後，您會看到一個綠色的勾號
-
-## 步驟 5: 訪問您的網站
-
-您的網站將在以下網址上線：
-```
-https://YOUR_USERNAME.github.io/YOUR_REPO_NAME
-```
-
-例如，如果您的 GitHub 用戶名是 `itsdamian`，倉庫名是 `portfolio`，那麼網址就是：
-```
-https://itsdamian.github.io/portfolio
-```
-
-## 自訂網域 (可選)
-
-如果您有自己的網域，可以：
-
-1. 在 "Pages" 設定頁面
-2. 在 "Custom domain" 欄位輸入您的網域
-3. 點擊 "Save"
-4. 在您的網域提供商處設定 DNS 記錄
-
-## 更新網站
-
-每次您修改檔案後：
-
-### 使用 GitHub Desktop:
-1. 在 GitHub Desktop 中會看到變更
-2. 輸入提交訊息
-3. 點擊 "Commit to main"
-4. 點擊 "Push origin"
-
-### 使用命令列:
 ```bash
-git add .
-git commit -m "Update website content"
-git push
+python run.py
 ```
 
-### 直接上傳:
-1. 在 GitHub 倉庫頁面編輯檔案
-2. 或重新上傳修改後的檔案
+或
 
-## 故障排除
+```bash
+python app.py
+```
 
-### 網站無法顯示
-- 確認倉庫是公開的
-- 檢查檔案名稱是否正確 (index.html 必須在根目錄)
-- 等待幾分鐘讓部署完成
+### 4. 訪問網站
 
-### 樣式或功能異常
-- 檢查瀏覽器開發者工具中的錯誤訊息
-- 確認所有檔案都已上傳
-- 清除瀏覽器快取
+- 網站地址：http://localhost:5000
+- 聯絡表單 API：http://localhost:5000/contact
 
-### 語言切換不工作
-- 確認 script.js 檔案已正確上傳
-- 檢查瀏覽器控制台是否有 JavaScript 錯誤
+## 其他部署方案
 
-## 進階設定
+### 方案一：EmailJS (最簡單)
 
-### 自動部署
-您可以設定 GitHub Actions 來自動部署：
+1. **註冊 EmailJS 帳號**
+   - 前往 [EmailJS](https://www.emailjs.com/) 註冊免費帳號
+   - 免費版每月可發送 200 封郵件
 
-1. 在 `.github/workflows/` 資料夾建立部署腳本
-2. 設定觸發條件 (例如推送到 main 分支)
-3. 自動建置和部署您的網站
+2. **設置 Email Service**
+   - 在 EmailJS 控制台添加 Email Service
+   - 支援 Gmail、Outlook、Yahoo 等
+   - 記錄下 Service ID
 
-### SEO 優化
-- 在 `index.html` 的 `<head>` 部分新增 meta 標籤
-- 新增 Open Graph 標籤用於社群媒體分享
-- 建立 sitemap.xml 檔案
+3. **創建 Email Template**
+   - 創建新的 Email Template
+   - 使用以下變數：
+     - `{{from_name}}` - 發送者姓名
+     - `{{from_email}}` - 發送者郵箱
+     - `{{message}}` - 訊息內容
+   - 記錄下 Template ID
 
-### 效能優化
-- 壓縮圖片檔案
-- 使用 CDN 載入外部資源
-- 啟用瀏覽器快取
+4. **獲取 Public Key**
+   - 在 EmailJS 控制台找到 Public Key
 
----
+5. **更新 JavaScript 代碼**
+   - 在 `script.js` 中替換以下值：
+     ```javascript
+     emailjs.init("YOUR_PUBLIC_KEY"); // 替換為您的 Public Key
+     emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams) // 替換 Service ID 和 Template ID
+     ```
 
-## 聯絡支援
+### 方案二：Netlify Forms (免費託管)
 
-如果您在部署過程中遇到問題，可以：
+1. **部署到 Netlify**
+   - 將網站部署到 Netlify
+   - Netlify 自動處理表單提交
 
-1. 檢查 [GitHub Pages 文件](https://pages.github.com/)
-2. 在 GitHub 社群論壇尋求協助
-3. 聯絡我：greetinitsdamian@gmail.com
+2. **更新表單 HTML**
+   ```html
+   <form name="contact" method="POST" data-netlify="true">
+     <input type="hidden" name="form-name" value="contact" />
+     <!-- 其他表單欄位 -->
+   </form>
+   ```
 
-祝您部署順利！ 🚀 
+3. **設置通知**
+   - 在 Netlify 控制台設置表單通知
+   - 可發送到郵箱或 Slack
+
+### 方案三：自建後端 API
+
+1. **PHP 後端 (推薦給您)**
+   ```php
+   <?php
+   header('Content-Type: application/json');
+   header('Access-Control-Allow-Origin: *');
+   header('Access-Control-Allow-Methods: POST');
+   header('Access-Control-Allow-Headers: Content-Type');
+   
+   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+       $data = json_decode(file_get_contents('php://input'), true);
+       
+       $name = $data['name'] ?? '';
+       $email = $data['email'] ?? '';
+       $message = $data['message'] ?? '';
+       
+       // 驗證
+       if (empty($name) || empty($email) || empty($message)) {
+           http_response_code(400);
+           echo json_encode(['error' => 'Missing required fields']);
+           exit;
+       }
+       
+       // 發送郵件
+       $to = 'greetinitsdamian@gmail.com';
+       $subject = 'Portfolio Contact Form - ' . $name;
+       $headers = "From: $email\r\n";
+       $headers .= "Reply-To: $email\r\n";
+       $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+       
+       $emailBody = "
+       <h3>New Contact Form Submission</h3>
+       <p><strong>Name:</strong> $name</p>
+       <p><strong>Email:</strong> $email</p>
+       <p><strong>Message:</strong></p>
+       <p>" . nl2br($message) . "</p>
+       ";
+       
+       if (mail($to, $subject, $emailBody, $headers)) {
+           echo json_encode(['success' => true]);
+       } else {
+           http_response_code(500);
+           echo json_encode(['error' => 'Failed to send email']);
+       }
+   }
+   ?>
+   ```
+
+2. **更新前端 JavaScript**
+   ```javascript
+   fetch('/contact.php', {
+       method: 'POST',
+       headers: {
+           'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({
+           name: formData.get('name'),
+           email: formData.get('email'),
+           message: formData.get('message')
+       })
+   })
+   .then(response => response.json())
+   .then(data => {
+       if (data.success) {
+           alert('Message sent successfully!');
+           form.reset();
+       } else {
+           alert('Failed to send message: ' + data.error);
+       }
+   })
+   .catch(error => {
+       alert('Error: ' + error.message);
+   });
+   ```
+
+## 推薦方案
+
+對於您的個人作品集網站，我推薦使用 **EmailJS**，因為：
+- 設置簡單，無需後端服務器
+- 免費版足夠個人使用
+- 可靠且安全
+- 支援多種郵件服務
+
+## 安全注意事項
+
+1. **防止垃圾郵件**
+   - 添加 reCAPTCHA
+   - 實施速率限制
+   - 驗證郵箱格式
+
+2. **數據保護**
+   - 不要在前端暴露敏感信息
+   - 使用 HTTPS
+   - 實施適當的 CORS 設置
+
+## 測試
+
+部署後請測試：
+1. 表單驗證是否正常
+2. 郵件是否能正確發送
+3. 錯誤處理是否完善
+4. 多語言支持是否正常 

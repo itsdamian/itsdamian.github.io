@@ -1,133 +1,167 @@
-# 林書弘 - 個人履歷網站
+# 林書弘 - 個人作品集網站
 
-一個現代化、響應式的個人履歷網站，支援中英韓三種語言。
+一個響應式的個人作品集網站，使用 HTML、CSS、JavaScript 和 Formspree 聯絡表單。
 
-## 🌟 特色功能
+## 功能特色
 
-- **多語言支援** - 中文、英文、韓文三種語言切換
-- **響應式設計** - 適配桌面、平板、手機等各種設備
-- **現代化UI** - 使用 Tailwind CSS 的簡約現代設計
-- **平滑動畫** - 滾動動畫和互動效果
-- **SEO 優化** - 搜尋引擎友好的結構
-- **無障礙設計** - 支援鍵盤導航和螢幕閱讀器
+- 🌐 **響應式設計** - 支援桌面、平板和手機
+- 🌍 **多語言支援** - 中文、英文、韓文
+- 📧 **聯絡表單** - Formspree 免費服務處理
+- 🎨 **現代化 UI** - 使用 Tailwind CSS
+- ⚡ **快速載入** - 優化的效能
+- 📱 **行動友善** - 觸控優化的介面
 
-## 📁 專案結構
+## 技術棧
+
+### 前端
+- HTML5
+- CSS3 (Tailwind CSS)
+- JavaScript (ES6+)
+- Font Awesome 圖標
+
+### 聯絡表單
+- Formspree (免費第三方服務)
+- 無需後端服務器
+- 自動郵件發送
+
+## 快速開始
+
+### 1. 複製專案
+
+```bash
+git clone <your-repo-url>
+cd profolio_damian
+```
+
+### 2. 設置 Formspree 聯絡表單
+
+1. **註冊 Formspree 帳號**
+   - 前往 [Formspree](https://formspree.io/) 註冊免費帳號
+   - 創建新的表單並獲取表單 ID
+
+2. **更新表單 ID**
+   - 在 `static/index.html` 中找到聯絡表單
+   - 將 `YOUR_FORM_ID` 替換為您的實際表單 ID
+
+### 3. 啟動本地服務器
+
+```bash
+python start_static.py
+```
+
+或使用 Python 內建服務器：
+
+```bash
+cd static
+python -m http.server 8000
+```
+
+### 4. 訪問網站
+
+打開瀏覽器訪問：http://localhost:8000
+
+## 專案結構
 
 ```
-profolio/
-├── index.html          # 主要HTML文件
-├── styles.css          # 自訂CSS樣式
-├── script.js           # JavaScript功能
-└── README.md           # 專案說明文件
+profolio_damian/
+├── start_static.py     # 靜態文件服務器
+├── deploy.md          # 部署說明
+├── README.md          # 專案說明
+├── static/            # 靜態文件
+│   ├── index.html     # 主頁面
+│   ├── styles.css     # 自定義樣式
+│   ├── script.js      # JavaScript 功能
+│   └── image.jpg      # 個人照片
+└── app.py             # Flask 後端 (可選)
 ```
 
-## 🚀 快速開始
+## 功能說明
 
-### 本地開發
+### 多語言切換
+- 支援中文、英文、韓文
+- 即時切換，無需重新載入頁面
+- 所有內容都會自動翻譯
 
-1. 下載或克隆專案到本地
-2. 使用任何本地伺服器開啟 `index.html`
-   - 使用 VS Code 的 Live Server 擴展
-   - 或使用 Python: `python -m http.server 8000`
-   - 或使用 Node.js: `npx serve .`
+### 聯絡表單
+- 使用 Formspree 免費服務
+- 完整的表單驗證
+- 防止垃圾郵件保護
+- 自動郵件發送到您的郵箱
 
-### GitHub Pages 部署
+### 響應式設計
+- 桌面版：完整功能展示
+- 平板版：適中的佈局
+- 手機版：觸控優化
 
-1. 將專案推送到 GitHub 倉庫
-2. 進入倉庫設定 (Settings)
-3. 找到 "Pages" 選項
-4. 選擇 "Deploy from a branch"
-5. 選擇 `main` 分支和 `/ (root)` 資料夾
-6. 點擊 "Save"
+## 部署選項
 
-您的網站將在 `https://yourusername.github.io/your-repo-name` 上線。
+### 1. 本地開發
+```bash
+python start_static.py
+```
 
-## 🎨 自訂指南
+### 2. GitHub Pages 部署 (推薦)
+- 上傳到 GitHub 倉庫
+- 啟用 GitHub Pages
+- 免費託管，自動部署
 
-### 更新個人資訊
+### 3. 其他靜態託管
+- **Netlify**: 免費靜態網站託管
+- **Vercel**: 快速部署平台
+- **Firebase Hosting**: Google 的靜態託管服務
 
-編輯 `index.html` 文件中的以下部分：
+## 自定義配置
 
-1. **基本資訊** - 姓名、職稱、聯絡方式
-2. **工作經驗** - 公司、職位、期間、成就
-3. **技能專長** - 技術技能和熟練程度
-4. **專案作品** - 重要專案和作品集
-5. **教育背景** - 學歷和畢業專案
+### 修改個人資訊
+編輯 `static/index.html` 中的內容：
+- 個人資料
+- 工作經驗
+- 技能專長
+- 專案作品
 
 ### 修改樣式
-
-編輯 `styles.css` 文件來自訂：
-
+編輯 `static/styles.css` 來自定義：
 - 顏色主題
 - 字體樣式
 - 動畫效果
-- 響應式斷點
 
-### 新增語言
+### 修改功能
+編輯 `static/script.js` 來調整：
+- 語言翻譯
+- 動畫效果
+- 表單處理
 
-在 `script.js` 的 `translations` 物件中新增語言：
+## 故障排除
 
-```javascript
-const translations = {
-    // 現有語言...
-    'new_lang': {
-        'nav.about': '翻譯文字',
-        // 其他翻譯...
-    }
-};
-```
+### 常見問題
 
-然後在 HTML 中新增語言切換按鈕。
+1. **聯絡表單無法發送**
+   - 確認已正確設置 Formspree 表單 ID
+   - 檢查 Formspree 帳號是否正常
+   - 確認表單欄位名稱正確
 
-### 更新照片
+2. **靜態文件無法載入**
+   - 確認文件在 `static/` 目錄中
+   - 檢查文件權限
+   - 清除瀏覽器快取
 
-1. 將您的專業照片命名為 `profile.jpg` 或 `profile.png`
-2. 放置在專案根目錄
-3. 在 `index.html` 中更新圖片路徑：
+3. **語言切換不工作**
+   - 確認 script.js 文件已正確載入
+   - 檢查瀏覽器控制台錯誤
 
-```html
-<img src="profile.jpg" alt="林書弘" class="w-64 h-64 rounded-full object-cover">
-```
+## 貢獻
 
-## 📱 響應式設計
+歡迎提交 Issue 和 Pull Request！
 
-網站已針對以下設備進行優化：
+## 授權
 
-- **桌面** (1200px+) - 完整佈局
-- **平板** (768px - 1199px) - 調整後的網格佈局
-- **手機** (< 768px) - 單欄佈局，折疊式導航
+MIT License
 
-## 🔧 技術棧
+## 聯絡
 
-- **HTML5** - 語義化標記
-- **CSS3** - 現代化樣式和動畫
-- **Tailwind CSS** - 實用優先的CSS框架
-- **JavaScript (ES6+)** - 互動功能和語言切換
-- **Font Awesome** - 圖示庫
-
-## 🌐 瀏覽器支援
-
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
-
-## 📄 授權
-
-此專案採用 MIT 授權條款。
-
-## 🤝 貢獻
-
-歡迎提交 Issue 和 Pull Request 來改善這個專案。
-
-## 📞 聯絡資訊
-
-- **姓名**: 林書弘
-- **Email**: greetinitsdamian@gmail.com
-- **電話**: +886 978 609 130
-- **GitHub**: [github.com/itsdamian](https://github.com/itsdamian)
-- **所在地**: New Taipei City, Taiwan
+- 電子郵件：greetinitsdamian@gmail.com
+- GitHub：https://github.com/itsdamian
 
 ---
 
-© 2025 林書弘. 保留所有權利。 
+**注意**：請記得更新 `static/index.html` 中的 Formspree 表單 ID 才能正常使用聯絡表單功能。 
