@@ -13,7 +13,7 @@ const translations = {
         'hero.greeting': '你好，我是',
         'hero.title': '資深後端工程師',
         'hero.description': '熟悉PHP, Python的後端工程師，也具有前端基礎技術包含HTML, JS JQuery等。專注於建立高效能、可擴展的網路應用程式。',
-        'hero.contact': '聯絡我',
+        'hero.contact': '關於我',
         'hero.projects': '查看作品',
         
         // About Section
@@ -130,7 +130,7 @@ const translations = {
         'hero.greeting': 'Hello, I\'m',
         'hero.title': 'Senior PHP Developer',
         'hero.description': 'Backend engineer proficient in PHP and Python, with solid foundation in frontend technologies including HTML, JS, jQuery. Focused on building high-performance, scalable web applications.',
-        'hero.contact': 'Contact Me',
+        'hero.contact': 'About Me',
         'hero.projects': 'View Projects',
         
         // About Section
@@ -247,7 +247,7 @@ const translations = {
         'hero.greeting': '안녕하세요, 저는',
         'hero.title': '시니어 PHP 개발자',
         'hero.description': 'PHP와 Python에 능숙한 백엔드 엔지니어로, HTML, JS, jQuery 등 프론트엔드 기술 기반을 갖추고 있습니다. 고성능, 확장 가능한 웹 애플리케이션 구축에 중점을 둡니다.',
-        'hero.contact': '연락하기',
+        'hero.contact': '소개',
         'hero.projects': '프로젝트 보기',
         
         // About Section
@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeLanguage();
     initializeMobileMenu();
     initializeScrollAnimations();
-    initializeContactForm();
+
     initializeScrollIndicator();
     initializeSmoothScrolling();
 });
@@ -438,37 +438,7 @@ function initializeScrollAnimations() {
     });
 }
 
-// Contact form functionality
-function initializeContactForm() {
-    const form = document.getElementById('contact-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            // Show loading state
-            submitBtn.textContent = currentLang === 'zh' ? '發送中...' : 
-                                   currentLang === 'en' ? 'Sending...' : 
-                                   '전송 중...';
-            submitBtn.disabled = true;
-            
-            // Formspree will handle the submission automatically
-            // We just need to show a success message after a delay
-            setTimeout(() => {
-                alert(currentLang === 'zh' ? '訊息已成功發送！' : 
-                      currentLang === 'en' ? 'Message sent successfully!' : 
-                      '메시지가 성공적으로 전송되었습니다!');
-                
-                // Reset button state
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                
-                // Reset form
-                form.reset();
-            }, 1000);
-        });
-    }
-}
+
 
 // Scroll indicator
 function initializeScrollIndicator() {
