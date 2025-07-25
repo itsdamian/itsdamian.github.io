@@ -92,6 +92,9 @@ const translations = {
         
         // Education Section
         'education.title': '教育背景',
+        'education.degree2': '幼兒保育系 二年制',
+        'education.school2': '嘉南藥理大學',
+        'education.period2': '2021 - 2023',
         'education.degree': '資訊管理學士',
         'education.school': '國立高雄大學',
         'education.location': '台灣',
@@ -210,6 +213,9 @@ const translations = {
         
         // Education Section
         'education.title': 'Education',
+        'education.degree2': 'Early Childhood Education (2-year program)',
+        'education.school2': 'Chia Nan University of Pharmacy & Science',
+        'education.period2': '2021 - 2023',
         'education.degree': 'Bachelor of Information Management',
         'education.school': 'National University of Kaohsiung',
         'education.location': 'Taiwan',
@@ -328,6 +334,9 @@ const translations = {
         
         // Education Section
         'education.title': '학력',
+        'education.degree2': '유아교육과 (2년제)',
+        'education.school2': '가남약리대학',
+        'education.period2': '2021 - 2023',
         'education.degree': '정보관리학 학사',
         'education.school': '국립고雄대학교',
         'education.location': '대만',
