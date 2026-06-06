@@ -1,6 +1,6 @@
-# 林書弘 - 個人作品集網站
+# 林書弘 Damian Lin - 個人作品集網站
 
-一個響應式的個人作品集網站，使用 HTML、CSS、JavaScript 和 Formspree 聯絡表單。
+一個響應式的個人履歷網站，呈現資深軟體工程師的後端系統、全端交付、AI 整合與基礎設施經驗。使用 HTML、CSS、JavaScript 製作。
 
 ## 功能特色
 
