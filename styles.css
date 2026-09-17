@@ -278,10 +278,15 @@ nav {
     overflow: hidden;
 }
 
-#hero::before {
-    content: '';
+/* Grid + glow used to be #hero::before/::after, but GSAP can't animate
+   pseudo-elements — promoted to real DOM nodes (see index.html) so
+   ScrollTrigger can move them at a different speed than the foreground
+   content for a parallax depth effect (see initGSAPAnimations() in
+   script.js). Sized generously beyond 100% so the parallax travel range
+   never exposes an edge. */
+.hero-grid {
     position: absolute;
-    inset: 0;
+    inset: -20% -10%;
     background-image:
         linear-gradient(var(--surface-border) 1px, transparent 1px),
         linear-gradient(90deg, var(--surface-border) 1px, transparent 1px);
@@ -289,10 +294,10 @@ nav {
     -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
     mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
     opacity: 0.7;
+    pointer-events: none;
 }
 
-#hero::after {
-    content: '';
+.hero-glow {
     position: absolute;
     top: -10%;
     right: -5%;
@@ -305,6 +310,14 @@ nav {
     pointer-events: none;
 }
 
+/* The real hero copy/avatar sit in normal doc flow after .hero-grid/.hero-glow
+   in the markup, which already paints them on top; z-index just makes that
+   explicit so the parallax layers can never end up in front of the text. */
+.hero-inner {
+    position: relative;
+    z-index: 1;
+}
+
 /* Gradient "frame" around the hero portrait — the one focal image on the
    page that hadn't picked up the site's signature accent gradient yet */
 .hero-avatar-frame {
@@ -313,6 +326,18 @@ nav {
     border-radius: 50%;
     background: var(--accent-gradient);
     box-shadow: var(--shadow-hover);
+}
+
+/* Hero entrance: base hidden state only. The actual staggered reveal
+   (name, then tagline, then summary, then avatar) is a GSAP timeline in
+   initGSAPAnimations() (script.js) so it can share easing/overlap control
+   with the rest of the page's choreography. This opacity:0 is what keeps
+   the content invisible during the brief window between first paint and
+   that script running; initGSAPAnimations() also has a no-GSAP fallback
+   that forces opacity:1 immediately if the CDN script fails to load, so
+   content can never get stuck invisible. */
+.hero-fade-item {
+    opacity: 0;
 }
 
 .hero-avatar-frame img {
@@ -483,6 +508,20 @@ section.visible {
     50% { opacity: 0.3; }
 }
 
+/* Research-project badge: same shape as the "in production" spotlight
+   badge, but a muted tone and a flask icon instead of the pulsing dot —
+   SOP-LLM is a research/benchmark system, not a live production service,
+   and the badge should say so at a glance rather than imply uptime. */
+.spotlight-badge--research {
+    color: var(--text-muted);
+    background: var(--bg-alt);
+    border-color: var(--surface-border);
+}
+
+.spotlight-badge--research i {
+    font-size: 0.75rem;
+}
+
 /* Section labels above the timeline */
 .timeline-subheading {
     font-family: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
@@ -507,14 +546,36 @@ section.visible {
     padding: 2.5rem 2.75rem 1.25rem;
 }
 
-.career-swiper::before {
-    content: '';
+/* Static base line (was .career-swiper::before) plus an accent "progress"
+   line drawn on top of it via stroke-dashoffset as the section scrolls
+   into view (see the career-path-progress ScrollTrigger in script.js) —
+   the timeline visually draws itself from ADBERT through to JTX. Using
+   SVG's pathLength="100" normalization means the dash math stays 0-100
+   regardless of the line's actual rendered pixel length, so it doesn't
+   need to track Swiper's internal slide positions at all. */
+.career-path-svg {
     position: absolute;
     left: 2.75rem;
     right: 2.75rem;
     top: 2.4rem;
+    width: calc(100% - 5.5rem);
     height: 2px;
-    background: var(--surface-border);
+    overflow: visible;
+    pointer-events: none;
+}
+
+.career-path-base {
+    stroke: var(--surface-border);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+}
+
+.career-path-progress {
+    stroke: var(--accent);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
 }
 
 .career-swiper .swiper-slide {
@@ -716,15 +777,11 @@ section.visible {
     grid-template-columns: 132px 1fr;
     gap: 1.5rem;
     padding: 1.5rem 0;
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    transition-delay: calc(var(--i, 0) * 90ms);
-}
-
-#skills.visible .stack-layer {
-    opacity: 1;
-    transform: translateY(0);
+    /* Reveal is a GSAP ScrollTrigger clip-path wipe, not a CSS transition —
+       see the .stack-layer timeline in initGSAPAnimations() (script.js).
+       No opacity/transform base here: GSAP's gsap.set() establishes the
+       hidden state at init time, and its own reduced-motion matchMedia
+       branch sets clip-path: none immediately for those users. */
 }
 
 .stack-layer + .stack-layer {
@@ -795,8 +852,41 @@ section.visible {
     font-size: 0.85rem;
     font-weight: 500;
     line-height: 1.3;
-    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease,
+        opacity 0.4s ease, transform 0.4s ease;
 }
+
+/* Tags pop in one at a time once the Skills section scrolls into view,
+   reusing the section-level `visible` class already toggled by
+   initializeScrollAnimations() — no extra JS needed. Delays repeat per
+   category group since nth-child resets inside each .skill-tags container. */
+section.visible .skill-tag {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.skill-tags .skill-tag:nth-child(1) { transition-delay: 0ms; }
+.skill-tags .skill-tag:nth-child(2) { transition-delay: 30ms; }
+.skill-tags .skill-tag:nth-child(3) { transition-delay: 60ms; }
+.skill-tags .skill-tag:nth-child(4) { transition-delay: 90ms; }
+.skill-tags .skill-tag:nth-child(5) { transition-delay: 120ms; }
+.skill-tags .skill-tag:nth-child(6) { transition-delay: 150ms; }
+.skill-tags .skill-tag:nth-child(7) { transition-delay: 180ms; }
+.skill-tags .skill-tag:nth-child(8) { transition-delay: 210ms; }
+.skill-tags .skill-tag:nth-child(9) { transition-delay: 240ms; }
+.skill-tags .skill-tag:nth-child(10) { transition-delay: 270ms; }
+.skill-tags .skill-tag:nth-child(11) { transition-delay: 300ms; }
+.skill-tags .skill-tag:nth-child(12) { transition-delay: 330ms; }
+.skill-tags .skill-tag:nth-child(13) { transition-delay: 360ms; }
+.skill-tags .skill-tag:nth-child(14) { transition-delay: 390ms; }
+.skill-tags .skill-tag:nth-child(15) { transition-delay: 420ms; }
+.skill-tags .skill-tag:nth-child(16) { transition-delay: 450ms; }
+.skill-tags .skill-tag:nth-child(17) { transition-delay: 480ms; }
+.skill-tags .skill-tag:nth-child(18) { transition-delay: 510ms; }
+.skill-tags .skill-tag:nth-child(19) { transition-delay: 540ms; }
+.skill-tags .skill-tag:nth-child(20) { transition-delay: 570ms; }
 
 .skill-tag:hover {
     color: var(--accent);
@@ -916,6 +1006,30 @@ section.visible {
     right: 0;
     height: 3px;
     background: var(--accent-gradient);
+    transform: scaleX(0.3);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* On hover, the accent edge grows to fill the card width and the badge
+   dot/icon gives a small nudge — reinforces which two cards are the ones
+   worth lingering on. */
+.project-card--featured:hover::before {
+    transform: scaleX(1);
+}
+
+.project-card--featured:hover .spotlight-badge {
+    border-color: rgba(var(--accent-rgb), 0.55);
+}
+
+.project-card--featured:hover .spotlight-badge i,
+.project-card--featured:hover .pulse-dot {
+    transform: translateX(2px);
+}
+
+.spotlight-badge i,
+.spotlight-badge .pulse-dot {
+    transition: transform 0.25s ease;
 }
 
 /* Numbers already stated in the project copy, pulled out as visual anchors */
@@ -998,27 +1112,17 @@ section.visible {
     margin-bottom: 0.75rem;
 }
 
-/* Same staggered reveal language as the skills stack layers */
-.project-card--featured,
-.project-list-item {
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
+/* Reveal for both the featured cards and the supporting list is a GSAP
+   ScrollTrigger timeline (scale-in for the cards, slide-from-left stagger
+   for the list) — see initGSAPAnimations() in script.js. No CSS base
+   opacity/transform here: same reasoning as .stack-layer above, elements
+   render normally if the GSAP CDN script fails to load. */
 
-#projects.visible .project-card--featured,
-#projects.visible .project-list-item {
-    opacity: 1;
-    transform: translateY(0);
+/* Tilt/glow micro-interaction on the featured cards needs perspective on
+   the grid so GSAP's rotateX/rotateY reads as a 3D tilt, not a 2D skew. */
+.project-featured-grid {
+    perspective: 1000px;
 }
-
-.project-featured-grid .project-card--featured:nth-child(2) { transition-delay: 90ms; }
-.project-list .project-list-item:nth-child(2) { transition-delay: 90ms; }
-.project-list .project-list-item:nth-child(3) { transition-delay: 180ms; }
-.project-list .project-list-item:nth-child(4) { transition-delay: 270ms; }
-.project-list .project-list-item:nth-child(5) { transition-delay: 360ms; }
-.project-list .project-list-item:nth-child(6) { transition-delay: 450ms; }
-.project-list .project-list-item:nth-child(7) { transition-delay: 540ms; }
 
 /* ==========================================================================
    Education: vertical timeline (reuses the Skills stack-layer spine + node
@@ -1084,9 +1188,14 @@ section.visible {
     .pulse-dot,
     .stack-layer,
     .project-card--featured,
-    .project-list-item {
+    .project-list-item,
+    .skill-tag,
+    .hero-fade-item {
         animation: none;
         transition-delay: 0ms;
+        animation-delay: 0ms;
+        opacity: 1;
+        transform: none;
     }
 }
 

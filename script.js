@@ -113,11 +113,16 @@ const translations = {
         // Projects Section
         'projects.title': '專案作品',
         'projects.featured.badge': '正式營運中',
+        'projects.research.badge': '研究專案',
         'projects.list.heading': '延伸與其他實作',
         'projects.wms.stat1': '客戶',
         'projects.wms.stat3': '錯誤率',
         'projects.wms.stat4': '人工時間',
         'projects.wms.stat5': '標籤生成',
+        'projects.rag.stat1': '向量維度',
+        'projects.rag.stat2': '基準比較',
+        'projects.rag.stat3': '自建評估機制',
+        'projects.rag.stat4': '框架依賴',
         'projects.assistant.title': 'WMS AI 客服助手',
         'projects.assistant.description': '設計並開發整合進 WMS 的模組化 AI 客服助手，透過 session 管理多輪對話，串接本機 Ollama LLM 回答入庫、出庫、盤點、標籤列印、ERP 整合等操作問題，並支援功能模組開關與多租戶隔離，已上線於正式營運的 WMS 系統。',
         'projects.rag.title': 'RAG 知識檢索研究系統 (SOP-LLM)',
@@ -266,11 +271,16 @@ const translations = {
         // Projects Section
         'projects.title': 'Projects',
         'projects.featured.badge': 'In Production',
+        'projects.research.badge': 'Research Project',
         'projects.list.heading': 'Additional Work',
         'projects.wms.stat1': 'Clients',
         'projects.wms.stat3': 'Error Rate',
         'projects.wms.stat4': 'Manual Labor',
         'projects.wms.stat5': 'Label Gen',
+        'projects.rag.stat1': 'Embedding Dims',
+        'projects.rag.stat2': 'Benchmarks',
+        'projects.rag.stat3': 'Eval Pipelines',
+        'projects.rag.stat4': 'Framework Deps',
         'projects.assistant.title': 'WMS AI Support Assistant',
         'projects.assistant.description': 'Designed and built a modular AI support assistant integrated into the WMS, managing multi-turn conversations via sessions and calling a local Ollama LLM to answer operational questions on receiving, shipping, stocktaking, label printing, and ERP integration, with feature-module toggles and multi-tenant isolation — live in the production WMS.',
         'projects.rag.title': 'RAG Retrieval Research System (SOP-LLM)',
@@ -327,6 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initializeScrollIndicator();
     initializeSmoothScrolling();
+    initGSAPAnimations();
 });
 
 // Skill-tag hover annotations (see [data-note] in styles.css) rely on
@@ -582,8 +593,61 @@ if (skillsSection) {
     observer.observe(skillsSection);
 }
 
-// Add hover effects to project cards
-document.querySelectorAll('.bg-white').forEach(card => {
+// Count the featured project stats (WMS + SOP-LLM stat strips) up from 0
+// to their real value once scrolled into view — the numbers themselves are
+// static facts already in the copy (see index.html), this just animates
+// how they're revealed.
+function animateStatNumbers() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const statEls = document.querySelectorAll('.project-stat-num[data-count-to]');
+
+    statEls.forEach(function(el) {
+        const target = parseFloat(el.dataset.countTo);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+
+        if (prefersReducedMotion || target === 0) {
+            el.textContent = prefix + target + suffix;
+            return;
+        }
+
+        const duration = 900;
+        const start = performance.now();
+
+        function tick(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const value = Math.round(target * eased);
+            el.textContent = prefix + value + suffix;
+            if (progress < 1) {
+                requestAnimationFrame(tick);
+            } else {
+                el.textContent = prefix + target + suffix;
+            }
+        }
+
+        requestAnimationFrame(tick);
+    });
+}
+
+const projectsSection = document.getElementById('projects');
+if (projectsSection) {
+    const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStatNumbers();
+                statObserver.unobserve(entry.target);
+            }
+        });
+    });
+    statObserver.observe(projectsSection);
+}
+
+// Add hover effects to project cards. Featured cards (.project-card--featured)
+// are excluded here — they get a richer GSAP cursor-tilt effect instead (see
+// initMicroInteractions()), and letting both handlers fight over
+// element.style.transform on the same cards causes visible jitter.
+document.querySelectorAll('.bg-white:not(.project-card--featured)').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-5px)';
     });
@@ -592,6 +656,283 @@ document.querySelectorAll('.bg-white').forEach(card => {
         this.style.transform = 'translateY(0)';
     });
 });
+
+// ==========================================================================
+// GSAP + ScrollTrigger: larger-scale scroll choreography, hero parallax,
+// the career timeline's SVG path draw, and richer micro-interactions.
+// Additive on top of the plain CSS/IntersectionObserver animations above
+// (initializeScrollAnimations, animateSkillBars, animateStatNumbers all
+// still run regardless of whether GSAP loads). If the GSAP CDN scripts fail
+// to load, the only thing that CSS pre-hides is .hero-fade-item (opacity:0
+// in styles.css, so it doesn't flash unstyled before the JS entrance runs)
+// — the fallback below just reveals those immediately so content can never
+// get stuck invisible. Everything else in this file has no GSAP-only
+// hidden state, so it renders normally with no animation if GSAP is absent.
+// ==========================================================================
+function initGSAPAnimations() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        document.querySelectorAll('.hero-fade-item').forEach(function(el) {
+            el.style.opacity = 1;
+        });
+        return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Scroll-driven choreography (hero entrance/parallax, career path draw,
+    // per-section reveals) lives inside matchMedia so it's rebuilt cleanly
+    // if the visitor crosses the reduced-motion or desktop/mobile breakpoint
+    // mid-session — GSAP auto-reverts tweens/ScrollTriggers created inside
+    // a matchMedia callback when its conditions change.
+    const mm = gsap.matchMedia();
+
+    mm.add({
+        reduceMotion: '(prefers-reduced-motion: reduce)',
+        isDesktop: '(min-width: 768px)'
+    }, function(context) {
+        const reduceMotion = context.conditions.reduceMotion;
+        const isDesktop = context.conditions.isDesktop;
+
+        if (reduceMotion) {
+            // Snap everything straight to its end state — no scroll-linked
+            // motion at all for these visitors.
+            gsap.set('.hero-fade-item', { opacity: 1, clearProps: 'transform' });
+            gsap.set('.stack-layer', { opacity: 1, clipPath: 'none' });
+            gsap.set('.project-card--featured, .project-list-item', { opacity: 1, clearProps: 'transform' });
+            gsap.set('.edu-item, .edu-dot', { opacity: 1, clearProps: 'transform' });
+            gsap.set('.career-path-progress', { strokeDashoffset: 0 });
+            gsap.set('.career-dot', { clearProps: 'transform', opacity: 1 });
+            return;
+        }
+
+        initHeroTimeline();
+        if (isDesktop) initHeroParallax();
+        initCareerPathDraw();
+        initSectionChoreography();
+    });
+
+    // Hover/click micro-interactions are plain event listeners, not
+    // GSAP-managed tweens tied to a breakpoint, so they're set up once
+    // outside matchMedia — re-running matchMedia's callback on every resize
+    // across 768px would otherwise stack duplicate listeners on the same
+    // elements. Motion amplitude/attachment is instead checked live inside
+    // each handler (see initMicroInteractions()).
+    initMicroInteractions();
+}
+
+// Hero entrance: name, then tagline, then the two summary paragraphs, then
+// the avatar, landing one beat apart. Base hidden state (opacity:0) already
+// comes from CSS (.hero-fade-item in styles.css) so there's no flash before
+// this runs; here we also set the transform origin so nothing pops in from
+// a stale position if this fires more than once (e.g. after a matchMedia
+// context rebuild).
+function initHeroTimeline() {
+    const items = document.querySelectorAll('.hero-fade-item');
+    if (!items.length) return;
+
+    gsap.set('#hero h1.hero-fade-item, #hero h2.hero-fade-item, #hero p.hero-fade-item', { opacity: 0, y: 18 });
+    gsap.set('.hero-fade-item--avatar', { opacity: 0, scale: 0.92 });
+
+    gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.7 } })
+        .to('#hero h1.hero-fade-item', { opacity: 1, y: 0 }, 0.05)
+        .to('#hero h2.hero-fade-item', { opacity: 1, y: 0 }, 0.18)
+        .to('#hero p.hero-fade-item', { opacity: 1, y: 0, stagger: 0.13 }, 0.31)
+        .to('.hero-fade-item--avatar', { opacity: 1, scale: 1 }, 0.3);
+}
+
+// Background grid + glow (real DOM nodes now, not ::before/::after — see
+// .hero-grid/.hero-glow in index.html/styles.css) drift at a different
+// speed than the foreground content while the hero scrolls past, for a
+// parallax depth cue. Desktop-only (see isDesktop gate in initGSAPAnimations).
+function initHeroParallax() {
+    if (!document.querySelector('.hero-grid')) return;
+
+    const trigger = { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true };
+
+    gsap.to('.hero-grid', { yPercent: 18, ease: 'none', scrollTrigger: trigger });
+    gsap.to('.hero-glow', { yPercent: 32, xPercent: -8, ease: 'none', scrollTrigger: trigger });
+    gsap.to('.hero-avatar-frame', { yPercent: -12, ease: 'none', scrollTrigger: trigger });
+}
+
+// Draws the career timeline's accent line left-to-right as #experience
+// scrolls into view (stroke-dashoffset on the SVG line added in index.html),
+// and pops each node's dot in a staggered wave timed to roughly track the
+// draw. Purely a scroll-position visual layer — it doesn't read or drive
+// Swiper's internal slide position, so the existing carousel click/keyboard
+// interaction (initializeCareerTimeline()) is completely unaffected.
+function initCareerPathDraw() {
+    const progressLine = document.querySelector('.career-path-progress');
+    const dots = gsap.utils.toArray('.career-dot');
+    if (!progressLine) return;
+
+    const trigger = {
+        trigger: '#experience',
+        start: 'top 75%',
+        end: 'bottom 55%',
+        scrub: 0.6
+    };
+
+    gsap.set(progressLine, { strokeDashoffset: 100 });
+    gsap.set(dots, { scale: 0.5, opacity: 0.4, transformOrigin: '50% 50%' });
+
+    gsap.to(progressLine, { strokeDashoffset: 0, ease: 'none', scrollTrigger: trigger });
+
+    if (dots.length) {
+        gsap.to(dots, {
+            scale: 1,
+            opacity: 1,
+            stagger: { each: 1 / dots.length },
+            ease: 'none',
+            scrollTrigger: trigger
+        });
+    }
+}
+
+// Per-section entrance choreography: each section gets its own reveal
+// treatment (slide/scale/clip-path) instead of the same fade+translateY
+// repeated everywhere. Base hidden states are set here via gsap.set() —
+// none of these elements have a CSS opacity:0 fallback, so if this never
+// runs (GSAP unavailable) they simply render normally with no animation.
+function initSectionChoreography() {
+    // About: text column slides in from the left, language card from the
+    // right with a slight scale — two columns converging reads better than
+    // a shared fade for a two-column layout.
+    const aboutCol1 = document.querySelector('#about .grid > div:first-child');
+    const aboutCol2 = document.querySelector('#about .grid > div:last-child');
+    if (aboutCol1 && aboutCol2) {
+        gsap.set(aboutCol1, { opacity: 0, x: -40 });
+        gsap.set(aboutCol2, { opacity: 0, x: 40, scale: 0.96 });
+        const aboutTrigger = { trigger: '#about', start: 'top 75%' };
+        gsap.to(aboutCol1, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: aboutTrigger });
+        gsap.to(aboutCol2, { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: 'power3.out', scrollTrigger: aboutTrigger });
+    }
+
+    // Skills: each tech-stack layer wipes in left-to-right via clip-path —
+    // fits the "drawn" engineering-doc feel used elsewhere (career path,
+    // section numbering) better than a plain fade.
+    const stackLayers = gsap.utils.toArray('.stack-layer');
+    if (stackLayers.length) {
+        gsap.set(stackLayers, { clipPath: 'inset(0 100% 0 0)', opacity: 0 });
+        gsap.to(stackLayers, {
+            clipPath: 'inset(0 0% 0 0)',
+            opacity: 1,
+            duration: 0.7,
+            ease: 'power2.inOut',
+            stagger: 0.12,
+            scrollTrigger: { trigger: '#skills', start: 'top 70%' }
+        });
+    }
+
+    // Projects: featured cards scale in together; the supporting list
+    // slides in from the left with a stagger (replaces the old fixed
+    // nth-child transition-delay list in styles.css).
+    const featuredCards = gsap.utils.toArray('.project-card--featured');
+    if (featuredCards.length) {
+        gsap.set(featuredCards, { opacity: 0, scale: 0.92, y: 20 });
+        gsap.to(featuredCards, {
+            opacity: 1, scale: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.12,
+            scrollTrigger: { trigger: '.project-featured-grid', start: 'top 80%' }
+        });
+    }
+
+    const listItems = gsap.utils.toArray('.project-list-item');
+    if (listItems.length) {
+        gsap.set(listItems, { opacity: 0, x: -28 });
+        gsap.to(listItems, {
+            opacity: 1, x: 0, duration: 0.6, ease: 'power2.out', stagger: 0.09,
+            scrollTrigger: { trigger: '.project-list', start: 'top 85%' }
+        });
+    }
+
+    // Education: each timeline entry rises in, its dot popping a beat later.
+    const eduItems = gsap.utils.toArray('.edu-item');
+    eduItems.forEach(function(item) {
+        const dot = item.querySelector('.edu-dot');
+        gsap.set(item, { opacity: 0, y: 24 });
+        const tl = gsap.timeline({ scrollTrigger: { trigger: item, start: 'top 82%' } });
+        tl.to(item, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+        if (dot) {
+            gsap.set(dot, { scale: 0, transformOrigin: '50% 50%' });
+            tl.to(dot, { scale: 1, duration: 0.4, ease: 'back.out(2.5)' }, 0.15);
+        }
+    });
+}
+
+// Richer hover/click feedback on top of the existing CSS :hover transitions.
+// Kept deliberately small in amplitude — this is a résumé site, not a
+// playground. Runs once (see the comment in initGSAPAnimations() on why
+// this sits outside matchMedia); the tilt effect checks viewport width and
+// prefers-reduced-motion live, at event time, rather than at setup time.
+function initMicroInteractions() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Featured project cards: cursor-following tilt. Skipped on narrow
+    // viewports at move-time (not just at setup) so rotating a tablet or
+    // resizing the window doesn't leave the listener stuck in the wrong mode.
+    document.querySelectorAll('.project-card--featured').forEach(function(card) {
+        gsap.set(card, { transformPerspective: 800 });
+        const maxTilt = 6;
+
+        card.addEventListener('mousemove', function(e) {
+            if (window.innerWidth < 768) return;
+            const rect = card.getBoundingClientRect();
+            const px = (e.clientX - rect.left) / rect.width - 0.5;
+            const py = (e.clientY - rect.top) / rect.height - 0.5;
+            gsap.to(card, {
+                rotateY: px * maxTilt * 2,
+                rotateX: py * -maxTilt * 2,
+                duration: 0.4,
+                ease: 'power2.out'
+            });
+        });
+
+        card.addEventListener('mouseleave', function() {
+            gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'power3.out' });
+        });
+    });
+
+    // Career nodes: a small pop on the dot on hover, layered on the
+    // existing CSS background-color hover.
+    document.querySelectorAll('.career-node').forEach(function(node) {
+        const dot = node.querySelector('.career-dot');
+        if (!dot) return;
+        node.addEventListener('mouseenter', function() {
+            gsap.to(dot, { scale: 1.18, duration: 0.2, ease: 'power2.out' });
+        });
+        node.addEventListener('mouseleave', function() {
+            gsap.to(dot, { scale: 1, duration: 0.25, ease: 'power2.out' });
+        });
+    });
+
+    // Theme toggle + language buttons: a small confirm pulse on click,
+    // separate from the actual state change (handled elsewhere).
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', function() {
+            gsap.fromTo(themeToggleBtn,
+                { scale: 0.85, rotate: -12 },
+                { scale: 1, rotate: 0, duration: 0.4, ease: 'back.out(3)' }
+            );
+        });
+    }
+
+    langButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            gsap.fromTo(btn, { scale: 0.9 }, { scale: 1, duration: 0.3, ease: 'back.out(3)' });
+        });
+    });
+
+    // Nav links: a small lift on hover, layered on the existing CSS
+    // underline-grow effect.
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+        link.addEventListener('mouseenter', function() {
+            gsap.to(link, { y: -2, duration: 0.2, ease: 'power2.out' });
+        });
+        link.addEventListener('mouseleave', function() {
+            gsap.to(link, { y: 0, duration: 0.25, ease: 'power2.out' });
+        });
+    });
+}
 
 // Keyboard navigation support
 document.addEventListener('keydown', function(e) {

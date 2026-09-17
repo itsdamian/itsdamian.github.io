@@ -66,25 +66,30 @@
 
     <!-- Hero Section -->
     <section id="hero" class="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div class="max-w-6xl mx-auto px-4">
+        <!-- Parallax layers: real DOM nodes (not ::before/::after — GSAP
+             can't target pseudo-elements) moved at a different scroll
+             speed than .hero-inner by ScrollTrigger in script.js -->
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-inner max-w-6xl mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="lg:w-1/2 mb-8 lg:mb-0">
-                    <h1 class="text-4xl lg:text-6xl font-bold text-gray-800 mb-4">
+                    <h1 class="hero-fade-item text-4xl lg:text-6xl font-bold text-gray-800 mb-4">
                         <span data-lang-key="hero.greeting">你好，我是</span>
                         <span class="text-blue-600">林書弘</span>
                     </h1>
-                    <h2 class="text-2xl lg:text-3xl text-gray-600 mb-6" data-lang-key="hero.title">Senior Software
+                    <h2 class="hero-fade-item text-2xl lg:text-3xl text-gray-600 mb-6" data-lang-key="hero.title">Senior Software
                         Engineer</h2>
-                    <p class="text-lg text-gray-700 mb-8 leading-relaxed" data-lang-key="hero.description">
+                    <p class="hero-fade-item text-lg text-gray-700 mb-8 leading-relaxed" data-lang-key="hero.description">
                         WMS 端到端交付 • RAG/AI 應用 • 倉儲自動化 • 基礎設施維運
                     </p>
-                    <p class="text-lg text-gray-700 mb-8 leading-relaxed" data-lang-key="hero.description2">
+                    <p class="hero-fade-item text-lg text-gray-700 mb-8 leading-relaxed" data-lang-key="hero.description2">
                         現任 JTX Corp. 資深軟體工程師，端到端擁有核心倉儲管理系統 (WMS)，已交付 3 個企業客戶。同時打造 RAG
                         知識檢索研究系統與 AI 客服助手，正朝 Forward Deployed Engineer 方向發展。
                     </p>
                 </div>
                 <div class="lg:w-1/2 flex justify-center">
-                    <div class="hero-avatar-frame">
+                    <div class="hero-fade-item hero-fade-item--avatar hero-avatar-frame">
                         <img src="image.jpg" alt="林書弘" class="w-64 h-64 rounded-full object-cover">
                     </div>
                 </div>
@@ -180,6 +185,17 @@
                  selected stage in the middle; slideToClickedSlide re-centers
                  whichever stage the visitor picks -->
             <div class="swiper career-swiper">
+                <!-- Base line (always visible) + accent progress line, drawn
+                     via stroke-dashoffset scrubbed to scroll position in
+                     initGSAPAnimations() (script.js). pathLength="100"
+                     normalizes the dash math to 0-100 regardless of the
+                     line's actual rendered width. Purely decorative overlay:
+                     doesn't participate in the Swiper carousel's own click/
+                     keyboard interaction, which is untouched. -->
+                <svg class="career-path-svg" viewBox="0 0 100 2" preserveAspectRatio="none" aria-hidden="true">
+                    <line class="career-path-base" x1="0" y1="1" x2="100" y2="1"></line>
+                    <line class="career-path-progress" x1="0" y1="1" x2="100" y2="1" pathLength="100"></line>
+                </svg>
                 <div class="swiper-wrapper" role="tablist" aria-label="Career timeline">
                     <div class="swiper-slide">
                         <button type="button" class="career-node" data-target="adbert" role="tab"
@@ -611,30 +627,15 @@
         <div class="max-w-6xl mx-auto px-4">
             <p class="eyebrow text-center">04 · Work</p>
             <h2 class="text-3xl font-bold text-center mb-12" data-lang-key="projects.title">專案作品</h2>
-            <!-- Featured: the two production-proven, quantified-impact
-                 projects get bigger cards, a status badge, and a stat strip
-                 that pulls the numbers already in the copy out as visual
-                 anchors — standing in for screenshots we can't show. -->
+            <!-- Featured: WMS (production-proven, quantified business impact)
+                 and SOP-LLM (research-depth RAG system, not in production) —
+                 the two projects that carry the "reliable systems architect"
+                 and "AI pioneer" brand pillars. Bigger cards, a status badge,
+                 and a stat strip pulling numbers already in the copy out as
+                 visual anchors — standing in for screenshots we can't show.
+                 Stat numbers count up on scroll-into-view (see
+                 animateStatNumbers() in script.js). -->
             <div class="project-featured-grid">
-                <div class="project-card--featured bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="p-8">
-                        <div class="spotlight-badge">
-                            <span class="pulse-dot"></span>
-                            <span data-lang-key="projects.featured.badge">正式營運中</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3" data-lang-key="projects.assistant.title">WMS AI 客服助手</h3>
-                        <p class="text-gray-700 mb-4" data-lang-key="projects.assistant.description">
-                            設計並開發整合進 WMS 的模組化 AI 客服助手，透過 session 管理多輪對話，串接本機 Ollama LLM
-                            回答入庫、出庫、盤點、標籤列印、ERP 整合等操作問題，並支援功能模組開關與多租戶隔離，已上線於正式營運的 WMS 系統。</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">PHP</span>
-                            <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">Laravel</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">LLM</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">Ollama</span>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="project-card--featured bg-white rounded-lg shadow-lg overflow-hidden">
                     <div class="p-8">
                         <div class="spotlight-badge">
@@ -649,19 +650,19 @@
                             個客戶，上線後錯誤率低於 5%，人工作業時間減少約 30%，LMS 標籤列印平台依客戶回饋生成時間縮短約 70%。</p>
                         <div class="project-stat-strip" aria-hidden="true">
                             <div class="project-stat">
-                                <span class="project-stat-num">3</span>
+                                <span class="project-stat-num" data-count-to="3">3</span>
                                 <span class="project-stat-label" data-lang-key="projects.wms.stat1">客戶</span>
                             </div>
                             <div class="project-stat">
-                                <span class="project-stat-num">&lt;5%</span>
+                                <span class="project-stat-num" data-count-to="5" data-prefix="&lt;" data-suffix="%">&lt;5%</span>
                                 <span class="project-stat-label" data-lang-key="projects.wms.stat3">錯誤率</span>
                             </div>
                             <div class="project-stat">
-                                <span class="project-stat-num">-30%</span>
+                                <span class="project-stat-num" data-count-to="30" data-prefix="-" data-suffix="%">-30%</span>
                                 <span class="project-stat-label" data-lang-key="projects.wms.stat4">人工時間</span>
                             </div>
                             <div class="project-stat">
-                                <span class="project-stat-num">-70%</span>
+                                <span class="project-stat-num" data-count-to="70" data-prefix="-" data-suffix="%">-70%</span>
                                 <span class="project-stat-label" data-lang-key="projects.wms.stat5">標籤生成</span>
                             </div>
                         </div>
@@ -675,6 +676,44 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="project-card--featured project-card--research bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-8">
+                        <div class="spotlight-badge spotlight-badge--research">
+                            <i class="fas fa-flask"></i>
+                            <span data-lang-key="projects.research.badge">研究專案</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3" data-lang-key="projects.rag.title">RAG 知識檢索研究系統 (SOP-LLM)</h3>
+                        <p class="text-gray-700 mb-4" data-lang-key="projects.rag.description">
+                            自建（無框架依賴）RAG 研究系統：sentence-transformers 載入 BGE-large-zh-v1.5（1024
+                            維）embedding，透過 ChromaDB 做向量搜尋，並以圖節點 embedding 做專家重新排序，自建兩套 RAGAS
+                            風格評估機制，並與 GraphRAG、LightRAG、Self-RAG 進行系統性 benchmark 比較。</p>
+                        <div class="project-stat-strip" aria-hidden="true">
+                            <div class="project-stat">
+                                <span class="project-stat-num" data-count-to="1024">1024</span>
+                                <span class="project-stat-label" data-lang-key="projects.rag.stat1">向量維度</span>
+                            </div>
+                            <div class="project-stat">
+                                <span class="project-stat-num" data-count-to="3">3</span>
+                                <span class="project-stat-label" data-lang-key="projects.rag.stat2">基準比較</span>
+                            </div>
+                            <div class="project-stat">
+                                <span class="project-stat-num" data-count-to="2">2</span>
+                                <span class="project-stat-label" data-lang-key="projects.rag.stat3">自建評估機制</span>
+                            </div>
+                            <div class="project-stat">
+                                <span class="project-stat-num" data-count-to="0">0</span>
+                                <span class="project-stat-label" data-lang-key="projects.rag.stat4">框架依賴</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">RAG</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">ChromaDB</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">Benchmark</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Supporting: smaller, compact list — proof of technical
@@ -684,16 +723,15 @@
                 <div class="project-list-item">
                     <span class="project-list-dot"></span>
                     <div class="project-list-content">
-                        <h3 class="project-list-title" data-lang-key="projects.rag.title">RAG 知識檢索研究系統 (SOP-LLM)</h3>
-                        <p class="project-list-desc" data-lang-key="projects.rag.description">
-                            自建（無框架依賴）RAG 研究系統：sentence-transformers 載入 BGE-large-zh-v1.5（1024
-                            維）embedding，透過 ChromaDB 做向量搜尋，並以圖節點 embedding 做專家重新排序，自建兩套 RAGAS
-                            風格評估機制，並與 GraphRAG、LightRAG、Self-RAG 進行系統性 benchmark 比較。</p>
+                        <h3 class="project-list-title" data-lang-key="projects.assistant.title">WMS AI 客服助手</h3>
+                        <p class="project-list-desc" data-lang-key="projects.assistant.description">
+                            設計並開發整合進 WMS 的模組化 AI 客服助手，透過 session 管理多輪對話，串接本機 Ollama LLM
+                            回答入庫、出庫、盤點、標籤列印、ERP 整合等操作問題，並支援功能模組開關與多租戶隔離，已上線於正式營運的 WMS 系統。</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Python</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">RAG</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">ChromaDB</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">Benchmark</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">PHP</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">Laravel</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">LLM</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">Ollama</span>
                         </div>
                     </div>
                 </div>
@@ -866,6 +904,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 
