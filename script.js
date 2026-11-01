@@ -1,960 +1,479 @@
-// Language translations
-const translations = {
+// Split-screen ("Front vs Back") portfolio. Long-form copy lives in i18n.js
+// (`translations`); the strings below are only what this layout adds.
+
+const EXTRA = {
     zh: {
-        // Navigation
-        'nav.about': '關於我',
-        'nav.experience': '工作經驗',
-        'nav.skills': '技能專長',
-        'nav.projects': '專案作品',
-        'nav.education': '教育背景',
-
-        // Hero Section
-        'hero.greeting': '你好，我是',
-        'hero.title': 'Senior Software Engineer',
-        'hero.description': 'WMS 端到端交付 • RAG/AI 應用 • 倉儲自動化 • 基礎設施維運',
-        'hero.description2': '現任 JTX Corp. 資深軟體工程師，端到端擁有核心倉儲管理系統 (WMS)，已交付 3 個企業客戶。同時打造 RAG 知識檢索研究系統與 AI 客服助手，正朝 Forward Deployed Engineer 方向發展。',
-
-        // About Section
-        'about.title': '關於我',
-        'about.subtitle': '專業背景',
-        'about.description': '現任 <strong class="tech-term">JTX Corp.</strong> 資深軟體工程師，端到端擁有公司核心倉儲管理系統（<strong class="tech-term">WMS</strong>）的開發與維運，技術涵蓋 <strong class="tech-term">PHP (Laravel)</strong>、<strong class="tech-term">Vue 3</strong>、<strong class="tech-term">MySQL</strong>/<strong class="tech-term">Oracle</strong>、<strong class="tech-term">Redis</strong> 全端開發，並延伸到 DevOps 部署、硬體整合與資安掃描。',
-        'about.description2': '近期將重心擴展到 AI/LLM 應用領域：自行手刻（不依賴 LangChain 等框架）一套 <strong class="tech-term">RAG</strong> 知識檢索研究系統，並另外設計開發整合進 WMS 的<strong class="tech-term">AI 對話式客服助手</strong>。',
-        'about.description3': '正在往 <strong class="tech-term">Forward Deployed Engineer（FDE）</strong>方向發展，希望將既有的企業級系統落地經驗與 AI 應用整合能力結合，協助企業客戶把 AI 原型真正落地成可用的生產系統。',
-        'about.location': '台北市板橋區',
-        'about.languages': '語言能力',
-        'about.chinese': '中文',
-        'about.native': '母語',
-        'about.english': '英文',
-        'about.fluent': '日常對話程度',
-
-        // Experience Section
-        'experience.title': '工作經驗',
-        'experience.spotlight.badge': '現在',
-        'experience.timeline.heading': '職涯時間軸',
-        'experience.timeline.hint': '點選任一階段查看詳細內容',
-        'experience.jtx.title': 'Senior Software Engineer',
-        'experience.jtx.period': 'Aug 2025 - Present',
-        'experience.jtx.achievement1': '端到端擁有公司核心倉儲管理系統 (<strong class="tech-term">WMS</strong>)：<strong class="tech-term">PHP (Laravel)</strong> + <strong class="tech-term">Vue 3</strong> + <strong class="tech-term">MySQL</strong>/<strong class="tech-term">Oracle</strong> + <strong class="tech-term">Redis</strong>，並負責 <strong class="tech-term">MSSQL</strong> ERP 雙向回寫整合，雲端與地端混合部署 (<strong class="tech-term">Docker</strong>)',
-        'experience.jtx.achievement2': '已交付 3 個客戶；上線後錯誤率低於 5%，人工作業時間減少約 30%',
-        'experience.jtx.achievement3': '開發 <strong class="tech-term">Python</strong> 標籤列印管理平台 (<strong class="tech-term">LMS</strong>，<strong class="tech-term">FastAPI</strong> + <strong class="tech-term">Vue</strong>)，依客戶回饋標籤生成時間縮短約 70%',
-        'experience.jtx.achievement4': '自建 <strong class="tech-term">RAG</strong> 知識檢索研究與評測系統（<strong class="tech-term">BGE-large-zh-v1.5</strong> embedding + <strong class="tech-term">ChromaDB</strong> + 專家圖卡重排），並與 <strong class="tech-term">GraphRAG</strong>/<strong class="tech-term">LightRAG</strong>/<strong class="tech-term">Self-RAG</strong> 進行系統性 benchmark 比較；另外設計開發整合進 WMS 的 AI 對話式客服助手（模組化架構，串接本機 <strong class="tech-term">Ollama</strong> LLM 並管理多輪對話 session）',
-        'experience.jtx.achievement5': '建置 <strong class="tech-term">Kotlin</strong> Android App (<strong class="tech-term">WebView</strong> + 雙向 <strong class="tech-term">JNI</strong> 橋接 <strong class="tech-term">Rust</strong>)，本地端以 <strong class="tech-term">actix-web</strong> 起 HTTP 服務取代集中式列印佇列，達成 PDA 裝置藍芽標籤機的低延遲離線列印架構，並完成簽章打包供客戶安裝',
-        'experience.jtx.achievement6': '整合硬體裝置（<strong class="tech-term">條碼/QR 辨識</strong>、<strong class="tech-term">ZPL</strong> 標籤列印，並以 <strong class="tech-term">Rust</strong> 常駐程式處理列印佇列）與 <strong class="tech-term">ERP</strong> 資料流串接；建立可擴充多物流商架構，整合<strong class="tech-term">嘉里大榮 (Kerry TJ)</strong> 物流 API',
-        'experience.jtx.achievement7': '從零主導設計開發倉儲控制系統 (<strong class="tech-term">WCS</strong>，<strong class="tech-term">Python</strong>/<strong class="tech-term">FastAPI</strong>/<strong class="tech-term">Celery</strong>)，串接 <strong class="tech-term">Siemens S7-1500</strong> 與 <strong class="tech-term">Mitsubishi</strong> PLC 雙廠牌協議，支援堆垛機/輸送機/穿梭車任務派工與狀態機管理，並建立完整單元/整合/壓力測試',
-        'experience.jtx.achievement8': '建立結構化資安弱點掃描腳本，整合 <strong class="tech-term">composer audit</strong>、<strong class="tech-term">npm audit</strong>、<strong class="tech-term">gitleaks</strong>、<strong class="tech-term">semgrep</strong>、<strong class="tech-term">enlightn</strong>',
-        'experience.jtx.achievement9': '獨立負責訪談上市櫃公司與政府機關以蒐集系統需求，提供上線支援 (go-live support) 並執行現場使用者訓練；同時參與公司官網 (Vue 3 + Vite 多語系) 前端開發',
-        'experience.current.title': 'Full Stack Engineer',
-        'experience.current.period': 'May 2025 - Jul 2025',
-        'experience.current.achievement1': '開發整合<strong class="tech-term">條碼掃描器</strong>的出貨驗證系統，採模組化架構設計，出貨錯誤率降低 93%',
-        'experience.current.achievement2': '使用 <strong class="tech-term">Docker</strong> 及 <strong class="tech-term">Git</strong> 建立開發流程，支援內部工具與流程自動化',
-        'experience.current.achievement3': '與營運團隊緊密協作，理解痛點並優化工作流程',
-        'experience.astral.title': 'Senior Backend Developer',
-        'experience.astral.period': 'Feb 2024 - Apr 2025 (Senior：Feb 2025)',
-        'experience.astral.period.short': 'Feb 2024 - Apr 2025',
-        'experience.astral.achievement1': '開發並維護 20+ 個 <strong class="tech-term">Magento 2</strong> 模組，以可重用、模組化實作提升平台可維護性',
-        'experience.astral.achievement2': '建立可重用的認證與社交登入解決方案，降低對第三方實作的依賴',
-        'experience.astral.achievement3': '整合金流、訊息系統與商業 <strong class="tech-term">API</strong>，並客製化結帳體驗與後端流程',
-        'experience.astral.achievement4': '導入 <strong class="tech-term">Docker</strong> 開發環境並以 <strong class="tech-term">GitHub Actions</strong> 支援 CI/CD 流程',
-        'experience.astral.achievement5': '運用 <strong class="tech-term">Redis</strong> 改善應用效能與快取策略，提升發布一致性與部署品質',
-        'experience.educator.title': 'English & Math Educator',
-        'experience.educator.stage': '職涯轉換',
-        'experience.educator.company': 'Creativity Kindergarten & Creativity Cram School (Kaohsiung)',
-        'experience.educator.period': 'Apr 2020 - Nov 2023',
-        'experience.educator.achievement1': '為 4 至 12 歲學生設計並教授模組化英語與數學課程，依個別學生程度調整教材與進度',
-        'experience.educator.achievement2': '期間持續透過個人專案與線上課程自學新技術，為 2024 年重返軟體工程領域做準備',
-        'experience.twhg.title': 'Web Developer',
-        'experience.twhg.period': 'Aug 2018 - Jun 2019',
-        'experience.twhg.achievement1': '將舊有系統遷移至 <strong class="tech-term">Laravel</strong> 框架，提升可維護性和效能',
-        'experience.twhg.achievement2': '使用 <strong class="tech-term">MySQL</strong> 重建房地產管理平台，優化查詢效率和搜尋排名邏輯',
-        'experience.twhg.achievement3': '建立並部署 <strong class="tech-term">LineBot</strong>，提供自動化用戶互動服務',
-        'experience.adbert.title': 'Backend Engineer',
-        'experience.adbert.period': 'Sep 2017 - Aug 2018',
-        'experience.adbert.achievement1': '使用 <strong class="tech-term">Laravel</strong> 和 <strong class="tech-term">RESTful API</strong> 設計開發電信廣告平台後端',
-        'experience.adbert.achievement2': '運用 <strong class="tech-term">Redis</strong> 和 <strong class="tech-term">MongoDB</strong> 處理即時事件資料和用戶分群',
-        'experience.adbert.achievement3': '與分析師協作，從原始後端日誌中生成用戶行為洞察',
-
-        // Skills Section
-        'skills.title': '技能專長',
-        'skills.programming': '程式語言',
-        'skills.backend': '後端框架與架構',
-        'skills.testing': '測試與資安',
-        'skills.sast': 'SAST 掃描 (composer/npm audit、gitleaks、semgrep、enlightn)',
-        'skills.tools': '基礎設施與 DevOps',
-        'skills.ai': 'AI / LLM',
-        'skills.tag.async': '非同步處理',
-        'skills.tag.concurrency': '併發控制',
-        'skills.tag.distributed': '分散式系統',
-        'skills.tag.llm': 'LLM 整合',
-        'skills.tag.ragas': 'RAGAS 風格評估',
-        'skills.tag.barcode': '條碼/QR Code 辨識',
-        'skills.tag.zpl': 'ZPL 標籤列印',
-        'skills.tag.erp': 'ERP 整合',
-        'skills.hardware': '硬體與系統整合',
-        'skills.web': '前端技術',
-        'skills.certification': '認證',
-        'skills.cert1.title': 'AWS Academy Graduate - Cloud Architecting',
-        'skills.cert1.issuer': 'Amazon Web Services',
-        'skills.cert2.title': 'Prompt Design in Vertex AI - Introductory Badge',
-        'skills.cert2.issuer': 'Google Cloud Skills Boost',
-        'skills.cert3.title': 'Machine Learning Operations (MLOps) in Generative AI',
-        'skills.cert3.issuer': 'Google Cloud Skills Boost',
-        'skills.note.rag': 'SOP Assistant，已上線 WMS',
-        'skills.note.sbert': 'BGE-large-zh-v1.5 embedding',
-        'skills.note.chromadb': 'RAG 向量檢索資料庫',
-        'skills.note.redisqueue': 'WMS 非同步任務處理',
-        'skills.note.fastapi': 'LMS 標籤列印平台',
-        'skills.note.celery': 'WCS 任務派工與排程',
-        'skills.note.kotlin': 'PDA 裝置 Android App',
-        'skills.note.docker': 'WMS 全服務容器化部署',
-        'skills.note.githubactions': 'AstralWeb Taiwan CI/CD 流程',
-        'skills.note.mqtt': 'WMS 感測器資料串接',
-        'skills.note.jni': 'Android App 原生橋接',
-
-        // Projects Section
-        'projects.title': '專案作品',
-        'projects.featured.badge': '正式營運中',
-        'projects.research.badge': '研究專案',
-        'projects.list.heading': '延伸與其他實作',
-        'projects.wms.stat1': '客戶',
-        'projects.wms.stat3': '錯誤率',
-        'projects.wms.stat4': '人工時間',
-        'projects.wms.stat5': '標籤生成',
-        'projects.rag.stat1': '向量維度',
-        'projects.rag.stat2': '基準比較',
-        'projects.rag.stat3': '自建評估機制',
-        'projects.rag.stat4': '框架依賴',
-        'projects.assistant.title': 'WMS AI 客服助手',
-        'projects.assistant.description': '設計並開發整合進 WMS 的模組化 AI 客服助手，透過 session 管理多輪對話，串接本機 Ollama LLM 回答入庫、出庫、盤點、標籤列印、ERP 整合等操作問題，並支援功能模組開關與多租戶隔離，已上線於正式營運的 WMS 系統。',
-        'projects.rag.title': 'RAG 知識檢索研究系統 (SOP-LLM)',
-        'projects.rag.description': '自建（無框架依賴）RAG 研究系統：sentence-transformers 載入 BGE-large-zh-v1.5（1024 維）embedding，透過 ChromaDB 做向量搜尋，並以圖節點 embedding 做專家重新排序，自建兩套 RAGAS 風格評估機制，並與 GraphRAG、LightRAG、Self-RAG 進行系統性 benchmark 比較。',
-        'projects.wcs.title': '倉儲控制系統 (WCS)',
-        'projects.wcs.description': '從零主導設計開發的倉儲控制系統，銜接上層 WMS 與底層 PLC。支援 Siemens S7-1500 與 Mitsubishi SLMP 雙廠牌協議，設計任務狀態機、Job/Task 分段派工模型與心跳監控，約 8,700 行程式碼並建立完整單元/整合/壓力測試。',
-        'projects.lms.title': '標籤列印管理平台 (LMS)',
-        'projects.lms.description': '以 FastAPI + Vue 3 重建的標籤列印管理系統，內建 ZPL 產生引擎與 Konva 畫布式範本編輯器，支援一維條碼、QR Code 與中日文字元點陣化，並整合 Labelary API 預覽（失敗自動降級本機解譯）。依客戶回饋，標籤生成時間縮短約 70%。',
-        'projects.pipeline.title': 'LLM 文件處理 Pipeline (OCR → 摘要 → Embedding → 向量資料庫)',
-        'projects.pipeline.description': '通用文件智能處理流程：OCR 文字擷取 → LLM 摘要 → 文字分塊（chunking）→ embedding 向量化 → 向量資料庫儲存，並設計 chunk 層級的內容雜湊去重機制，避免重複資料佔用檢索空間。',
-        'projects.wms.title': '倉儲管理系統 (WMS) — 端到端產品擁有',
-        'projects.wms.description': '獨自負責架構、開發、部署、維運的完整生命週期。Docker 容器化（Laravel + Vue 3 + Nginx + Redis + MySQL/Oracle + Queue Worker），並負責 MSSQL ERP 雙向回寫整合；整合硬體裝置（ZPL 標籤列印、條碼/QR 辨識），並與自建的 WCS 倉儲控制系統對接。已交付 3 個客戶，上線後錯誤率低於 5%，人工作業時間減少約 30%，LMS 標籤列印平台依客戶回饋生成時間縮短約 70%。',
-        'projects.scan.title': '資安掃描自動化 (security-scan.sh)',
-        'projects.scan.description': '為 PHP/Laravel 技術堆疊建立的自動化弱點掃描腳本，整合 composer audit、npm audit、gitleaks、semgrep、enlightn 等開源 SAST 工具，並理解其與商業工具（Fortify、Checkmarx）在 taint analysis 能力上的差異。',
-        'projects.android.title': 'Kotlin Android App (WebView + Rust JNI)',
-        'projects.android.description': '提供給客戶安裝於 PDA 裝置的行動端應用，以 Kotlin 開發、WebView 承載內容，並透過雙向 JNI 橋接 Rust：本地端以 actix-web 起 HTTP 服務取代集中式列印佇列，達成低延遲離線藍芽標籤列印，並具備當機自動重啟等生產級容錯設計。',
-        'projects.agents.title': 'Agent Factory Platform (多 Agent 協作開發平台)',
-        'projects.agents.description': '個人專案：將 PM/SWE/QA/DevOps 多個 AI agent 協作流程視覺化的開發自動化平台，以工廠流水線風格即時呈現任務狀態，QA 失敗自動退回重工。支援多 LLM provider 與零設定 Mock 模式，Docker Compose 一鍵啟動。',
-
-        // Education Section
-        'education.title': '教育背景',
-        'education.degree2': '幼兒保育系 二年制',
-        'education.school2': '嘉南藥理大學',
-        'education.period2': '2021 - 2023',
-        'education.degree': '資訊管理學士',
-        'education.school': '國立高雄大學',
-        'education.location': '台灣',
-        'education.period': '2013 - 2017',
-        'education.capstone.title': '畢業專案',
-        'education.capstone.description': '開發圖像識別行動系統，協助視障用戶識別物體和環境。運用機器學習和電腦視覺技術，為視障人士提供實用的輔助工具。',
-
-        // Footer
-        'footer.rights': '保留所有權利。'
+        skip: '跳到內容', 'nav.index': '首頁', 'nav.work': '作品', 'nav.experience2': '經歷', 'nav.about2': '關於', 'nav.contact': '聯絡',
+        'hero.l1': '每個<em>系統</em>', 'hero.l2': '都有<em>兩面</em>…', 'hero.l1b': '我負責', 'hero.l2b': '<em>兩面</em>。',
+        'hero.c1': '多數工程師<em>只選一邊</em>。', 'hero.c2': '這一位，<em>兩邊都扛</em>。',
+        front: '前端', back: '後端', scroll: '往下滑', skipstory: '跳過開場',
+        'nav.factory': '工廠',
+        's02.k': '街道', 's02.h': '前台，是使用者看得到的。', 'hint.side': '← 左右滑動 →',
+        'sf.k': '工廠', 'sf.h': '幕後，<em>是一座工廠。</em>', 'sf.hint': '往下滑，輸送帶會橫向移動', 'sf.shipped': '已出貨',
+        'type.system': '系統', 'type.wip': '開發中', 'sf.wip': '開發中', 'sf.research': '研究專案', 'sf.s.dims': '向量維度', 'sf.s.bench': '基準比較', 'sf.s.nofw': '框架依賴', 'type.stream': '即時串流', 'type.bot': 'LINE Bot', 'type.research': '研究', 'type.pipeline': '管線', 'type.tool': '工具', 'type.personal': '個人專案', 'type.more': '更多',
+        'sf.d.wcs': '連接 WMS 與 PLC 的倉儲控制系統，支援 Siemens S7-1500 與 Mitsubishi SLMP。',
+        'sf.d.rag': '不依賴框架的 RAG 檢索研究系統，與 GraphRAG、LightRAG、Self-RAG 做系統性比較。研究系統，未上線。',
+        'sf.d.pipeline': 'OCR → 摘要 → 向量化 → 向量資料庫的文件處理管線，含 chunk 級去重。',
+        'sf.d.scan': '整合 composer audit、npm audit、gitleaks、semgrep、enlightn 的資安掃描腳本。',
+        'sf.d.agents': '視覺化 PM / SWE / QA / DevOps AI agent 協作的多代理開發平台（個人專案）。',
+        'sf.d.cube': '即時比特幣儀表板：Coinbase / Kraken WebSocket → Kafka Streams K 線 → SSE → React，主備來源自動切換，k3d + Argo CD GitOps。',
+        'sf.d.linebot': 'LINE Bot 微服務架構，整合 OpenAI 與 Gemini，支援文字對話與圖片辨識。',
+        'sf.d.laravelbot': 'Laravel 的 LINE Bot，串接 OpenAI / Gemini，採 Service / Repository 分層。',
+        'sf.d.jobagent': '個人求職 Agent：以經歷資料庫為唯一事實來源（RAG）評估職缺適配度並產出可追溯的客製履歷。PostgreSQL + pgvector、BGE-M3，開發中。',
+        'sf.d.github': '更多程式碼在 GitHub。',
+        'sc.k': '經歷', 'sc.h': '走過的地方。', 'job.more': '展開全部', 'job.badge': '現任',
+        's04.k': '引擎蓋下', 's04.h': '引擎蓋下是誰？', p1: 'Player 1', open: '尋找 FDE 機會',
+        'fact.since': '開始交付', 'fact.clients': '企業客戶', 'fact.layers': '技術層', 'fact.based': '所在地', 'fact.basedv': '台北',
+        's05.k': '裝備', 's05.h': '挑一個技術層。', 's05.p': '點選左側任一層，查看細節',
+        'cta.h': '一起把整個系統做完。', 'cta.btn': '寄信聊聊', 'foot.touch': '聯絡我', top: '回到頂端'
     },
-
     en: {
-        // Navigation
-        'nav.about': 'About',
-        'nav.experience': 'Experience',
-        'nav.skills': 'Skills',
-        'nav.projects': 'Projects',
-        'nav.education': 'Education',
-
-        // Hero Section
-        'hero.greeting': 'Hello, I\'m',
-        'hero.title': 'Senior Software Engineer',
-        'hero.description': 'WMS End-to-End Delivery • RAG/AI Applications • Warehouse Automation • Infrastructure',
-        'hero.description2': 'Senior Software Engineer at JTX Corp., owning a core Warehouse Management System (WMS) end-to-end and delivering it to 3 enterprise clients. Also building a RAG research system and an AI support assistant, working toward a Forward Deployed Engineer role.',
-
-        // About Section
-        'about.title': 'About Me',
-        'about.subtitle': 'Professional Background',
-        'about.description': 'Senior Software Engineer currently owning the end-to-end development and operations of a core Warehouse Management System (<strong class="tech-term">WMS</strong>) at <strong class="tech-term">JTX Corp.</strong> — full-stack delivery across <strong class="tech-term">PHP (Laravel)</strong>, <strong class="tech-term">Vue 3</strong>, <strong class="tech-term">MySQL</strong>/<strong class="tech-term">Oracle</strong>, and <strong class="tech-term">Redis</strong>, extending into DevOps deployment, hardware integration, and security scanning.',
-        'about.description2': 'Recently expanded into AI/LLM application work: hand-building a <strong class="tech-term">RAG</strong> retrieval research system (no framework dependency), and separately designing and shipping an <strong class="tech-term">AI conversational support assistant</strong> integrated into the WMS.',
-        'about.description3': 'Currently working toward <strong class="tech-term">Forward Deployed Engineer (FDE)</strong> roles, aiming to combine hands-on enterprise system delivery experience with AI integration skills to help enterprise customers turn AI prototypes into real production systems.',
-        'about.location': 'Banqiao Dist., Taipei, Taiwan',
-        'about.languages': 'Language Skills',
-        'about.chinese': 'Chinese',
-        'about.native': 'Native',
-        'about.english': 'English',
-        'about.fluent': 'Conversational',
-
-        // Experience Section
-        'experience.title': 'Work Experience',
-        'experience.spotlight.badge': 'Current',
-        'experience.timeline.heading': 'Career Timeline',
-        'experience.timeline.hint': 'Select any stage to see full details',
-        'experience.jtx.title': 'Senior Software Engineer',
-        'experience.jtx.period': 'Aug 2025 - Present',
-        'experience.jtx.achievement1': 'End-to-end ownership of the company\'s core <strong class="tech-term">Warehouse Management System (WMS)</strong>: <strong class="tech-term">PHP (Laravel)</strong> + <strong class="tech-term">Vue 3</strong> + <strong class="tech-term">MySQL</strong>/<strong class="tech-term">Oracle</strong> + <strong class="tech-term">Redis</strong>, with <strong class="tech-term">MSSQL</strong>-based bidirectional ERP write-back integration, hybrid cloud/on-prem deployment (<strong class="tech-term">Docker</strong>)',
-        'experience.jtx.achievement2': 'Delivered to 3 clients; post-launch error rate under 5%, manual labor time reduced by ~30%',
-        'experience.jtx.achievement3': 'Built a <strong class="tech-term">Python</strong>-based label printing management platform (<strong class="tech-term">LMS</strong>, <strong class="tech-term">FastAPI</strong> + <strong class="tech-term">Vue</strong>), cutting label generation time by ~70% based on customer feedback',
-        'experience.jtx.achievement4': 'Built a self-researched <strong class="tech-term">RAG</strong> retrieval and evaluation system (<strong class="tech-term">BGE-large-zh-v1.5</strong> embeddings + <strong class="tech-term">ChromaDB</strong> + expert-card reranking), benchmarked systematically against <strong class="tech-term">GraphRAG</strong>/<strong class="tech-term">LightRAG</strong>/<strong class="tech-term">Self-RAG</strong>; separately designed and shipped a modular AI conversational support assistant integrated into the WMS, backed by a local <strong class="tech-term">Ollama</strong> LLM with multi-turn session management',
-        'experience.jtx.achievement5': 'Built a <strong class="tech-term">Kotlin</strong> Android app (<strong class="tech-term">WebView</strong> + bidirectional <strong class="tech-term">JNI</strong> bridging to <strong class="tech-term">Rust</strong>) that runs a local <strong class="tech-term">actix-web</strong> HTTP service in place of a centralized print queue, achieving low-latency offline Bluetooth label printing on PDA devices; signed and packaged for customer deployment',
-        'experience.jtx.achievement6': 'Integrated hardware devices (<strong class="tech-term">barcode/QR recognition</strong>, <strong class="tech-term">ZPL</strong> label printing via a <strong class="tech-term">Rust</strong> daemon handling the print queue) with <strong class="tech-term">ERP</strong> data flows; built an extensible multi-carrier architecture integrating <strong class="tech-term">Kerry TJ</strong> logistics API',
-        'experience.jtx.achievement7': 'Independently designed and built a Warehouse Control System (<strong class="tech-term">WCS</strong>, <strong class="tech-term">Python</strong>/<strong class="tech-term">FastAPI</strong>/<strong class="tech-term">Celery</strong>) from scratch, bridging both <strong class="tech-term">Siemens S7-1500</strong> and <strong class="tech-term">Mitsubishi</strong> PLC protocols to dispatch and track stacker crane/conveyor/shuttle tasks via a full state machine, with complete unit/integration/load test coverage',
-        'experience.jtx.achievement8': 'Built a structured security vulnerability scanning script integrating <strong class="tech-term">composer audit</strong>, <strong class="tech-term">npm audit</strong>, <strong class="tech-term">gitleaks</strong>, <strong class="tech-term">semgrep</strong>, and <strong class="tech-term">enlightn</strong>',
-        'experience.jtx.achievement9': 'Independently conducted requirement-gathering interviews with listed companies and government agencies, provided go-live support, and delivered on-site user training; also contributed to the company website\'s front end (Vue 3 + Vite, multi-language)',
-        'experience.current.title': 'Full Stack Engineer',
-        'experience.current.period': 'May 2025 - Jul 2025',
-        'experience.current.achievement1': 'Developed a shipping verification system integrated with <strong class="tech-term">barcode scanners</strong> using a modular architecture, reducing shipping errors by 93%',
-        'experience.current.achievement2': 'Established development workflows with <strong class="tech-term">Docker</strong> and <strong class="tech-term">Git</strong> to support internal tooling and process automation',
-        'experience.current.achievement3': 'Collaborated closely with operations teams to understand pain points and optimize workflows',
-        'experience.astral.title': 'Senior Backend Developer',
-        'experience.astral.period': 'Feb 2024 - Apr 2025 (Senior: Feb 2025)',
-        'experience.astral.period.short': 'Feb 2024 - Apr 2025',
-        'experience.astral.achievement1': 'Developed and maintained 20+ <strong class="tech-term">Magento 2</strong> modules, enhancing maintainability through reusable, modular implementations',
-        'experience.astral.achievement2': 'Built reusable authentication and social login solutions, reducing dependency on third-party implementations',
-        'experience.astral.achievement3': 'Integrated payment providers, messaging systems, and business <strong class="tech-term">APIs</strong>, customizing checkout experiences and backend workflows',
-        'experience.astral.achievement4': 'Implemented <strong class="tech-term">Docker</strong>-based development environments and <strong class="tech-term">GitHub Actions</strong> to support CI/CD',
-        'experience.astral.achievement5': 'Leveraged <strong class="tech-term">Redis</strong> to improve application performance and caching strategies, enhancing release consistency and deployment quality',
-        'experience.educator.title': 'English & Math Educator',
-        'experience.educator.stage': 'Career Switch',
-        'experience.educator.company': 'Creativity Kindergarten & Creativity Cram School (Kaohsiung)',
-        'experience.educator.period': 'Apr 2020 - Nov 2023',
-        'experience.educator.achievement1': 'Designed and taught modular English and Math curricula for students aged 4-12, adapting materials and pacing to individual student levels',
-        'experience.educator.achievement2': 'Continued self-directed learning through personal projects and online coursework throughout, preparing for a return to software engineering in 2024',
-        'experience.twhg.title': 'Web Developer',
-        'experience.twhg.period': 'Aug 2018 - Jun 2019',
-        'experience.twhg.achievement1': 'Migrated legacy systems to <strong class="tech-term">Laravel</strong> framework, improving maintainability and performance',
-        'experience.twhg.achievement2': 'Rebuilt real estate management platform using <strong class="tech-term">MySQL</strong>, enhancing query efficiency and search ranking logic',
-        'experience.twhg.achievement3': 'Created and deployed <strong class="tech-term">LineBot</strong> to engage users with automated interaction',
-        'experience.adbert.title': 'Backend Engineer',
-        'experience.adbert.period': 'Sep 2017 - Aug 2018',
-        'experience.adbert.achievement1': 'Developed telecom ad platform backend using <strong class="tech-term">Laravel</strong> and <strong class="tech-term">RESTful API</strong> design',
-        'experience.adbert.achievement2': 'Leveraged <strong class="tech-term">Redis</strong> and <strong class="tech-term">MongoDB</strong> for real-time event data handling and user segmentation',
-        'experience.adbert.achievement3': 'Collaborated with analysts to generate user behavior insights from raw backend logs',
-
-        // Skills Section
-        'skills.title': 'Skills & Expertise',
-        'skills.programming': 'Programming Languages',
-        'skills.backend': 'Backend Frameworks & Architecture',
-        'skills.testing': 'Testing & Security',
-        'skills.sast': 'SAST Scanning (composer/npm audit, gitleaks, semgrep, enlightn)',
-        'skills.tools': 'Infrastructure & DevOps',
-        'skills.ai': 'AI / LLM',
-        'skills.tag.async': 'Async Processing',
-        'skills.tag.concurrency': 'Concurrency Control',
-        'skills.tag.distributed': 'Distributed Systems',
-        'skills.tag.llm': 'LLM Integration',
-        'skills.tag.ragas': 'RAGAS-style Evaluation',
-        'skills.tag.barcode': 'Barcode/QR Recognition',
-        'skills.tag.zpl': 'ZPL Label Printing',
-        'skills.tag.erp': 'ERP Integration',
-        'skills.hardware': 'Hardware & Systems Integration',
-        'skills.web': 'Frontend Technologies',
-        'skills.certification': 'Certifications',
-        'skills.cert1.title': 'AWS Academy Graduate - Cloud Architecting',
-        'skills.cert1.issuer': 'Amazon Web Services',
-        'skills.cert2.title': 'Prompt Design in Vertex AI - Introductory Badge',
-        'skills.cert2.issuer': 'Google Cloud Skills Boost',
-        'skills.cert3.title': 'Machine Learning Operations (MLOps) in Generative AI',
-        'skills.cert3.issuer': 'Google Cloud Skills Boost',
-        'skills.note.rag': 'SOP Assistant, live in production WMS',
-        'skills.note.sbert': 'BGE-large-zh-v1.5 embeddings',
-        'skills.note.chromadb': 'RAG vector retrieval store',
-        'skills.note.redisqueue': 'WMS async task processing',
-        'skills.note.fastapi': 'LMS label printing platform',
-        'skills.note.celery': 'WCS task dispatch & scheduling',
-        'skills.note.kotlin': 'PDA device Android app',
-        'skills.note.docker': 'WMS full-stack containerized deployment',
-        'skills.note.githubactions': 'AstralWeb Taiwan CI/CD pipeline',
-        'skills.note.mqtt': 'WMS sensor data integration',
-        'skills.note.jni': 'Android app native bridge',
-
-        // Projects Section
-        'projects.title': 'Projects',
-        'projects.featured.badge': 'In Production',
-        'projects.research.badge': 'Research Project',
-        'projects.list.heading': 'Additional Work',
-        'projects.wms.stat1': 'Clients',
-        'projects.wms.stat3': 'Error Rate',
-        'projects.wms.stat4': 'Manual Labor',
-        'projects.wms.stat5': 'Label Gen',
-        'projects.rag.stat1': 'Embedding Dims',
-        'projects.rag.stat2': 'Benchmarks',
-        'projects.rag.stat3': 'Eval Pipelines',
-        'projects.rag.stat4': 'Framework Deps',
-        'projects.assistant.title': 'WMS AI Support Assistant',
-        'projects.assistant.description': 'Designed and built a modular AI support assistant integrated into the WMS, managing multi-turn conversations via sessions and calling a local Ollama LLM to answer operational questions on receiving, shipping, stocktaking, label printing, and ERP integration, with feature-module toggles and multi-tenant isolation — live in the production WMS.',
-        'projects.rag.title': 'RAG Retrieval Research System (SOP-LLM)',
-        'projects.rag.description': 'A self-built (no framework dependency) RAG research system: sentence-transformers loading BGE-large-zh-v1.5 (1024-dim) embeddings, ChromaDB for vector search, and graph-node embeddings for expert re-ranking. Built two custom RAGAS-style evaluation pipelines, benchmarked systematically against GraphRAG, LightRAG, and Self-RAG.',
-        'projects.wcs.title': 'Warehouse Control System (WCS)',
-        'projects.wcs.description': 'Independently designed and built a Warehouse Control System bridging the upper WMS with underlying PLCs from scratch. Supports both Siemens S7-1500 and Mitsubishi SLMP protocols, with a custom task state machine, Job/Task multi-leg dispatch model, and heartbeat monitoring — roughly 8,700 lines of code with full unit/integration/load test coverage.',
-        'projects.lms.title': 'Label Printing Management Platform (LMS)',
-        'projects.lms.description': 'A label printing management system rebuilt with FastAPI + Vue 3, featuring a built-in ZPL generation engine and a Konva canvas-based template editor, supporting 1D barcodes, QR codes, and CJK character rasterization, with Labelary API preview (falling back to local rendering on failure). Cut label generation time by ~70% based on customer feedback.',
-        'projects.pipeline.title': 'LLM Document Processing Pipeline (OCR → Summarization → Embedding → Vector DB)',
-        'projects.pipeline.description': 'A general-purpose document intelligence pipeline: OCR text extraction → LLM summarization → chunking → embedding → vector database storage, with a chunk-level content-hash deduplication mechanism to avoid duplicate data consuming retrieval space.',
-        'projects.wms.title': 'Warehouse Management System (WMS) — End-to-End Product Ownership',
-        'projects.wms.description': 'Solely responsible for the architecture, development, deployment, and operations across the full lifecycle. Dockerized (Laravel + Vue 3 + Nginx + Redis + MySQL/Oracle + Queue Worker), with MSSQL-based bidirectional ERP write-back integration; hardware integration (ZPL label printing, barcode/QR recognition), interfacing with a self-built WCS (Warehouse Control System). Delivered to 3 clients, with post-launch error rate under 5%, manual labor time reduced by ~30%, and LMS label generation time cut by ~70% based on customer feedback.',
-        'projects.scan.title': 'Security Scanning Automation (security-scan.sh)',
-        'projects.scan.description': 'An automated vulnerability scanning script built for the PHP/Laravel stack, integrating composer audit, npm audit, gitleaks, semgrep, and enlightn, with an understanding of how these open-source SAST tools differ from commercial tools (Fortify, Checkmarx) in taint analysis capability.',
-        'projects.android.title': 'Kotlin Android App (WebView + Rust JNI)',
-        'projects.android.description': 'A mobile app for customers to install on PDA devices, built in Kotlin with a WebView-hosted UI and bidirectional JNI bridging to Rust: a local actix-web HTTP service replaces a centralized print queue, achieving low-latency offline Bluetooth label printing, with production-grade fault tolerance like automatic crash recovery.',
-        'projects.agents.title': 'Agent Factory Platform (Multi-Agent Dev Platform)',
-        'projects.agents.description': 'Personal project: a development automation platform visualizing PM/SWE/QA/DevOps AI agents collaborating, showing task status in real time with a factory-assembly-line style UI; QA failures automatically route back for rework. Supports multiple LLM providers and a zero-config mock mode, with one-command Docker Compose startup.',
-
-        // Education Section
-        'education.title': 'Education',
-        'education.degree2': 'Early Childhood Education (2-year program)',
-        'education.school2': 'Chia Nan University of Pharmacy & Science',
-        'education.period2': '2021 - 2023',
-        'education.degree': 'Bachelor of Information Management',
-        'education.school': 'National University of Kaohsiung',
-        'education.location': 'Taiwan',
-        'education.period': '2013 - 2017',
-        'education.capstone.title': 'Capstone Project',
-        'education.capstone.description': 'Developed image recognition mobile system to assist visually impaired users in identifying objects and environments. Applied machine learning and computer vision technologies to provide practical assistance tools for visually impaired individuals.',
-
-        // Footer
-        'footer.rights': 'All rights reserved.'
+        skip: 'Skip to content', 'nav.index': 'Index', 'nav.work': 'Work', 'nav.experience2': 'Experience', 'nav.about2': 'About', 'nav.contact': 'Contact',
+        'hero.l1': 'Every <em>system</em>', 'hero.l2': 'has two <em>sides</em>…', 'hero.l1b': 'I build', 'hero.l2b': '<em>both</em> sides.',
+        'hero.c1': 'Most engineers <em>pick a side.</em>', 'hero.c2': 'This one <em>carries both.</em>',
+        front: 'Front', back: 'Back', scroll: 'Scroll down', skipstory: 'Skip the story',
+        'nav.factory': 'Factory',
+        's02.k': 'The street', 's02.h': 'The front is what people see.', 'hint.side': '← Scroll sideways →',
+        'sf.k': 'The factory', 'sf.h': 'Behind the shops, <em>a factory.</em>', 'sf.hint': 'Scroll down, the belt moves sideways', 'sf.shipped': 'shipped',
+        'type.system': 'System', 'type.wip': 'In progress', 'sf.wip': 'In progress', 'sf.research': 'Research', 'sf.s.dims': 'Embedding dims', 'sf.s.bench': 'Benchmarks', 'sf.s.nofw': 'Framework deps', 'type.stream': 'Streaming', 'type.bot': 'LINE Bot', 'type.research': 'Research', 'type.pipeline': 'Pipeline', 'type.tool': 'Tool', 'type.personal': 'Personal', 'type.more': 'More',
+        'sf.d.wcs': 'Warehouse control system bridging the WMS and PLCs; Siemens S7-1500 and Mitsubishi SLMP.',
+        'sf.d.rag': 'Framework-free RAG research system, benchmarked against GraphRAG, LightRAG and Self-RAG. A research system, not in production.',
+        'sf.d.pipeline': 'OCR → summary → embedding → vector DB document pipeline with chunk-level dedup.',
+        'sf.d.scan': 'Security scan script combining composer audit, npm audit, gitleaks, semgrep and enlightn.',
+        'sf.d.agents': 'Multi-agent dev platform visualizing PM / SWE / QA / DevOps AI agents at work (personal project).',
+        'sf.d.cube': 'Live BTC dashboard: Coinbase / Kraken WebSocket → Kafka Streams candles → SSE → React, automatic primary/standby failover, k3d + Argo CD GitOps.',
+        'sf.d.linebot': 'LINE Bot microservices integrating OpenAI and Gemini for text chat and image recognition.',
+        'sf.d.laravelbot': 'Laravel LINE bot on OpenAI / Gemini with a Service / Repository architecture.',
+        'sf.d.jobagent': 'Personal job-search agent: a grounded RAG over my own experience scores job fit and writes traceable tailored resumes. PostgreSQL + pgvector, BGE-M3; in development.',
+        'sf.d.github': 'More code on GitHub.',
+        'sc.k': 'Career', 'sc.h': 'Where I have worked.', 'job.more': 'Show all', 'job.badge': 'Current',
+        's04.k': 'Under the hood', 's04.h': 'Who is under the hood?', p1: 'Player 1', open: 'Open to FDE roles',
+        'fact.since': 'Shipping since', 'fact.clients': 'Enterprise clients', 'fact.layers': 'Stack layers', 'fact.based': 'Based in', 'fact.basedv': 'Taipei',
+        's05.k': 'Loadout', 's05.h': 'Choose your layer.', 's05.p': 'Pick a layer on the left to see the details',
+        'cta.h': "Let's build the whole thing.", 'cta.btn': 'Start a conversation', 'foot.touch': 'Get in touch', top: 'Back to top'
     }
 };
 
-// Current language
-let currentLang = 'zh';
+const JOBS = [
+    { id: 'jtx', co: 'JTX Corp.', n: 9, current: true },
+    { id: 'current', co: 'YFLD Health Co., Ltd', n: 3 },
+    { id: 'astral', co: 'AstralWeb Taiwan', n: 5, period: 'experience.astral.period.short' },
+    { id: 'educator', coKey: 'experience.educator.company', n: 2 },
+    { id: 'twhg', co: 'TWHG IT Department', n: 3 },
+    { id: 'adbert', co: 'ADBERT', n: 3 }
+];
 
-// DOM elements
-const langButtons = document.querySelectorAll('.lang-btn');
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const themeToggleBtn = document.getElementById('theme-toggle-btn');
+const LAYERS = [
+    ['skills.ai', [['RAG', 'skills.note.rag'], ['skills.tag.llm'], ['sentence-transformers', 'skills.note.sbert'], ['BGE-large-zh-v1.5'], ['ChromaDB', 'skills.note.chromadb'], ['skills.tag.ragas'], ['LLM-as-judge'], ['Cursor'], ['Claude Code'], ['AWS Kiro']]],
+    ['skills.backend', [['Kafka', 'skills.note.kafka'], ['Kafka Streams'], ['SSE'], ['Laravel'], ['Magento 2'], ['FastAPI', 'skills.note.fastapi'], ['Celery', 'skills.note.celery'], ['Node.js'], ['RESTful API'], ['MVC'], ['Redis Queue', 'skills.note.redisqueue'], ['skills.tag.async'], ['skills.tag.concurrency'], ['skills.tag.distributed'], ['MySQL'], ['PostgreSQL', 'skills.note.pgvector'], ['MongoDB'], ['Oracle'], ['MSSQL'], ['Redis']]],
+    ['skills.programming', [['Python'], ['PHP'], ['JavaScript'], ['Java', 'skills.note.java'], ['TypeScript'], ['SQL'], ['Rust'], ['Kotlin', 'skills.note.kotlin']]],
+    ['skills.tools', [['Docker', 'skills.note.docker'], ['Linux'], ['Nginx'], ['Git'], ['Kubernetes', 'skills.note.k8s'], ['Argo CD'], ['Prometheus / Grafana'], ['GitHub Actions CI/CD', 'skills.note.githubactions'], ['Cloudflare DNS'], ['AWS'], ['GCP'], ['Azure'], ['Vultr']]],
+    ['skills.web', [['Vue 3'], ['React', 'skills.note.react'], ['JavaScript'], ['HTML'], ['CSS']]],
+    ['skills.hardware', [['skills.tag.barcode'], ['OpenCV'], ['pyzbar'], ['skills.tag.zpl'], ['PLC'], ['WES'], ['WCS'], ['AGV'], ['MQTT', 'skills.note.mqtt'], ['skills.tag.erp'], ['JNI (Rust + Kotlin)', 'skills.note.jni']]],
+    ['skills.testing', [['Pytest'], ['PHPUnit'], ['skills.sast']]]
+];
 
-// Initialize the page
-document.addEventListener('DOMContentLoaded', function() {
-    initializeLanguage();
-    initializeMobileMenu();
-    initializeScrollAnimations();
-    initializeThemeToggle();
-    initializeCareerTimeline();
-    initializeSkillNotes();
+// The street: what operators and customers touch.
+const PROJECTS = [
+    { id: 'wms', featured: true, tags: ['PHP', 'Laravel', 'Vue 3', 'MySQL', 'Oracle', 'Redis'], stats: [['3', 'stat1'], ['<5%', 'stat3'], ['-30%', 'stat4'], ['-70%', 'stat5']] },
+    { id: 'assistant', featured: true, tags: ['PHP', 'Laravel', 'LLM', 'Ollama'] },
+    { id: 'lms', tags: ['FastAPI', 'Vue 3', 'ZPL', 'Konva'] },
+    { id: 'android', tags: ['Kotlin', 'Rust', 'JNI', 'actix-web'] }
+];
 
-    initializeScrollIndicator();
-    initializeSmoothScrolling();
-    initGSAPAnimations();
+// The factory: the machinery behind them. One box per project, plus a link-out box.
+const BELT = [
+    { id: 'cube', name: 'cube_test', type: 'stream', repo: 'https://github.com/itsdamian/cube_test' },
+    { id: 'wcs', name: 'WCS', type: 'system' },
+    { id: 'rag', name: 'SOP-LLM', type: 'research', stamp: 'research', stats: [['1024', 'sf.s.dims'], ['3', 'sf.s.bench'], ['0', 'sf.s.nofw']] },
+    { id: 'pipeline', name: 'doc-pipeline', type: 'pipeline' },
+    { id: 'linebot', name: 'line_genai_services', type: 'bot', repo: 'https://github.com/itsdamian/line_genai_services' },
+    { id: 'laravelbot', name: 'new_gen_PDA', type: 'bot', repo: 'https://github.com/itsdamian/new_gen_PDA' },
+    { id: 'scan', name: 'security-scan', type: 'tool' },
+    { id: 'agents', name: 'agent-factory', type: 'personal' },
+    { id: 'jobagent', name: 'job-agent', type: 'wip', stamp: 'wip' },
+    { id: 'github', name: 'GitHub ↗', type: 'more', href: 'https://github.com/itsdamian' }
+];
+const SHIPPABLE = BELT.filter(b => !b.href && !b.stamp).length;
+
+const TERM_LINES = [
+    ['$ docker compose up -d', ''],
+    ['✔ laravel · redis · mysql', 'ok'],
+    ['$ curl /api/health', ''],
+    ['HTTP/2 200', 'ok'],
+    ['$ celery -A wcs worker', '']
+];
+
+let lang = 'zh';
+try { lang = localStorage.getItem('lang') || 'zh'; } catch (e) {}
+
+const t = key => (EXTRA[lang][key] ?? translations[lang][key] ?? translations.zh[key] ?? key);
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let layerIdx = 2;
+
+// ------------------------------------------------------------ render
+function renderStatic() {
+    $$('[data-i]').forEach(el => { el.innerHTML = t(el.dataset.i); });
+    $('#lang-btn').textContent = lang === 'zh' ? 'EN' : '中';
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+}
+
+function renderStrip() {
+    $('#strip').innerHTML = PROJECTS.map((p, i) => `<article class="proj${p.featured ? ' featured' : ''}" role="listitem">
+        <div class="proj-no"><span>${String(i + 1).padStart(2, '0')}</span><span>${p.featured ? t('projects.featured.badge') : ''}</span></div>
+        <h3>${t(`projects.${p.id}.title`)}</h3>
+        ${p.stats ? `<div class="stats">${p.stats.map(([n, k]) => `<div class="stat"><b>${n}</b><span>${t(`projects.wms.${k}`)}</span></div>`).join('')}</div>` : ''}
+        <p>${t(`projects.${p.id}.description`)}</p>
+        <div class="chips">${p.tags.map(x => `<span>${x}</span>`).join('')}</div></article>`).join('');
+    updateCount();
+}
+
+function renderJobs() {
+    $('#jobs').innerHTML = JOBS.map(j => {
+        const lis = Array.from({ length: j.n }, (_, i) => `<li>${t(`experience.${j.id}.achievement${i + 1}`)}</li>`);
+        const head = lis.slice(0, 3).join('');
+        const rest = lis.slice(3).join('');
+        return `<li class="job">
+            <div class="job-meta"><span class="period">${t(j.period || `experience.${j.id}.period`)}</span></div>
+            <div><h3>${j.coKey ? t(j.coKey) : j.co}${j.current ? `<span class="badge">${t('job.badge')}</span>` : ''}</h3>
+            <p class="jr">${t(`experience.${j.id}.title`)}</p>
+            <ul>${head}</ul>
+            ${rest ? `<details><summary>${t('job.more')} +${j.n - 3}</summary><ul>${rest}</ul></details>` : ''}</div></li>`;
+    }).join('');
+}
+
+function renderFacts() {
+    $('#facts').innerHTML = [['fact.since', '2017'], ['fact.clients', '3'], ['fact.layers', String(LAYERS.length)], ['fact.based', t('fact.basedv')]]
+        .map(([k, v]) => `<div><dt>${t(k)}</dt><dd>${v}</dd></div>`).join('');
+}
+
+function renderStack() {
+    $('#picker').innerHTML = LAYERS.map(([title], i) =>
+        `<li><button type="button" data-layer="${i}" aria-pressed="${i === layerIdx}"><span>L0${i + 1}</span>${t(title)}</button></li>`).join('');
+    const [title, items] = LAYERS[layerIdx];
+    $('#detail').innerHTML = `<p class="k">L0${layerIdx + 1}</p><h3>${t(title)}</h3><div class="chips">${items.map(([label, note]) => {
+        const text = label.startsWith('skills.') ? t(label) : label;
+        return `<span>${text}${note ? `<small class="note">${t(note)}</small>` : ''}</span>`;
+    }).join('')}</div>`;
+}
+
+function renderExtra() {
+    $('#certs').innerHTML = [1, 2, 3].map(n => `<li>${t(`skills.cert${n}.title`)}<small>${t(`skills.cert${n}.issuer`)}</small></li>`).join('');
+    $('#edu').innerHTML = [
+        ['CNU.svg', 'education.degree2', 'education.school2', 'education.period2'],
+        ['NUK.jpg', 'education.degree', 'education.school', 'education.period']
+    ].map(([img, d, s, p]) => `<li><img src="${img}" alt=""><div><b>${t(s)}</b>${t(d)}<small>${t(p)}</small></div></li>`).join('');
+}
+
+// ---- factory: boxes ride a belt that is driven by scroll progress through a tall, pinned section
+const beltSec = $('#factory');
+const boxesEl = $('#boxes');
+const bandEl = $('#band');
+const pressEl = $('#press');
+const CODE_ICON = '<svg viewBox="0 0 48 28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4 3 14l11 10M34 4l11 10-11 10M28 2 20 26"/></svg>';
+const B = { travel: 1, x0: 0, cx: 0, step: 0, bw: 0, active: -1, shipped: -1 };
+let staticBelt = reduced;
+let gears = [];
+
+function gearPath(teeth, outer, inner) {
+    const pts = [];
+    for (let i = 0; i < teeth; i++) {
+        const a = (i / teeth) * Math.PI * 2, w = Math.PI / teeth;
+        [[a - w * .5, inner], [a - w * .28, outer], [a + w * .28, outer], [a + w * .5, inner]].forEach(([ang, r]) => pts.push(`${(50 + r * Math.cos(ang)).toFixed(1)},${(50 + r * Math.sin(ang)).toFixed(1)}`));
+    }
+    return `M${pts.join('L')}Z M50,32a18,18 0 1,0 .01,0Z`;
+}
+
+function buildGears() {
+    const scene = $('#scene');
+    const defs = [
+        { teeth: 12, size: 170, left: '4%', speed: 1 },
+        { teeth: 9, size: 100, left: '15%', speed: -1.7 },
+        { teeth: 14, size: 140, right: '9%', speed: 1.3 }
+    ];
+    defs.forEach(d => {
+        const el = document.createElement('div');
+        el.className = 'gear';
+        el.style.cssText = `width:${d.size}px;height:${d.size}px;bottom:calc(var(--floor) - 12px);${d.left ? `left:${d.left}` : `right:${d.right}`}`;
+        el.innerHTML = `<svg viewBox="0 0 100 100" width="100%" height="100%"><path fill="currentColor" fill-rule="evenodd" d="${gearPath(d.teeth, 48, 38)}"/></svg>`;
+        scene.appendChild(el);
+        gears.push({ el, speed: d.speed });
+    });
+}
+
+function renderBelt() {
+    boxesEl.innerHTML = BELT.map((b, i) => {
+        const faces = `<span class="face raw">${CODE_ICON}<span class="box-name">${b.name}</span><span class="box-type">${t(`type.${b.type}`)}</span></span>
+            <span class="face done"><i class="hazard"></i>
+                <span class="done-body"><span class="d-by">Damian /</span><span class="d-name">${b.name}</span>${b.stats ? `<span class="d-stats">${b.stats.map(([n, k]) => `<span><b>${n}</b>${t(k)}</span>`).join('')}</span>` : ''}<span class="d-desc${b.stats ? ' short' : ''}">${t(`sf.d.${b.id}`)}</span></span>
+                <span class="d-foot">${t(`type.${b.type}`)}${b.repo ? ' · GitHub ↗' : ''}</span>${b.href ? '' : `<span class="stamp${b.stamp ? ' ' + b.stamp : ''}">${t(b.stamp ? `sf.${b.stamp}` : 'sf.shipped')}</span>`}</span>`;
+        const url = b.href || b.repo;
+        const hit = url
+            ? `<a class="box-in" href="${url}" target="_blank" rel="noopener">${faces}</a>`
+            : `<button class="box-in" type="button">${faces}</button>`;
+        return `<li class="box" data-n="${i}">${hit}<p class="box-desc">${t(`sf.d.${b.id}`)}</p></li>`;
+    }).join('');
+    $('#shipped-total').textContent = String(SHIPPABLE).padStart(2, '0');
+    layoutBelt();
+}
+
+function layoutBelt() {
+    beltSec.classList.toggle('static', staticBelt);
+    if (staticBelt) { beltSec.style.height = ''; return; }
+    const boxes = $$('.box', boxesEl);
+    if (!boxes.length) return;
+    B.bw = boxes[0].offsetWidth;
+    B.step = B.bw + Math.round(B.bw * 0.4);
+    boxes.forEach((b, i) => { b.style.left = `${i * B.step}px`; });
+    B.cx = innerWidth / 2;
+    B.x0 = B.cx + 60;
+    B.travel = 60 + (boxes.length - 1) * B.step + B.bw / 2;
+    beltSec.style.height = `${$('.belt-pin').offsetHeight + B.travel}px`;
+    B.active = B.shipped = -1;
+    updateBelt();
+}
+
+function updateBelt() {
+    if (staticBelt) return;
+    const p = Math.min(1, Math.max(0, -beltSec.getBoundingClientRect().top / B.travel));
+    const shift = p * B.travel;
+    boxesEl.style.transform = `translate3d(${(B.x0 - shift).toFixed(1)}px,0,0)`;
+    bandEl.style.backgroundPositionX = `${(-shift).toFixed(1)}px`;
+    bandEl.style.setProperty('--hz', `${(-shift).toFixed(1)}px`);
+    gears.forEach(g => { g.el.style.transform = `rotate(${(shift * g.speed / 3).toFixed(1)}deg)`; });
+
+    const boxes = $$('.box', boxesEl);
+    let active = 0, best = Infinity, bestPress = Infinity, shipped = 0;
+    BELT.forEach((b, i) => {
+        const c = B.x0 + i * B.step + B.bw / 2 - shift;
+        if (Math.abs(c - B.cx) < best) { best = Math.abs(c - B.cx); active = i; }
+        if (b.href) return; // the link-out box is never pressed
+        bestPress = Math.min(bestPress, Math.abs(c - B.cx));
+        const done = c < B.cx;
+        if (done && !b.stamp) shipped++;
+        // crossing the press flips the crate to its stamped face (and squashes it on the way in)
+        if (done !== boxes[i].classList.contains('is-done')) {
+            boxes[i].classList.toggle('is-done', done);
+            if (done) {
+                boxes[i].classList.remove('hit');
+                void boxes[i].offsetWidth;
+                boxes[i].classList.add('hit');
+            }
+        }
+    });
+    // piston follows how close the nearest box is to the press: fully down when it is right under it
+    const near = Math.max(0, 1 - bestPress / (B.bw * 0.5));
+    pressEl.style.setProperty('--dip', `${(26 * near * near * (3 - 2 * near)).toFixed(1)}px`);
+    if (active !== B.active) {
+        B.active = active;
+        $$('.box', boxesEl).forEach((el, i) => el.classList.toggle('on', i === active));
+        $('#belt-cap').innerHTML = `<b>${BELT[active].name}</b>${t(`sf.d.${BELT[active].id}`)}`;
+    }
+    if (shipped !== B.shipped) {
+        B.shipped = shipped;
+        $('#shipped').textContent = String(shipped).padStart(2, '0');
+    }
+}
+
+boxesEl.addEventListener('animationend', e => { if (e.animationName === 'squash') e.target.classList.remove('hit'); });
+boxesEl.addEventListener('click', e => {
+    const li = e.target.closest('.box');
+    if (!li || staticBelt || e.target.closest('a')) return;
+    const i = Number(li.dataset.n);
+    const p = (B.x0 + i * B.step + B.bw / 2 - B.cx) / B.travel;
+    scrollTo({ top: beltSec.offsetTop + p * B.travel, behavior: 'smooth' });
 });
 
-// Skill-tag hover annotations (see [data-note] in styles.css) rely on
-// :hover/:focus-visible on desktop. Touch devices have no hover, so tapping
-// a tag toggles the same annotation via this class instead.
-function initializeSkillNotes() {
-    const notedTags = document.querySelectorAll('.skill-tag[data-note-key]');
-    if (!notedTags.length) return;
-
-    notedTags.forEach(function(tag) {
-        tag.setAttribute('tabindex', '0');
-        tag.addEventListener('click', function() {
-            const wasActive = tag.classList.contains('is-active');
-            notedTags.forEach(function(t) { t.classList.remove('is-active'); });
-            if (!wasActive) tag.classList.add('is-active');
-        });
-    });
-}
-
-// Career timeline: a Swiper carousel with centeredSlides + slideToClickedSlide,
-// so the selected stage (by default, the current role) always sits in the
-// middle instead of getting stranded at the scrollable strip's far end.
-// The JTX panel is visible by default (progressive enhancement: it has no
-// [hidden] attribute in the markup, so it still shows correctly even if
-// this script fails to load).
-function initializeCareerTimeline() {
-    const nodes = document.querySelectorAll('.career-node');
-    const panels = document.querySelectorAll('.career-detail-panel');
-    const swiperEl = document.querySelector('.career-swiper');
-    if (!nodes.length || !panels.length || !swiperEl || typeof Swiper === 'undefined') return;
-
-    function selectStage(target) {
-        nodes.forEach(function(n) {
-            const isTarget = n.dataset.target === target;
-            n.classList.toggle('is-active', isTarget);
-            n.setAttribute('aria-selected', isTarget ? 'true' : 'false');
-        });
-
-        panels.forEach(function(panel) {
-            const isTarget = panel.dataset.panel === target;
-            panel.classList.toggle('is-active', isTarget);
-            panel.hidden = !isTarget;
-        });
-    }
-
-    const initialNode = document.querySelector('.career-node.is-active') || nodes[nodes.length - 1];
-    const initialIndex = Array.prototype.indexOf.call(nodes, initialNode);
-
-    new Swiper('.career-swiper', {
-        slidesPerView: 'auto',
-        centeredSlides: true,
-        spaceBetween: 24,
-        slideToClickedSlide: true,
-        initialSlide: initialIndex >= 0 ? initialIndex : nodes.length - 1,
-        grabCursor: true,
-        keyboard: { enabled: true },
-        navigation: {
-            nextEl: '.career-swiper .swiper-button-next',
-            prevEl: '.career-swiper .swiper-button-prev'
-        },
-        on: {
-            // Fires when a slide becomes active via arrows, keyboard, drag,
-            // or slideToClickedSlide — but not for the initial slide, whose
-            // detail panel is already correct in the static markup.
-            slideChange: function() {
-                const activeNode = this.slides[this.activeIndex] &&
-                    this.slides[this.activeIndex].querySelector('.career-node');
-                if (activeNode) selectStage(activeNode.dataset.target);
-            }
+// ---- headings: letters rise one by one when the title scrolls into view
+const CJK = /[\u3000-\u9fff\uff00-\uffef]/;
+function splitHeading(el) {
+    const label = el.textContent.trim();
+    let n = 0;
+    const chars = txt => [...txt].map(c => `<span class="ch" aria-hidden="true" style="--i:${n++}">${c}</span>`).join('');
+    const walk = node => [...node.childNodes].map(c => {
+        if (c.nodeType === 3) {
+            return c.textContent.split(/(\s+)/).map(tok => !tok.trim() ? tok
+                : CJK.test(tok) ? chars(tok) : `<span class="w">${chars(tok)}</span>`).join('');
         }
+        return c.nodeType === 1 ? `<${c.tagName.toLowerCase()}>${walk(c)}</${c.tagName.toLowerCase()}>` : '';
+    }).join('');
+    el.setAttribute('aria-label', label);
+    el.innerHTML = walk(el);
+    el.classList.remove('split-in');
+    el.classList.add('split');
+}
+const headIO = 'IntersectionObserver' in window && !reduced ? new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('split-in'); headIO.unobserve(e.target); }
+}), { threshold: 0.4 }) : null;
+function splitHeadings() {
+    $$('.sec-head h2, .belt-head h2, .cta h2').forEach(h => {
+        if (reduced || !headIO) return;
+        splitHeading(h);
+        headIO.observe(h);
     });
 }
 
-// Theme (light/dark) toggle
-// The actual theme is applied before first paint by an inline script in
-// <head> (reads localStorage, falls back to prefers-color-scheme). This
-// just wires up the button to flip and persist it.
-function initializeThemeToggle() {
-    if (!themeToggleBtn) return;
-
-    themeToggleBtn.addEventListener('click', function() {
-        const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-    });
+function render() {
+    renderStatic(); renderStrip(); renderJobs(); renderFacts(); renderStack(); renderExtra(); renderBelt(); splitHeadings();
+    document.title = '林書弘 Damian Lin - Senior Software Engineer';
 }
 
-// Language switching functionality
-function initializeLanguage() {
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lang = this.dataset.lang;
-            switchLanguage(lang);
-
-            // Update active button
-            langButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-}
-
-function switchLanguage(lang) {
-    currentLang = lang;
-    const elements = document.querySelectorAll('[data-lang-key]');
-
-    elements.forEach(element => {
-        const key = element.dataset.langKey;
-        if (translations[lang] && translations[lang][key]) {
-            // innerHTML (not textContent) so achievement bullets can wrap key
-            // technologies in <strong class="tech-term"> for emphasis. All
-            // translation strings are authored by us, not user input.
-            element.innerHTML = translations[lang][key];
-        }
-    });
-
-    // Skill-tag hover annotations live in a data-note attribute (read via
-    // CSS attr()), not element text, so they need their own translation pass
-    const notedElements = document.querySelectorAll('[data-note-key]');
-    notedElements.forEach(element => {
-        const key = element.dataset.noteKey;
-        if (translations[lang] && translations[lang][key]) {
-            element.setAttribute('data-note', translations[lang][key]);
-        }
-    });
-
-    // Update document title
-    document.title = lang === 'zh' ? '林書弘 Damian Lin - Senior Software Engineer' :
-                    'Damian Lin - Senior Software Engineer';
-}
-
-// Mobile menu functionality
-function initializeMobileMenu() {
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-    }
-}
-
-// Scroll animations
-function initializeScrollAnimations() {
-    const sections = document.querySelectorAll('section');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-}
-
-
-
-// Scroll indicator
-function initializeScrollIndicator() {
-    const scrollIndicator = document.createElement('div');
-    scrollIndicator.className = 'scroll-indicator';
-    document.body.appendChild(scrollIndicator);
-
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
-        scrollIndicator.style.width = scrollPercent + '%';
-    });
-}
-
-// Smooth scrolling for navigation links and hero buttons
-function initializeSmoothScrolling() {
-    // Navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Hero section buttons
-    const aboutBtn = document.getElementById('about-btn');
-    const projectsBtn = document.getElementById('projects-btn');
-
-    if (aboutBtn) {
-        aboutBtn.addEventListener('click', function() {
-            const target = document.getElementById('about');
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    }
-
-    if (projectsBtn) {
-        projectsBtn.addEventListener('click', function() {
-            const target = document.getElementById('projects');
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    }
-}
-
-// Add loading animation to skill bars
-function animateSkillBars() {
-    const skillBars = document.querySelectorAll('.skill-bar');
-    skillBars.forEach(bar => {
-        const width = bar.style.width;
-        bar.style.width = '0%';
-        setTimeout(() => {
-            bar.style.width = width;
-        }, 500);
-    });
-}
-
-// Call skill bar animation when skills section is visible
-const skillsSection = document.getElementById('skills');
-if (skillsSection) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateSkillBars();
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-    observer.observe(skillsSection);
-}
-
-// Count the featured project stats (WMS + SOP-LLM stat strips) up from 0
-// to their real value once scrolled into view — the numbers themselves are
-// static facts already in the copy (see index.html), this just animates
-// how they're revealed.
-function animateStatNumbers() {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const statEls = document.querySelectorAll('.project-stat-num[data-count-to]');
-
-    statEls.forEach(function(el) {
-        const target = parseFloat(el.dataset.countTo);
-        const prefix = el.dataset.prefix || '';
-        const suffix = el.dataset.suffix || '';
-
-        if (prefersReducedMotion || target === 0) {
-            el.textContent = prefix + target + suffix;
-            return;
-        }
-
-        const duration = 900;
-        const start = performance.now();
-
-        function tick(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const value = Math.round(target * eased);
-            el.textContent = prefix + value + suffix;
-            if (progress < 1) {
-                requestAnimationFrame(tick);
-            } else {
-                el.textContent = prefix + target + suffix;
-            }
-        }
-
-        requestAnimationFrame(tick);
-    });
-}
-
-const projectsSection = document.getElementById('projects');
-if (projectsSection) {
-    const statObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateStatNumbers();
-                statObserver.unobserve(entry.target);
-            }
-        });
-    });
-    statObserver.observe(projectsSection);
-}
-
-// Add hover effects to project cards. Featured cards (.project-card--featured)
-// are excluded here — they get a richer GSAP cursor-tilt effect instead (see
-// initMicroInteractions()), and letting both handlers fight over
-// element.style.transform on the same cards causes visible jitter.
-document.querySelectorAll('.bg-white:not(.project-card--featured)').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-5px)';
-    });
-
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-    });
+// ------------------------------------------------------------ interactions
+$('#lang-btn').addEventListener('click', () => {
+    lang = lang === 'zh' ? 'en' : 'zh';
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    render();
 });
 
-// ==========================================================================
-// GSAP + ScrollTrigger: larger-scale scroll choreography, hero parallax,
-// the career timeline's SVG path draw, and richer micro-interactions.
-// Additive on top of the plain CSS/IntersectionObserver animations above
-// (initializeScrollAnimations, animateSkillBars, animateStatNumbers all
-// still run regardless of whether GSAP loads). If the GSAP CDN scripts fail
-// to load, the only thing that CSS pre-hides is .hero-fade-item (opacity:0
-// in styles.css, so it doesn't flash unstyled before the JS entrance runs)
-// — the fallback below just reveals those immediately so content can never
-// get stuck invisible. Everything else in this file has no GSAP-only
-// hidden state, so it renders normally with no animation if GSAP is absent.
-// ==========================================================================
-function initGSAPAnimations() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        document.querySelectorAll('.hero-fade-item').forEach(function(el) {
-            el.style.opacity = 1;
-        });
+$('#picker').addEventListener('click', e => {
+    const b = e.target.closest('[data-layer]');
+    if (!b) return;
+    layerIdx = Number(b.dataset.layer);
+    renderStack();
+});
+
+const strip = $('#strip');
+const step = () => (strip.firstElementChild ? strip.firstElementChild.offsetWidth + 20 : 300);
+const updateCount = () => {
+    const i = Math.min(PROJECTS.length, Math.round(strip.scrollLeft / step()) + 1);
+    $('#strip-count').textContent = `${String(i).padStart(2, '0')} / ${String(PROJECTS.length).padStart(2, '0')}`;
+};
+$('#prev').addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }));
+$('#next').addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }));
+strip.addEventListener('scroll', updateCount, { passive: true });
+strip.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') strip.scrollBy({ left: step(), behavior: 'smooth' });
+    if (e.key === 'ArrowLeft') strip.scrollBy({ left: -step(), behavior: 'smooth' });
+});
+
+const nav = $('#nav');
+const burger = $('#burger');
+const setMenu = open => { nav.classList.toggle('open', open); burger.setAttribute('aria-expanded', String(open)); };
+burger.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+// header turns solid once the hero is behind us; highlight the current section
+const hero = $('#hero');
+const sections = $$('#nav a').map(a => ({ a, el: $(a.getAttribute('href')) }));
+function onScroll() {
+    updateStory();
+    updateBelt();
+    $('#top').classList.toggle('solid', scrollY > hero.offsetHeight - 80);
+    const y = scrollY + 140;
+    let cur = sections[0];
+    sections.forEach(s => { if (s.el && s.el.offsetTop <= y) cur = s; });
+    sections.forEach(s => s.a.classList.toggle('on', s === cur));
+}
+addEventListener('scroll', onScroll, { passive: true });
+addEventListener('resize', () => { layoutStory(); layoutBelt(); });
+
+// Taipei clock
+function tick() {
+    const f = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Taipei' });
+    $('#clock span').textContent = `TAIPEI ${f.format(new Date())}`;
+}
+tick(); setInterval(tick, 20000);
+
+// ---- hero story: scroll progress u (0..1 across the pinned stretch) drives everything
+//   0.00-0.10  FRONT vs BACK pill and hint fade out, headline swaps to its second line
+//   0.00-0.50  halves part like doors; figure rises on the stage
+//   0.12-0.88  centre line: "pick a side" -> "carries both"; name tag appears
+//   0.62-0.92  halves close again behind the figure
+const storyEl = hero;
+const storyPin = $('#story-pin');
+const S = {
+    halfF: $('#half-f'), halfB: $('#half-b'), figure: $('#figure'), vs: $('#vs'), cue: $('#cue'), tag: $('#nametag'),
+    a: $$('.hl .s.a', storyEl), b: $$('.hl .s.b', storyEl), c1: $('.c1', storyEl), c2: $('.c2', storyEl), cl: $('#center-line'), hl: $$('.hl', storyEl)
+};
+const STORY_NODES = [S.halfF, S.halfB, S.figure, S.vs, S.cue, S.tag, S.cl, ...S.hl, ...S.a, ...S.b, S.c1, S.c2];
+let staticStory = true;
+let storyLen = 1;
+const clamp01 = x => Math.min(1, Math.max(0, x));
+const seg = (u, a, b) => clamp01((u - a) / (b - a));
+const ease = x => x * x * (3 - 2 * x);
+
+function layoutStory() {
+    staticStory = reduced || innerWidth <= 900;
+    storyEl.classList.toggle('static', staticStory);
+    $('#top').classList.remove('on-dark');
+    if (staticStory) {
+        storyEl.style.height = '';
+        STORY_NODES.forEach(n => n.removeAttribute('style'));
         return;
     }
+    storyLen = innerHeight * 3.4;
+    storyEl.style.height = `${storyPin.offsetHeight + storyLen}px`;
+    updateStory();
+}
 
-    gsap.registerPlugin(ScrollTrigger);
+function updateStory() {
+    if (staticStory) return;
+    const u = clamp01(-storyEl.getBoundingClientRect().top / storyLen);
+    const open = ease(seg(u, 0, 0.5)) * 0.62 * (1 - ease(seg(u, 0.62, 0.92)));
+    const w = innerWidth / 2;
+    S.halfF.style.transform = `translate3d(${(-open * w).toFixed(1)}px,0,0)`;
+    S.halfB.style.transform = `translate3d(${(open * w).toFixed(1)}px,0,0)`;
+    S.figure.style.transform = `translate(-50%, ${((1 - ease(seg(u, 0.02, 0.5))) * 0.85 * innerHeight).toFixed(1)}px)`;
 
-    // Scroll-driven choreography (hero entrance/parallax, career path draw,
-    // per-section reveals) lives inside matchMedia so it's rebuilt cleanly
-    // if the visitor crosses the reduced-motion or desktop/mobile breakpoint
-    // mid-session — GSAP auto-reverts tweens/ScrollTriggers created inside
-    // a matchMedia callback when its conditions change.
-    const mm = gsap.matchMedia();
+    const pill = 1 - seg(u, 0, 0.1);
+    [S.vs, S.cue].forEach(n => { n.style.opacity = pill.toFixed(3); n.style.scale = (0.85 + 0.15 * pill).toFixed(3); n.style.pointerEvents = pill < 0.2 ? 'none' : ''; });
 
-    mm.add({
-        reduceMotion: '(prefers-reduced-motion: reduce)',
-        isDesktop: '(min-width: 768px)'
-    }, function(context) {
-        const reduceMotion = context.conditions.reduceMotion;
-        const isDesktop = context.conditions.isDesktop;
+    // the halves' own headline swaps lines, then clears the way for the centre line (and returns when they close)
+    const swap = ease(seg(u, 0.03, 0.08));
+    const hlOpacity = (1 - seg(u, 0.12, 0.24)) + seg(u, 0.86, 0.94);
+    S.hl.forEach(n => n.style.setProperty('--hl', Math.min(1, hlOpacity).toFixed(3)));
+    S.a.forEach(n => { n.style.opacity = ((1 - swap) * hlOpacity).toFixed(3); });
+    S.b.forEach(n => { n.style.opacity = (swap * hlOpacity).toFixed(3); });
 
-        if (reduceMotion) {
-            // Snap everything straight to its end state — no scroll-linked
-            // motion at all for these visitors.
-            gsap.set('.hero-fade-item', { opacity: 1, clearProps: 'transform' });
-            gsap.set('.stack-layer', { opacity: 1, clipPath: 'none' });
-            gsap.set('.project-card--featured, .project-list-item', { opacity: 1, clearProps: 'transform' });
-            gsap.set('.edu-item, .edu-dot', { opacity: 1, clearProps: 'transform' });
-            gsap.set('.career-path-progress', { strokeDashoffset: 0 });
-            gsap.set('.career-dot', { clearProps: 'transform', opacity: 1 });
-            return;
+    // centre lines only show once the stage is wide enough to hold them
+    const c1 = seg(u, 0.26, 0.32) * (1 - seg(u, 0.4, 0.45));
+    const c2 = seg(u, 0.46, 0.5) * (1 - seg(u, 0.72, 0.78));
+    S.c1.style.opacity = c1.toFixed(3);
+    S.c2.style.opacity = c2.toFixed(3);
+    S.cl.style.setProperty('--cl', Math.max(c1, c2).toFixed(3));
+    S.tag.style.opacity = seg(u, 0.3, 0.45).toFixed(3);
+
+    // the logo is ink on the cream half; switch to cream once that half has slid past it
+    $('#top').classList.toggle('on-dark', w - open * w < 150);
+}
+
+// terminal typing
+function typeTerm() {
+    const el = $('#term');
+    const cursor = '<span class="cur"></span>';
+    if (reduced) {
+        el.innerHTML = TERM_LINES.map(([s, c]) => c ? `<span class="${c}">${s}</span>` : s).join('\n') + '\n' + cursor;
+        return;
+    }
+    let line = 0, ch = 0, out = '';
+    (function type() {
+        if (line >= TERM_LINES.length) { el.innerHTML = out + cursor; return; }
+        const [s, c] = TERM_LINES[line];
+        const isCmd = s.startsWith('$');
+        if (isCmd && ch < s.length) {
+            ch++;
+            el.innerHTML = out + s.slice(0, ch) + cursor;
+            return setTimeout(type, 38);
         }
-
-        initHeroTimeline();
-        if (isDesktop) initHeroParallax();
-        initCareerPathDraw();
-        initSectionChoreography();
-    });
-
-    // Hover/click micro-interactions are plain event listeners, not
-    // GSAP-managed tweens tied to a breakpoint, so they're set up once
-    // outside matchMedia — re-running matchMedia's callback on every resize
-    // across 768px would otherwise stack duplicate listeners on the same
-    // elements. Motion amplitude/attachment is instead checked live inside
-    // each handler (see initMicroInteractions()).
-    initMicroInteractions();
+        out += (c ? `<span class="${c}">${s}</span>` : s) + '\n';
+        line++; ch = 0;
+        el.innerHTML = out + cursor;
+        setTimeout(type, isCmd ? 260 : 380);
+    })();
 }
 
-// Hero entrance: name, then tagline, then the two summary paragraphs, then
-// the avatar, landing one beat apart. Base hidden state (opacity:0) already
-// comes from CSS (.hero-fade-item in styles.css) so there's no flash before
-// this runs; here we also set the transform origin so nothing pops in from
-// a stale position if this fires more than once (e.g. after a matchMedia
-// context rebuild).
-function initHeroTimeline() {
-    const items = document.querySelectorAll('.hero-fade-item');
-    if (!items.length) return;
+// scroll reveal
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: 0.12 }) : null;
+$$('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
 
-    gsap.set('#hero h1.hero-fade-item, #hero h2.hero-fade-item, #hero p.hero-fade-item', { opacity: 0, y: 18 });
-    gsap.set('.hero-fade-item--avatar', { opacity: 0, scale: 0.92 });
-
-    gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.7 } })
-        .to('#hero h1.hero-fade-item', { opacity: 1, y: 0 }, 0.05)
-        .to('#hero h2.hero-fade-item', { opacity: 1, y: 0 }, 0.18)
-        .to('#hero p.hero-fade-item', { opacity: 1, y: 0, stagger: 0.13 }, 0.31)
-        .to('.hero-fade-item--avatar', { opacity: 1, scale: 1 }, 0.3);
-}
-
-// Background grid + glow (real DOM nodes now, not ::before/::after — see
-// .hero-grid/.hero-glow in index.html/styles.css) drift at a different
-// speed than the foreground content while the hero scrolls past, for a
-// parallax depth cue. Desktop-only (see isDesktop gate in initGSAPAnimations).
-function initHeroParallax() {
-    if (!document.querySelector('.hero-grid')) return;
-
-    const trigger = { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true };
-
-    gsap.to('.hero-grid', { yPercent: 18, ease: 'none', scrollTrigger: trigger });
-    gsap.to('.hero-glow', { yPercent: 32, xPercent: -8, ease: 'none', scrollTrigger: trigger });
-    gsap.to('.hero-avatar-frame', { yPercent: -12, ease: 'none', scrollTrigger: trigger });
-}
-
-// Draws the career timeline's accent line left-to-right as #experience
-// scrolls into view (stroke-dashoffset on the SVG line added in index.html),
-// and pops each node's dot in a staggered wave timed to roughly track the
-// draw. Purely a scroll-position visual layer — it doesn't read or drive
-// Swiper's internal slide position, so the existing carousel click/keyboard
-// interaction (initializeCareerTimeline()) is completely unaffected.
-function initCareerPathDraw() {
-    const progressLine = document.querySelector('.career-path-progress');
-    const dots = gsap.utils.toArray('.career-dot');
-    if (!progressLine) return;
-
-    const trigger = {
-        trigger: '#experience',
-        start: 'top 75%',
-        end: 'bottom 55%',
-        scrub: 0.6
-    };
-
-    gsap.set(progressLine, { strokeDashoffset: 100 });
-    gsap.set(dots, { scale: 0.5, opacity: 0.4, transformOrigin: '50% 50%' });
-
-    gsap.to(progressLine, { strokeDashoffset: 0, ease: 'none', scrollTrigger: trigger });
-
-    if (dots.length) {
-        gsap.to(dots, {
-            scale: 1,
-            opacity: 1,
-            stagger: { each: 1 / dots.length },
-            ease: 'none',
-            scrollTrigger: trigger
-        });
-    }
-}
-
-// Per-section entrance choreography: each section gets its own reveal
-// treatment (slide/scale/clip-path) instead of the same fade+translateY
-// repeated everywhere. Base hidden states are set here via gsap.set() —
-// none of these elements have a CSS opacity:0 fallback, so if this never
-// runs (GSAP unavailable) they simply render normally with no animation.
-function initSectionChoreography() {
-    // About: text column slides in from the left, language card from the
-    // right with a slight scale — two columns converging reads better than
-    // a shared fade for a two-column layout.
-    const aboutCol1 = document.querySelector('#about .grid > div:first-child');
-    const aboutCol2 = document.querySelector('#about .grid > div:last-child');
-    if (aboutCol1 && aboutCol2) {
-        gsap.set(aboutCol1, { opacity: 0, x: -40 });
-        gsap.set(aboutCol2, { opacity: 0, x: 40, scale: 0.96 });
-        const aboutTrigger = { trigger: '#about', start: 'top 75%' };
-        gsap.to(aboutCol1, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: aboutTrigger });
-        gsap.to(aboutCol2, { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: 'power3.out', scrollTrigger: aboutTrigger });
-    }
-
-    // Skills: each tech-stack layer wipes in left-to-right via clip-path —
-    // fits the "drawn" engineering-doc feel used elsewhere (career path,
-    // section numbering) better than a plain fade.
-    const stackLayers = gsap.utils.toArray('.stack-layer');
-    if (stackLayers.length) {
-        gsap.set(stackLayers, { clipPath: 'inset(0 100% 0 0)', opacity: 0 });
-        gsap.to(stackLayers, {
-            clipPath: 'inset(0 0% 0 0)',
-            opacity: 1,
-            duration: 0.7,
-            ease: 'power2.inOut',
-            stagger: 0.12,
-            scrollTrigger: { trigger: '#skills', start: 'top 70%' }
-        });
-    }
-
-    // Projects: featured cards scale in together; the supporting list
-    // slides in from the left with a stagger (replaces the old fixed
-    // nth-child transition-delay list in styles.css).
-    const featuredCards = gsap.utils.toArray('.project-card--featured');
-    if (featuredCards.length) {
-        gsap.set(featuredCards, { opacity: 0, scale: 0.92, y: 20 });
-        gsap.to(featuredCards, {
-            opacity: 1, scale: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.12,
-            scrollTrigger: { trigger: '.project-featured-grid', start: 'top 80%' }
-        });
-    }
-
-    const listItems = gsap.utils.toArray('.project-list-item');
-    if (listItems.length) {
-        gsap.set(listItems, { opacity: 0, x: -28 });
-        gsap.to(listItems, {
-            opacity: 1, x: 0, duration: 0.6, ease: 'power2.out', stagger: 0.09,
-            scrollTrigger: { trigger: '.project-list', start: 'top 85%' }
-        });
-    }
-
-    // Education: each timeline entry rises in, its dot popping a beat later.
-    const eduItems = gsap.utils.toArray('.edu-item');
-    eduItems.forEach(function(item) {
-        const dot = item.querySelector('.edu-dot');
-        gsap.set(item, { opacity: 0, y: 24 });
-        const tl = gsap.timeline({ scrollTrigger: { trigger: item, start: 'top 82%' } });
-        tl.to(item, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        if (dot) {
-            gsap.set(dot, { scale: 0, transformOrigin: '50% 50%' });
-            tl.to(dot, { scale: 1, duration: 0.4, ease: 'back.out(2.5)' }, 0.15);
-        }
-    });
-}
-
-// Richer hover/click feedback on top of the existing CSS :hover transitions.
-// Kept deliberately small in amplitude — this is a résumé site, not a
-// playground. Runs once (see the comment in initGSAPAnimations() on why
-// this sits outside matchMedia); the tilt effect checks viewport width and
-// prefers-reduced-motion live, at event time, rather than at setup time.
-function initMicroInteractions() {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    // Featured project cards: cursor-following tilt. Skipped on narrow
-    // viewports at move-time (not just at setup) so rotating a tablet or
-    // resizing the window doesn't leave the listener stuck in the wrong mode.
-    document.querySelectorAll('.project-card--featured').forEach(function(card) {
-        gsap.set(card, { transformPerspective: 800 });
-        const maxTilt = 6;
-
-        card.addEventListener('mousemove', function(e) {
-            if (window.innerWidth < 768) return;
-            const rect = card.getBoundingClientRect();
-            const px = (e.clientX - rect.left) / rect.width - 0.5;
-            const py = (e.clientY - rect.top) / rect.height - 0.5;
-            gsap.to(card, {
-                rotateY: px * maxTilt * 2,
-                rotateX: py * -maxTilt * 2,
-                duration: 0.4,
-                ease: 'power2.out'
-            });
-        });
-
-        card.addEventListener('mouseleave', function() {
-            gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'power3.out' });
-        });
-    });
-
-    // Career nodes: a small pop on the dot on hover, layered on the
-    // existing CSS background-color hover.
-    document.querySelectorAll('.career-node').forEach(function(node) {
-        const dot = node.querySelector('.career-dot');
-        if (!dot) return;
-        node.addEventListener('mouseenter', function() {
-            gsap.to(dot, { scale: 1.18, duration: 0.2, ease: 'power2.out' });
-        });
-        node.addEventListener('mouseleave', function() {
-            gsap.to(dot, { scale: 1, duration: 0.25, ease: 'power2.out' });
-        });
-    });
-
-    // Theme toggle + language buttons: a small confirm pulse on click,
-    // separate from the actual state change (handled elsewhere).
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', function() {
-            gsap.fromTo(themeToggleBtn,
-                { scale: 0.85, rotate: -12 },
-                { scale: 1, rotate: 0, duration: 0.4, ease: 'back.out(3)' }
-            );
-        });
-    }
-
-    langButtons.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            gsap.fromTo(btn, { scale: 0.9 }, { scale: 1, duration: 0.3, ease: 'back.out(3)' });
-        });
-    });
-
-    // Nav links: a small lift on hover, layered on the existing CSS
-    // underline-grow effect.
-    document.querySelectorAll('.nav-link').forEach(function(link) {
-        link.addEventListener('mouseenter', function() {
-            gsap.to(link, { y: -2, duration: 0.2, ease: 'power2.out' });
-        });
-        link.addEventListener('mouseleave', function() {
-            gsap.to(link, { y: 0, duration: 0.25, ease: 'power2.out' });
-        });
-    });
-}
-
-// Keyboard navigation support
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
-        mobileMenu.classList.add('hidden');
-    }
-});
-
-// Performance optimization: Debounce scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Apply debouncing to scroll events
-const debouncedScrollHandler = debounce(() => {
-    // Any scroll-based functionality can go here
-}, 10);
+$('#year').textContent = new Date().getFullYear();
+if (!staticBelt) buildGears();
+layoutStory();
+render();
+typeTerm();
+onScroll();
