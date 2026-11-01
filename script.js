@@ -10,12 +10,15 @@ const EXTRA = {
         'nav.factory': '工廠',
         's02.k': '街道', 's02.h': '前台，是使用者看得到的。', 'hint.side': '← 左右滑動 →',
         'sf.k': '工廠', 'sf.h': '幕後，<em>是一座工廠。</em>', 'sf.hint': '往下滑，輸送帶會橫向移動', 'sf.shipped': '已出貨',
-        'type.system': '系統', 'type.research': '研究', 'type.pipeline': '管線', 'type.tool': '工具', 'type.personal': '個人專案', 'type.more': '更多',
+        'type.system': '系統', 'type.stream': '即時串流', 'type.bot': 'LINE Bot', 'type.research': '研究', 'type.pipeline': '管線', 'type.tool': '工具', 'type.personal': '個人專案', 'type.more': '更多',
         'sf.d.wcs': '連接 WMS 與 PLC 的倉儲控制系統，支援 Siemens S7-1500 與 Mitsubishi SLMP。',
         'sf.d.rag': '不依賴框架的 RAG 檢索研究系統，與 GraphRAG、LightRAG、Self-RAG 做系統性比較。',
         'sf.d.pipeline': 'OCR → 摘要 → 向量化 → 向量資料庫的文件處理管線，含 chunk 級去重。',
         'sf.d.scan': '整合 composer audit、npm audit、gitleaks、semgrep、enlightn 的資安掃描腳本。',
         'sf.d.agents': '視覺化 PM / SWE / QA / DevOps AI agent 協作的多代理開發平台（個人專案）。',
+        'sf.d.cube': '即時比特幣儀表板：Coinbase / Kraken WebSocket → Kafka Streams K 線 → SSE → React，主備來源自動切換，k3d + Argo CD GitOps。',
+        'sf.d.linebot': 'LINE Bot 微服務架構，整合 OpenAI 與 Gemini，支援文字對話與圖片辨識。',
+        'sf.d.laravelbot': 'Laravel 的 LINE Bot，串接 OpenAI / Gemini，採 Service / Repository 分層。',
         'sf.d.github': '更多程式碼在 GitHub。',
         'sc.k': '經歷', 'sc.h': '走過的地方。', 'job.more': '展開全部', 'job.badge': '現任',
         's04.k': '引擎蓋下', 's04.h': '引擎蓋下是誰？', p1: 'Player 1', open: '尋找 FDE 機會',
@@ -31,12 +34,15 @@ const EXTRA = {
         'nav.factory': 'Factory',
         's02.k': 'The street', 's02.h': 'The front is what people see.', 'hint.side': '← Scroll sideways →',
         'sf.k': 'The factory', 'sf.h': 'Behind the shops, <em>a factory.</em>', 'sf.hint': 'Scroll down, the belt moves sideways', 'sf.shipped': 'shipped',
-        'type.system': 'System', 'type.research': 'Research', 'type.pipeline': 'Pipeline', 'type.tool': 'Tool', 'type.personal': 'Personal', 'type.more': 'More',
+        'type.system': 'System', 'type.stream': 'Streaming', 'type.bot': 'LINE Bot', 'type.research': 'Research', 'type.pipeline': 'Pipeline', 'type.tool': 'Tool', 'type.personal': 'Personal', 'type.more': 'More',
         'sf.d.wcs': 'Warehouse control system bridging the WMS and PLCs; Siemens S7-1500 and Mitsubishi SLMP.',
         'sf.d.rag': 'Framework-free RAG research system, benchmarked against GraphRAG, LightRAG and Self-RAG.',
         'sf.d.pipeline': 'OCR → summary → embedding → vector DB document pipeline with chunk-level dedup.',
         'sf.d.scan': 'Security scan script combining composer audit, npm audit, gitleaks, semgrep and enlightn.',
         'sf.d.agents': 'Multi-agent dev platform visualizing PM / SWE / QA / DevOps AI agents at work (personal project).',
+        'sf.d.cube': 'Live BTC dashboard: Coinbase / Kraken WebSocket → Kafka Streams candles → SSE → React, automatic primary/standby failover, k3d + Argo CD GitOps.',
+        'sf.d.linebot': 'LINE Bot microservices integrating OpenAI and Gemini for text chat and image recognition.',
+        'sf.d.laravelbot': 'Laravel LINE bot on OpenAI / Gemini with a Service / Repository architecture.',
         'sf.d.github': 'More code on GitHub.',
         'sc.k': 'Career', 'sc.h': 'Where I have worked.', 'job.more': 'Show all', 'job.badge': 'Current',
         's04.k': 'Under the hood', 's04.h': 'Who is under the hood?', p1: 'Player 1', open: 'Open to FDE roles',
@@ -75,9 +81,12 @@ const PROJECTS = [
 
 // The factory: the machinery behind them. One box per project, plus a link-out box.
 const BELT = [
+    { id: 'cube', name: 'cube_test', type: 'stream', repo: 'https://github.com/itsdamian/cube_test' },
     { id: 'wcs', name: 'WCS', type: 'system' },
     { id: 'rag', name: 'SOP-LLM', type: 'research' },
     { id: 'pipeline', name: 'doc-pipeline', type: 'pipeline' },
+    { id: 'linebot', name: 'line_genai_services', type: 'bot', repo: 'https://github.com/itsdamian/line_genai_services' },
+    { id: 'laravelbot', name: 'new_gen_PDA', type: 'bot', repo: 'https://github.com/itsdamian/new_gen_PDA' },
     { id: 'scan', name: 'security-scan', type: 'tool' },
     { id: 'agents', name: 'agent-factory', type: 'personal' },
     { id: 'github', name: 'GitHub ↗', type: 'more', href: 'https://github.com/itsdamian' }
@@ -196,9 +205,10 @@ function renderBelt() {
         const faces = `<span class="face raw">${CODE_ICON}<span class="box-name">${b.name}</span><span class="box-type">${t(`type.${b.type}`)}</span></span>
             <span class="face done"><i class="hazard"></i>
                 <span class="done-body"><span class="d-by">Damian /</span><span class="d-name">${b.name}</span><span class="d-desc">${t(`sf.d.${b.id}`)}</span></span>
-                <span class="d-foot">${t(`type.${b.type}`)}</span>${b.href ? '' : `<span class="stamp">${t('sf.shipped')}</span>`}</span>`;
-        const hit = b.href
-            ? `<a class="box-in" href="${b.href}" target="_blank" rel="noopener">${faces}</a>`
+                <span class="d-foot">${t(`type.${b.type}`)}${b.repo ? ' · GitHub ↗' : ''}</span>${b.href ? '' : `<span class="stamp">${t('sf.shipped')}</span>`}</span>`;
+        const url = b.href || b.repo;
+        const hit = url
+            ? `<a class="box-in" href="${url}" target="_blank" rel="noopener">${faces}</a>`
             : `<button class="box-in" type="button">${faces}</button>`;
         return `<li class="box" data-n="${i}">${hit}<p class="box-desc">${t(`sf.d.${b.id}`)}</p></li>`;
     }).join('');
@@ -273,8 +283,37 @@ boxesEl.addEventListener('click', e => {
     scrollTo({ top: beltSec.offsetTop + p * B.travel, behavior: 'smooth' });
 });
 
+// ---- headings: letters rise one by one when the title scrolls into view
+const CJK = /[\u3000-\u9fff\uff00-\uffef]/;
+function splitHeading(el) {
+    const label = el.textContent.trim();
+    let n = 0;
+    const chars = txt => [...txt].map(c => `<span class="ch" aria-hidden="true" style="--i:${n++}">${c}</span>`).join('');
+    const walk = node => [...node.childNodes].map(c => {
+        if (c.nodeType === 3) {
+            return c.textContent.split(/(\s+)/).map(tok => !tok.trim() ? tok
+                : CJK.test(tok) ? chars(tok) : `<span class="w">${chars(tok)}</span>`).join('');
+        }
+        return c.nodeType === 1 ? `<${c.tagName.toLowerCase()}>${walk(c)}</${c.tagName.toLowerCase()}>` : '';
+    }).join('');
+    el.setAttribute('aria-label', label);
+    el.innerHTML = walk(el);
+    el.classList.remove('split-in');
+    el.classList.add('split');
+}
+const headIO = 'IntersectionObserver' in window && !reduced ? new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('split-in'); headIO.unobserve(e.target); }
+}), { threshold: 0.4 }) : null;
+function splitHeadings() {
+    $$('.sec-head h2, .belt-head h2, .cta h2').forEach(h => {
+        if (reduced || !headIO) return;
+        splitHeading(h);
+        headIO.observe(h);
+    });
+}
+
 function render() {
-    renderStatic(); renderStrip(); renderJobs(); renderFacts(); renderStack(); renderExtra(); renderBelt();
+    renderStatic(); renderStrip(); renderJobs(); renderFacts(); renderStack(); renderExtra(); renderBelt(); splitHeadings();
     document.title = '林書弘 Damian Lin - Senior Software Engineer';
 }
 
