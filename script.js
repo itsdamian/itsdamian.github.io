@@ -27,7 +27,7 @@ const JOBS = [
 const LAYERS = [
     ['skills.ai', [['RAG', 'skills.note.rag'], ['skills.tag.llm'], ['sentence-transformers', 'skills.note.sbert'], ['BGE-large-zh-v1.5'], ['ChromaDB', 'skills.note.chromadb'], ['skills.tag.ragas'], ['LLM-as-judge'], ['Cursor'], ['Claude Code'], ['AWS Kiro']]],
     ['skills.backend', [['Laravel'], ['Magento 2'], ['FastAPI', 'skills.note.fastapi'], ['Celery', 'skills.note.celery'], ['Node.js'], ['RESTful API'], ['MVC'], ['Redis Queue', 'skills.note.redisqueue'], ['skills.tag.async'], ['skills.tag.concurrency'], ['skills.tag.distributed'], ['MySQL'], ['PostgreSQL'], ['MongoDB'], ['Oracle'], ['MSSQL'], ['Redis']]],
-    ['skills.programming', [['Python'], ['PHP'], ['JavaScript'], ['SQL'], ['Rust'], ['Kotlin', 'skills.note.kotlin']]],
+    ['skills.programming', [['Python'], ['PHP'], ['JavaScript'], ['Java'], ['SQL'], ['Rust'], ['Kotlin', 'skills.note.kotlin']]],
     ['skills.tools', [['Docker', 'skills.note.docker'], ['Linux'], ['Nginx'], ['Git'], ['GitHub Actions CI/CD', 'skills.note.githubactions'], ['Cloudflare DNS'], ['AWS'], ['GCP'], ['Azure'], ['Vultr']]],
     ['skills.web', [['Vue 3'], ['JavaScript'], ['HTML'], ['CSS']]],
     ['skills.hardware', [['skills.tag.barcode'], ['OpenCV'], ['pyzbar'], ['skills.tag.zpl'], ['PLC'], ['WES'], ['WCS'], ['AGV'], ['MQTT', 'skills.note.mqtt'], ['skills.tag.erp'], ['JNI (Rust + Kotlin)', 'skills.note.jni']]],
