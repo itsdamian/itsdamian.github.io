@@ -6,8 +6,17 @@ const EXTRA = {
         skip: '跳到內容', 'nav.index': '首頁', 'nav.work': '作品', 'nav.experience2': '經歷', 'nav.about2': '關於', 'nav.contact': '聯絡',
         'hero.l1': '每個<em>系統</em>', 'hero.l2': '都有<em>兩面</em>…', front: '前端', back: '後端',
         tagline: 'Damian · Senior Software Engineer · 台北 · Since 2017', scroll: '往下滑', skipstory: '跳過開場',
-        's02.k': '作品', 's02.h': '做出來、上線的東西。', 'hint.side': '← 左右滑動 →',
-        's03.k': '工廠', 's03.h': '每個畫面背後，都有一座工廠。', 'job.more': '展開全部', 'job.badge': '現任',
+        'nav.factory': '工廠',
+        's02.k': '街道', 's02.h': '前台，是使用者看得到的。', 'hint.side': '← 左右滑動 →',
+        'sf.k': '工廠', 'sf.h': '幕後，<em>是一座工廠。</em>', 'sf.hint': '往下滑，輸送帶會橫向移動', 'sf.shipped': '已出貨',
+        'type.system': '系統', 'type.research': '研究', 'type.pipeline': '管線', 'type.tool': '工具', 'type.personal': '個人專案', 'type.more': '更多',
+        'sf.d.wcs': '連接 WMS 與 PLC 的倉儲控制系統，支援 Siemens S7-1500 與 Mitsubishi SLMP。',
+        'sf.d.rag': '不依賴框架的 RAG 檢索研究系統，與 GraphRAG、LightRAG、Self-RAG 做系統性比較。',
+        'sf.d.pipeline': 'OCR → 摘要 → 向量化 → 向量資料庫的文件處理管線，含 chunk 級去重。',
+        'sf.d.scan': '整合 composer audit、npm audit、gitleaks、semgrep、enlightn 的資安掃描腳本。',
+        'sf.d.agents': '視覺化 PM / SWE / QA / DevOps AI agent 協作的多代理開發平台（個人專案）。',
+        'sf.d.github': '更多程式碼在 GitHub。',
+        'sc.k': '經歷', 'sc.h': '走過的地方。', 'job.more': '展開全部', 'job.badge': '現任',
         's04.k': '引擎蓋下', 's04.h': '引擎蓋下是誰？', p1: 'Player 1', open: '尋找 FDE 機會',
         'fact.since': '開始交付', 'fact.clients': '企業客戶', 'fact.layers': '技術層', 'fact.based': '所在地', 'fact.basedv': '台北',
         's05.k': '裝備', 's05.h': '挑一個技術層。', 's05.p': '點選左側任一層，查看細節',
@@ -17,8 +26,17 @@ const EXTRA = {
         skip: 'Skip to content', 'nav.index': 'Index', 'nav.work': 'Work', 'nav.experience2': 'Experience', 'nav.about2': 'About', 'nav.contact': 'Contact',
         'hero.l1': 'Every <em>system</em>', 'hero.l2': 'has two <em>sides</em>…', front: 'Front', back: 'Back',
         tagline: 'Damian · Senior Software Engineer · Taipei · Since 2017', scroll: 'Scroll down', skipstory: 'Skip the story',
-        's02.k': 'Work', 's02.h': 'Things that shipped.', 'hint.side': '← Scroll sideways →',
-        's03.k': 'The factory', 's03.h': 'Behind every screen, a factory.', 'job.more': 'Show all', 'job.badge': 'Current',
+        'nav.factory': 'Factory',
+        's02.k': 'The street', 's02.h': 'The front is what people see.', 'hint.side': '← Scroll sideways →',
+        'sf.k': 'The factory', 'sf.h': 'Behind the shops, <em>a factory.</em>', 'sf.hint': 'Scroll down, the belt moves sideways', 'sf.shipped': 'shipped',
+        'type.system': 'System', 'type.research': 'Research', 'type.pipeline': 'Pipeline', 'type.tool': 'Tool', 'type.personal': 'Personal', 'type.more': 'More',
+        'sf.d.wcs': 'Warehouse control system bridging the WMS and PLCs; Siemens S7-1500 and Mitsubishi SLMP.',
+        'sf.d.rag': 'Framework-free RAG research system, benchmarked against GraphRAG, LightRAG and Self-RAG.',
+        'sf.d.pipeline': 'OCR → summary → embedding → vector DB document pipeline with chunk-level dedup.',
+        'sf.d.scan': 'Security scan script combining composer audit, npm audit, gitleaks, semgrep and enlightn.',
+        'sf.d.agents': 'Multi-agent dev platform visualizing PM / SWE / QA / DevOps AI agents at work (personal project).',
+        'sf.d.github': 'More code on GitHub.',
+        'sc.k': 'Career', 'sc.h': 'Where I have worked.', 'job.more': 'Show all', 'job.badge': 'Current',
         's04.k': 'Under the hood', 's04.h': 'Who is under the hood?', p1: 'Player 1', open: 'Open to FDE roles',
         'fact.since': 'Shipping since', 'fact.clients': 'Enterprise clients', 'fact.layers': 'Stack layers', 'fact.based': 'Based in', 'fact.basedv': 'Taipei',
         's05.k': 'Loadout', 's05.h': 'Choose your layer.', 's05.p': 'Pick a layer on the left to see the details',
@@ -45,17 +63,24 @@ const LAYERS = [
     ['skills.testing', [['Pytest'], ['PHPUnit'], ['skills.sast']]]
 ];
 
+// The street: what operators and customers touch.
 const PROJECTS = [
     { id: 'wms', featured: true, tags: ['PHP', 'Laravel', 'Vue 3', 'MySQL', 'Oracle', 'Redis'], stats: [['3', 'stat1'], ['<5%', 'stat3'], ['-30%', 'stat4'], ['-70%', 'stat5']] },
     { id: 'assistant', featured: true, tags: ['PHP', 'Laravel', 'LLM', 'Ollama'] },
-    { id: 'rag', tags: ['Python', 'RAG', 'ChromaDB', 'Benchmark'] },
-    { id: 'wcs', tags: ['Python', 'FastAPI', 'Celery', 'PLC'] },
     { id: 'lms', tags: ['FastAPI', 'Vue 3', 'ZPL', 'Konva'] },
-    { id: 'pipeline', tags: ['OCR', 'LLM', 'Embedding', 'Vector DB'] },
-    { id: 'scan', tags: ['gitleaks', 'semgrep', 'composer audit', 'enlightn'] },
-    { id: 'android', tags: ['Kotlin', 'Rust', 'JNI', 'actix-web'] },
-    { id: 'agents', tags: ['Multi-Agent', 'Docker Compose', 'LLM'] }
+    { id: 'android', tags: ['Kotlin', 'Rust', 'JNI', 'actix-web'] }
 ];
+
+// The factory: the machinery behind them. One box per project, plus a link-out box.
+const BELT = [
+    { id: 'wcs', name: 'WCS', type: 'system' },
+    { id: 'rag', name: 'SOP-LLM', type: 'research' },
+    { id: 'pipeline', name: 'doc-pipeline', type: 'pipeline' },
+    { id: 'scan', name: 'security-scan', type: 'tool' },
+    { id: 'agents', name: 'agent-factory', type: 'personal' },
+    { id: 'github', name: 'GitHub ↗', type: 'more', href: 'https://github.com/itsdamian' }
+];
+const SHIPPABLE = BELT.filter(b => !b.href).length;
 
 const TERM_LINES = [
     ['$ docker compose up -d', ''],
@@ -128,8 +153,105 @@ function renderExtra() {
     ].map(([img, d, s, p]) => `<li><img src="${img}" alt=""><div><b>${t(s)}</b>${t(d)}<small>${t(p)}</small></div></li>`).join('');
 }
 
+// ---- factory: boxes ride a belt that is driven by scroll progress through a tall, pinned section
+const beltSec = $('#factory');
+const boxesEl = $('#boxes');
+const bandEl = $('#band');
+const CODE_ICON = '<svg viewBox="0 0 48 28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4 3 14l11 10M34 4l11 10-11 10M28 2 20 26"/></svg>';
+const B = { travel: 1, x0: 0, cx: 0, step: 0, bw: 0, active: -1, shipped: -1 };
+let staticBelt = reduced;
+let gears = [];
+
+function gearPath(teeth, outer, inner) {
+    const pts = [];
+    for (let i = 0; i < teeth; i++) {
+        const a = (i / teeth) * Math.PI * 2, w = Math.PI / teeth;
+        [[a - w * .5, inner], [a - w * .28, outer], [a + w * .28, outer], [a + w * .5, inner]].forEach(([ang, r]) => pts.push(`${(50 + r * Math.cos(ang)).toFixed(1)},${(50 + r * Math.sin(ang)).toFixed(1)}`));
+    }
+    return `M${pts.join('L')}Z M50,32a18,18 0 1,0 .01,0Z`;
+}
+
+function buildGears() {
+    const scene = $('#scene');
+    const defs = [
+        { teeth: 12, size: 170, left: '4%', speed: 1 },
+        { teeth: 9, size: 100, left: '15%', speed: -1.7 },
+        { teeth: 14, size: 140, right: '9%', speed: 1.3 }
+    ];
+    defs.forEach(d => {
+        const el = document.createElement('div');
+        el.className = 'gear';
+        el.style.cssText = `width:${d.size}px;height:${d.size}px;bottom:calc(var(--floor) - 12px);${d.left ? `left:${d.left}` : `right:${d.right}`}`;
+        el.innerHTML = `<svg viewBox="0 0 100 100" width="100%" height="100%"><path fill="currentColor" fill-rule="evenodd" d="${gearPath(d.teeth, 48, 38)}"/></svg>`;
+        scene.appendChild(el);
+        gears.push({ el, speed: d.speed });
+    });
+}
+
+function renderBelt() {
+    boxesEl.innerHTML = BELT.map((b, i) => {
+        const inner = `${CODE_ICON}<span class="box-name">${b.name}</span><span class="box-type">${t(`type.${b.type}`)}</span>`;
+        const hit = b.href
+            ? `<a class="box-in" href="${b.href}" target="_blank" rel="noopener">${inner}</a>`
+            : `<button class="box-in" type="button">${inner}</button>`;
+        return `<li class="box" data-n="${i}">${hit}<p class="box-desc">${t(`sf.d.${b.id}`)}</p></li>`;
+    }).join('');
+    $('#shipped-total').textContent = String(SHIPPABLE).padStart(2, '0');
+    layoutBelt();
+}
+
+function layoutBelt() {
+    beltSec.classList.toggle('static', staticBelt);
+    if (staticBelt) { beltSec.style.height = ''; return; }
+    const boxes = $$('.box', boxesEl);
+    if (!boxes.length) return;
+    B.bw = boxes[0].offsetWidth;
+    B.step = B.bw + Math.round(B.bw * 0.4);
+    boxes.forEach((b, i) => { b.style.left = `${i * B.step}px`; });
+    B.cx = innerWidth / 2;
+    B.x0 = B.cx + 60;
+    B.travel = 60 + (boxes.length - 1) * B.step + B.bw / 2;
+    beltSec.style.height = `${$('.belt-pin').offsetHeight + B.travel}px`;
+    B.active = B.shipped = -1;
+    updateBelt();
+}
+
+function updateBelt() {
+    if (staticBelt) return;
+    const p = Math.min(1, Math.max(0, -beltSec.getBoundingClientRect().top / B.travel));
+    const shift = p * B.travel;
+    boxesEl.style.transform = `translate3d(${(B.x0 - shift).toFixed(1)}px,0,0)`;
+    bandEl.style.backgroundPositionX = `${(-shift).toFixed(1)}px`;
+    bandEl.style.setProperty('--hz', `${(-shift).toFixed(1)}px`);
+    gears.forEach(g => { g.el.style.transform = `rotate(${(shift * g.speed / 3).toFixed(1)}deg)`; });
+
+    let active = 0, best = Infinity, shipped = 0;
+    BELT.forEach((b, i) => {
+        const c = B.x0 + i * B.step + B.bw / 2 - shift;
+        if (Math.abs(c - B.cx) < best) { best = Math.abs(c - B.cx); active = i; }
+        if (!b.href && c < B.cx) shipped++;
+    });
+    if (active !== B.active) {
+        B.active = active;
+        $$('.box', boxesEl).forEach((el, i) => el.classList.toggle('on', i === active));
+        $('#belt-cap').innerHTML = `<b>${BELT[active].name}</b>${t(`sf.d.${BELT[active].id}`)}`;
+    }
+    if (shipped !== B.shipped) {
+        B.shipped = shipped;
+        $('#shipped').textContent = String(shipped).padStart(2, '0');
+    }
+}
+
+boxesEl.addEventListener('click', e => {
+    const li = e.target.closest('.box');
+    if (!li || staticBelt || e.target.closest('a')) return;
+    const i = Number(li.dataset.n);
+    const p = (B.x0 + i * B.step + B.bw / 2 - B.cx) / B.travel;
+    scrollTo({ top: beltSec.offsetTop + p * B.travel, behavior: 'smooth' });
+});
+
 function render() {
-    renderStatic(); renderStrip(); renderJobs(); renderFacts(); renderStack(); renderExtra();
+    renderStatic(); renderStrip(); renderJobs(); renderFacts(); renderStack(); renderExtra(); renderBelt();
     document.title = '林書弘 Damian Lin - Senior Software Engineer';
 }
 
@@ -172,6 +294,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
 const hero = $('#hero');
 const sections = $$('#nav a').map(a => ({ a, el: $(a.getAttribute('href')) }));
 function onScroll() {
+    updateBelt();
     $('#top').classList.toggle('solid', scrollY > hero.offsetHeight - 80);
     const y = scrollY + 140;
     let cur = sections[0];
@@ -179,6 +302,7 @@ function onScroll() {
     sections.forEach(s => s.a.classList.toggle('on', s === cur));
 }
 addEventListener('scroll', onScroll, { passive: true });
+addEventListener('resize', layoutBelt);
 
 // Taipei clock
 function tick() {
@@ -234,6 +358,7 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.
 $$('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
 
 $('#year').textContent = new Date().getFullYear();
+if (!staticBelt) buildGears();
 render();
 typeTerm();
 onScroll();

@@ -23,7 +23,8 @@
         <nav class="nav" id="nav" aria-label="Primary">
             <a href="#hero" data-i="nav.index">Index</a>
             <a href="#work" data-i="nav.work">Work</a>
-            <a href="#factory" data-i="nav.experience2">Experience</a>
+            <a href="#factory" data-i="nav.factory">Factory</a>
+            <a href="#career" data-i="nav.experience2">Experience</a>
             <a href="#hood" data-i="nav.about2">About</a>
             <a href="#contact" data-i="nav.contact">Contact</a>
         </nav>
@@ -96,19 +97,42 @@
             </div>
         </section>
 
-        <!-- 03 FACTORY: experience -->
-        <section class="factory reveal" id="factory">
+        <!-- 03 FACTORY: pinned scene, scrolling moves the belt sideways -->
+        <section class="belt" id="factory" aria-labelledby="belt-title">
+            <div class="belt-pin">
+                <div class="scene" id="scene" aria-hidden="true">
+                    <div class="shelf s1"></div><div class="shelf s2"></div><div class="shelf s3"></div>
+                    <div class="pipe p1"></div><div class="pipe p2"></div>
+                </div>
+                <header class="belt-head">
+                    <p class="kicker"><b>03</b> <span data-i="sf.k"></span></p>
+                    <h2 id="belt-title" data-i="sf.h"></h2>
+                    <p class="belt-cap" id="belt-cap" aria-live="polite"></p>
+                    <p class="belt-hint"><i></i><span data-i="sf.hint"></span></p>
+                </header>
+                <div class="crane" aria-hidden="true">
+                    <div class="trolley"><i></i><i></i><i></i></div>
+                    <div class="crane-bar"></div>
+                </div>
+                <ol class="boxes" id="boxes"></ol>
+                <div class="floor" aria-hidden="true"><div class="band" id="band"></div></div>
+                <p class="belt-count"><b id="shipped">00</b> / <span id="shipped-total">05</span> <span data-i="sf.shipped"></span></p>
+            </div>
+        </section>
+
+        <!-- 04 CAREER: experience -->
+        <section class="career reveal" id="career">
             <header class="sec-head">
-                <p class="kicker"><b>03</b> <span data-i="s03.k"></span></p>
-                <h2 data-i="s03.h"></h2>
+                <p class="kicker"><b>04</b> <span data-i="sc.k"></span></p>
+                <h2 data-i="sc.h"></h2>
             </header>
             <ol class="jobs" id="jobs"></ol>
         </section>
 
-        <!-- 04 HOOD: profile card -->
+        <!-- 05 HOOD: profile card -->
         <section class="hood reveal" id="hood">
             <header class="sec-head">
-                <p class="kicker"><b>04</b> <span data-i="s04.k"></span></p>
+                <p class="kicker"><b>05</b> <span data-i="s04.k"></span></p>
                 <h2 data-i="s04.h"></h2>
             </header>
             <article class="card">
@@ -125,10 +149,10 @@
             </article>
         </section>
 
-        <!-- 05 STACK: pick a layer -->
+        <!-- 06 STACK: pick a layer -->
         <section class="stack reveal" id="stack">
             <header class="sec-head">
-                <p class="kicker"><b>05</b> <span data-i="s05.k"></span></p>
+                <p class="kicker"><b>06</b> <span data-i="s05.k"></span></p>
                 <h2 data-i="s05.h"></h2>
                 <p class="hint" data-i="s05.p"></p>
             </header>

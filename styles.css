@@ -155,9 +155,74 @@ section { position: relative; }
 .strip-ctl button:hover { background: var(--ink); color: var(--cream); }
 .strip-count { margin-left: 12px; font: 500 12px var(--mono); letter-spacing: .12em; }
 
-/* factory (dark) */
-.factory { background: var(--night); color: #e8eaf0; padding: clamp(70px, 10vw, 130px) 0; }
-.factory .kicker b { color: var(--amber); }
+/* factory: pinned conveyor scene. The section is made tall by JS; the inner
+   stage stays stuck while scroll progress slides the boxes sideways. */
+.belt { position: relative; height: 420vh; background: #0c0f15; color: #e8eaf0; }
+.belt-pin { position: sticky; top: 0; height: 100vh; min-height: 560px; overflow: hidden; --floor: 104px; --bh: clamp(150px, 29vh, 260px); }
+.scene { position: absolute; inset: 0; }
+.shelf { position: absolute; border: 6px solid #181e2b; background:
+    repeating-linear-gradient(90deg, transparent 0 calc(25% - 6px), #181e2b calc(25% - 6px) 25%),
+    repeating-linear-gradient(0deg, transparent 0 calc(33.33% - 6px), #181e2b calc(33.33% - 6px) 33.33%); }
+.shelf::before, .shelf::after { content: ''; position: absolute; width: 11%; height: 11%; background: #5b4526; opacity: .85; }
+.shelf::before { left: 14%; top: 10%; } .shelf::after { left: 62%; top: 44%; }
+.s1 { left: 3%; top: 16%; width: 18%; height: 56%; }
+.s2 { left: 31%; top: 22%; width: 18%; height: 50%; }
+.s3 { right: 3%; top: 14%; width: 22%; height: 58%; }
+.pipe { position: absolute; left: 0; right: 0; height: 8px; background: #1b2231; }
+.p1 { bottom: calc(var(--floor) + var(--bh) * .52); background: #3a2f1c; height: 3px; }
+.p2 { bottom: calc(var(--floor) + var(--bh) * .42); }
+.gear { position: absolute; color: #1d2433; will-change: transform; }
+
+.belt-head { position: relative; z-index: 3; text-align: center; padding: 84px clamp(16px, 4vw, 48px) 0; }
+.belt-head .kicker { justify-content: center; color: #aab1c2; }
+.belt-head .kicker b { color: var(--amber); }
+.belt-head .kicker::after { display: none; }
+.belt-head h2 { font: 800 clamp(26px, 4.4vw, 62px)/1.05 var(--display); text-transform: uppercase; color: #f3efe6; max-width: none; }
+.belt-head h2 em { color: var(--amber); font-style: normal; }
+.belt-cap { max-width: 760px; margin: 14px auto 0; min-height: 3.4em; font-size: 15px; line-height: 1.7; color: #aab1c2; }
+.belt-cap b { color: #fff; font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; margin-right: 8px; }
+.belt-hint { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 8px; font: 500 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #8892a8; }
+.belt-hint i { width: 48px; height: 1px; background: var(--amber); }
+
+.crane { position: absolute; left: 50%; transform: translateX(-50%); z-index: 2; bottom: calc(var(--floor) + var(--bh) + 28px); width: 170px; }
+.crane::before { content: ''; position: absolute; left: -100vw; right: -100vw; top: -2px; height: 6px; background: #2a3142; }
+.trolley { position: relative; margin-top: 6px; height: 44px; background: #2a3142; border-radius: 4px; display: flex; justify-content: center; align-items: center; gap: 14px; }
+.trolley i { width: 11px; height: 11px; border-radius: 50%; background: var(--amber); }
+.trolley i:nth-child(2) { background: #4a2d2a; }
+.crane-bar { margin: 6px auto 0; width: 136px; height: 10px; background: var(--red); border-radius: 2px; }
+
+.boxes { position: absolute; left: 0; bottom: var(--floor); height: var(--bh); z-index: 2; will-change: transform; }
+.box { position: absolute; bottom: 0; width: calc(var(--bh) * .9); height: var(--bh); border: 2px dashed var(--amber); background: rgba(12, 15, 21, .72); color: var(--amber); transition: background .25s, box-shadow .25s; }
+.box-in { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 14px; text-align: center; }
+.box-in:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
+.box:hover, .box.on { background: rgba(255, 176, 58, .1); box-shadow: 0 0 0 4px rgba(255, 176, 58, .12); }
+.box svg { width: 52px; height: auto; }
+.box-name { font: 500 12px/1.6 var(--mono); letter-spacing: .22em; text-transform: uppercase; color: #aab1c2; word-break: break-word; }
+.box-type { position: absolute; bottom: 12px; font: 500 10px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
+.box-desc { display: none; }
+
+.floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor); background: #161b26; z-index: 1; }
+.band { position: absolute; left: 0; right: 0; top: 0; height: 30px; background: #2b3244; border-top: 3px solid #8892a8;
+    background-image: radial-gradient(circle at 26px 55%, #2b3244 5px, #8892a8 5px 7px, transparent 7px); background-size: 52px 100%; }
+.band::after { content: ''; position: absolute; left: 0; right: 0; bottom: -10px; height: 10px; background: repeating-linear-gradient(115deg, var(--amber) 0 10px, #161b26 10px 20px); background-position: var(--hz, 0) 0; }
+.belt-count { position: absolute; left: clamp(16px, 4vw, 48px); bottom: 26px; z-index: 3; font: 500 12px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #8892a8; }
+.belt-count b { color: var(--amber); font-weight: 500; }
+
+/* no pinning: reduced motion, or JS unavailable */
+.belt.static { height: auto; padding: 84px 0 70px; }
+.belt.static .belt-pin { position: relative; height: auto; overflow: visible; }
+.belt.static .scene, .belt.static .crane, .belt.static .floor, .belt.static .belt-hint, .belt.static .belt-count { display: none; }
+.belt.static .belt-head { padding-top: 0; }
+.belt.static .belt-cap { display: none; }
+.belt.static .boxes { position: static; height: auto; transform: none !important; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; padding: 40px clamp(16px, 4vw, 48px) 0; max-width: 1200px; margin: 0 auto; }
+.belt.static .box { position: static; width: auto; height: auto; min-height: 200px; text-align: left; padding: 20px; }
+.belt.static .box-in { height: auto; align-items: flex-start; text-align: left; padding: 0 0 14px; gap: 12px; }
+.belt.static .box-type { position: static; }
+.belt.static .box-desc { display: block; font-size: 14px; color: #c7cddb; }
+
+/* career (dark) */
+.career { background: var(--night); color: #e8eaf0; padding: clamp(70px, 10vw, 130px) 0; }
+.career .kicker b { color: var(--amber); }
 .jobs { max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); }
 .job { display: grid; grid-template-columns: 220px 1fr; gap: 12px 40px; padding: 34px 0; border-top: 1px solid rgba(255, 255, 255, .14); }
 .job-meta .period { font: 500 12px var(--mono); letter-spacing: .1em; color: var(--amber); }
@@ -250,6 +315,13 @@ section { position: relative; }
     .scroll-cue:hover { transform: translateY(3px); }
     .skip-story { display: none; }
     .hero { background: var(--night); padding-bottom: 20px; }
+    .belt-pin { --floor: 84px; --bh: clamp(140px, 26vh, 200px); }
+    .belt-head { padding-top: 68px; }
+    .belt-cap { font-size: 13px; min-height: 5.4em; }
+    .belt-hint { display: none; }
+    .box svg { width: 38px; }
+    .box-name { letter-spacing: .12em; font-size: 11px; }
+    .belt-count { bottom: 22px; }
     .job { grid-template-columns: 1fr; }
     .card-cols { grid-template-columns: 1fr; }
     .facts { grid-template-columns: 1fr 1fr; }
