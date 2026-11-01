@@ -10,7 +10,7 @@ const EXTRA = {
         'nav.factory': '工廠',
         's02.k': '街道', 's02.h': '前台，是使用者看得到的。', 'hint.side': '← 左右滑動 →',
         'sf.k': '工廠', 'sf.h': '幕後，<em>是一座工廠。</em>', 'sf.hint': '往下滑，輸送帶會橫向移動', 'sf.shipped': '已出貨',
-        'type.system': '系統', 'type.stream': '即時串流', 'type.bot': 'LINE Bot', 'type.research': '研究', 'type.pipeline': '管線', 'type.tool': '工具', 'type.personal': '個人專案', 'type.more': '更多',
+        'type.system': '系統', 'type.wip': '開發中', 'sf.wip': '開發中', 'type.stream': '即時串流', 'type.bot': 'LINE Bot', 'type.research': '研究', 'type.pipeline': '管線', 'type.tool': '工具', 'type.personal': '個人專案', 'type.more': '更多',
         'sf.d.wcs': '連接 WMS 與 PLC 的倉儲控制系統，支援 Siemens S7-1500 與 Mitsubishi SLMP。',
         'sf.d.rag': '不依賴框架的 RAG 檢索研究系統，與 GraphRAG、LightRAG、Self-RAG 做系統性比較。',
         'sf.d.pipeline': 'OCR → 摘要 → 向量化 → 向量資料庫的文件處理管線，含 chunk 級去重。',
@@ -19,6 +19,7 @@ const EXTRA = {
         'sf.d.cube': '即時比特幣儀表板：Coinbase / Kraken WebSocket → Kafka Streams K 線 → SSE → React，主備來源自動切換，k3d + Argo CD GitOps。',
         'sf.d.linebot': 'LINE Bot 微服務架構，整合 OpenAI 與 Gemini，支援文字對話與圖片辨識。',
         'sf.d.laravelbot': 'Laravel 的 LINE Bot，串接 OpenAI / Gemini，採 Service / Repository 分層。',
+        'sf.d.jobagent': '個人求職 Agent：以經歷資料庫為唯一事實來源（RAG）評估職缺適配度並產出可追溯的客製履歷。PostgreSQL + pgvector、BGE-M3，開發中。',
         'sf.d.github': '更多程式碼在 GitHub。',
         'sc.k': '經歷', 'sc.h': '走過的地方。', 'job.more': '展開全部', 'job.badge': '現任',
         's04.k': '引擎蓋下', 's04.h': '引擎蓋下是誰？', p1: 'Player 1', open: '尋找 FDE 機會',
@@ -34,7 +35,7 @@ const EXTRA = {
         'nav.factory': 'Factory',
         's02.k': 'The street', 's02.h': 'The front is what people see.', 'hint.side': '← Scroll sideways →',
         'sf.k': 'The factory', 'sf.h': 'Behind the shops, <em>a factory.</em>', 'sf.hint': 'Scroll down, the belt moves sideways', 'sf.shipped': 'shipped',
-        'type.system': 'System', 'type.stream': 'Streaming', 'type.bot': 'LINE Bot', 'type.research': 'Research', 'type.pipeline': 'Pipeline', 'type.tool': 'Tool', 'type.personal': 'Personal', 'type.more': 'More',
+        'type.system': 'System', 'type.wip': 'In progress', 'sf.wip': 'In progress', 'type.stream': 'Streaming', 'type.bot': 'LINE Bot', 'type.research': 'Research', 'type.pipeline': 'Pipeline', 'type.tool': 'Tool', 'type.personal': 'Personal', 'type.more': 'More',
         'sf.d.wcs': 'Warehouse control system bridging the WMS and PLCs; Siemens S7-1500 and Mitsubishi SLMP.',
         'sf.d.rag': 'Framework-free RAG research system, benchmarked against GraphRAG, LightRAG and Self-RAG.',
         'sf.d.pipeline': 'OCR → summary → embedding → vector DB document pipeline with chunk-level dedup.',
@@ -43,6 +44,7 @@ const EXTRA = {
         'sf.d.cube': 'Live BTC dashboard: Coinbase / Kraken WebSocket → Kafka Streams candles → SSE → React, automatic primary/standby failover, k3d + Argo CD GitOps.',
         'sf.d.linebot': 'LINE Bot microservices integrating OpenAI and Gemini for text chat and image recognition.',
         'sf.d.laravelbot': 'Laravel LINE bot on OpenAI / Gemini with a Service / Repository architecture.',
+        'sf.d.jobagent': 'Personal job-search agent: a grounded RAG over my own experience scores job fit and writes traceable tailored resumes. PostgreSQL + pgvector, BGE-M3; in development.',
         'sf.d.github': 'More code on GitHub.',
         'sc.k': 'Career', 'sc.h': 'Where I have worked.', 'job.more': 'Show all', 'job.badge': 'Current',
         's04.k': 'Under the hood', 's04.h': 'Who is under the hood?', p1: 'Player 1', open: 'Open to FDE roles',
@@ -63,10 +65,10 @@ const JOBS = [
 
 const LAYERS = [
     ['skills.ai', [['RAG', 'skills.note.rag'], ['skills.tag.llm'], ['sentence-transformers', 'skills.note.sbert'], ['BGE-large-zh-v1.5'], ['ChromaDB', 'skills.note.chromadb'], ['skills.tag.ragas'], ['LLM-as-judge'], ['Cursor'], ['Claude Code'], ['AWS Kiro']]],
-    ['skills.backend', [['Laravel'], ['Magento 2'], ['FastAPI', 'skills.note.fastapi'], ['Celery', 'skills.note.celery'], ['Node.js'], ['RESTful API'], ['MVC'], ['Redis Queue', 'skills.note.redisqueue'], ['skills.tag.async'], ['skills.tag.concurrency'], ['skills.tag.distributed'], ['MySQL'], ['PostgreSQL'], ['MongoDB'], ['Oracle'], ['MSSQL'], ['Redis']]],
-    ['skills.programming', [['Python'], ['PHP'], ['JavaScript'], ['Java'], ['SQL'], ['Rust'], ['Kotlin', 'skills.note.kotlin']]],
-    ['skills.tools', [['Docker', 'skills.note.docker'], ['Linux'], ['Nginx'], ['Git'], ['GitHub Actions CI/CD', 'skills.note.githubactions'], ['Cloudflare DNS'], ['AWS'], ['GCP'], ['Azure'], ['Vultr']]],
-    ['skills.web', [['Vue 3'], ['JavaScript'], ['HTML'], ['CSS']]],
+    ['skills.backend', [['Kafka', 'skills.note.kafka'], ['Kafka Streams'], ['SSE'], ['Laravel'], ['Magento 2'], ['FastAPI', 'skills.note.fastapi'], ['Celery', 'skills.note.celery'], ['Node.js'], ['RESTful API'], ['MVC'], ['Redis Queue', 'skills.note.redisqueue'], ['skills.tag.async'], ['skills.tag.concurrency'], ['skills.tag.distributed'], ['MySQL'], ['PostgreSQL', 'skills.note.pgvector'], ['MongoDB'], ['Oracle'], ['MSSQL'], ['Redis']]],
+    ['skills.programming', [['Python'], ['PHP'], ['JavaScript'], ['Java', 'skills.note.java'], ['TypeScript'], ['SQL'], ['Rust'], ['Kotlin', 'skills.note.kotlin']]],
+    ['skills.tools', [['Docker', 'skills.note.docker'], ['Linux'], ['Nginx'], ['Git'], ['Kubernetes', 'skills.note.k8s'], ['Argo CD'], ['Prometheus / Grafana'], ['GitHub Actions CI/CD', 'skills.note.githubactions'], ['Cloudflare DNS'], ['AWS'], ['GCP'], ['Azure'], ['Vultr']]],
+    ['skills.web', [['Vue 3'], ['React', 'skills.note.react'], ['JavaScript'], ['HTML'], ['CSS']]],
     ['skills.hardware', [['skills.tag.barcode'], ['OpenCV'], ['pyzbar'], ['skills.tag.zpl'], ['PLC'], ['WES'], ['WCS'], ['AGV'], ['MQTT', 'skills.note.mqtt'], ['skills.tag.erp'], ['JNI (Rust + Kotlin)', 'skills.note.jni']]],
     ['skills.testing', [['Pytest'], ['PHPUnit'], ['skills.sast']]]
 ];
@@ -89,9 +91,10 @@ const BELT = [
     { id: 'laravelbot', name: 'new_gen_PDA', type: 'bot', repo: 'https://github.com/itsdamian/new_gen_PDA' },
     { id: 'scan', name: 'security-scan', type: 'tool' },
     { id: 'agents', name: 'agent-factory', type: 'personal' },
+    { id: 'jobagent', name: 'job-agent', type: 'wip', wip: true },
     { id: 'github', name: 'GitHub ↗', type: 'more', href: 'https://github.com/itsdamian' }
 ];
-const SHIPPABLE = BELT.filter(b => !b.href).length;
+const SHIPPABLE = BELT.filter(b => !b.href && !b.wip).length;
 
 const TERM_LINES = [
     ['$ docker compose up -d', ''],
@@ -205,7 +208,7 @@ function renderBelt() {
         const faces = `<span class="face raw">${CODE_ICON}<span class="box-name">${b.name}</span><span class="box-type">${t(`type.${b.type}`)}</span></span>
             <span class="face done"><i class="hazard"></i>
                 <span class="done-body"><span class="d-by">Damian /</span><span class="d-name">${b.name}</span><span class="d-desc">${t(`sf.d.${b.id}`)}</span></span>
-                <span class="d-foot">${t(`type.${b.type}`)}${b.repo ? ' · GitHub ↗' : ''}</span>${b.href ? '' : `<span class="stamp">${t('sf.shipped')}</span>`}</span>`;
+                <span class="d-foot">${t(`type.${b.type}`)}${b.repo ? ' · GitHub ↗' : ''}</span>${b.href ? '' : `<span class="stamp${b.wip ? ' wip' : ''}">${t(b.wip ? 'sf.wip' : 'sf.shipped')}</span>`}</span>`;
         const url = b.href || b.repo;
         const hit = url
             ? `<a class="box-in" href="${url}" target="_blank" rel="noopener">${faces}</a>`
@@ -249,7 +252,7 @@ function updateBelt() {
         if (b.href) return; // the link-out box is never pressed
         bestPress = Math.min(bestPress, Math.abs(c - B.cx));
         const done = c < B.cx;
-        if (done) shipped++;
+        if (done && !b.wip) shipped++;
         // crossing the press flips the crate to its stamped face (and squashes it on the way in)
         if (done !== boxes[i].classList.contains('is-done')) {
             boxes[i].classList.toggle('is-done', done);

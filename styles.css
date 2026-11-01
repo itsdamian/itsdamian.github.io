@@ -413,3 +413,4 @@ section { position: relative; }
 .split .ch { display: inline-block; opacity: 0; transform: translateY(.55em) rotate(6deg); transform-origin: 0 100%;
     transition: opacity .5s ease, transform .6s cubic-bezier(.2, .8, .3, 1); transition-delay: calc(var(--i) * 32ms); }
 .split-in .ch { opacity: 1; transform: none; }
+.stamp.wip { color: #b36b00; border-color: #b36b00; }
