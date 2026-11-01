@@ -415,9 +415,14 @@ section { position: relative; }
 .split-in .ch { opacity: 1; transform: none; }
 .stamp.wip { color: #b36b00; border-color: #b36b00; }
 
-/* hero figure: the avatar in an arch, left half in colour, right half as an amber scan */
-.photo { position: relative; aspect-ratio: 480 / 615; border-radius: 999px 999px 0 0; overflow: hidden; box-shadow: 0 0 0 3px #ea1d10, 0 30px 80px rgba(234, 29, 16, .35); }
-.photo-l, .photo-r { position: absolute; inset: 0; background: url(avatar.jpg) 81.5% 93.2% / 176.7% auto no-repeat; }
+/* hero figure: a round avatar centred in an arch. The avatar is split like the hero:
+   left half in colour, right half as an amber scan. */
+.photo { position: relative; aspect-ratio: 480 / 615; border-radius: 999px 999px 0 0; overflow: hidden; display: grid; place-items: center;
+    background: radial-gradient(circle at 50% 46%, rgba(234, 29, 15, .28), transparent 62%), radial-gradient(circle, rgba(255, 176, 58, .3) 1.5px, transparent 2px) 0 0 / 34px 34px, #120d0c;
+    box-shadow: 0 0 0 3px #ea1d10, 0 30px 80px rgba(234, 29, 15, .35); }
+.photo::before { content: ''; position: absolute; inset: 14px 14px 0; border: 1.5px solid rgba(255, 176, 58, .45); border-bottom: 0; border-radius: 999px 999px 0 0; }
+.avatar { position: relative; width: 66%; aspect-ratio: 1; margin-top: -8%; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 4px #120d0c, 0 0 0 6px #ffb03a, 0 18px 50px rgba(0, 0, 0, .55); }
+.photo-l, .photo-r { position: absolute; inset: 0; background: url(avatar.jpg) 69.3% 56.8% / 282.7% auto no-repeat; }
 .photo-r { clip-path: inset(0 0 0 50%); filter: contrast(1.15) brightness(1.45); }
 .photo-r::before { content: ''; position: absolute; inset: 0; background: #ffb03a; mix-blend-mode: color; }
 .photo-r::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(12, 15, 21, .4) 0 2px, transparent 2px 9px); }
