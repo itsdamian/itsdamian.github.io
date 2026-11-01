@@ -4,8 +4,9 @@
 const EXTRA = {
     zh: {
         skip: '跳到內容', 'nav.index': '首頁', 'nav.work': '作品', 'nav.experience2': '經歷', 'nav.about2': '關於', 'nav.contact': '聯絡',
-        'hero.l1': '每個<em>系統</em>', 'hero.l2': '都有<em>兩面</em>…', front: '前端', back: '後端',
-        tagline: 'Damian · Senior Software Engineer · 台北 · Since 2017', scroll: '往下滑', skipstory: '跳過開場',
+        'hero.l1': '每個<em>系統</em>', 'hero.l2': '都有<em>兩面</em>…', 'hero.l1b': '我負責', 'hero.l2b': '<em>兩面</em>。',
+        'hero.c1': '多數工程師<em>只選一邊</em>。', 'hero.c2': '這一位，<em>兩邊都扛</em>。',
+        front: '前端', back: '後端', scroll: '往下滑', skipstory: '跳過開場',
         'nav.factory': '工廠',
         's02.k': '街道', 's02.h': '前台，是使用者看得到的。', 'hint.side': '← 左右滑動 →',
         'sf.k': '工廠', 'sf.h': '幕後，<em>是一座工廠。</em>', 'sf.hint': '往下滑，輸送帶會橫向移動', 'sf.shipped': '已出貨',
@@ -24,8 +25,9 @@ const EXTRA = {
     },
     en: {
         skip: 'Skip to content', 'nav.index': 'Index', 'nav.work': 'Work', 'nav.experience2': 'Experience', 'nav.about2': 'About', 'nav.contact': 'Contact',
-        'hero.l1': 'Every <em>system</em>', 'hero.l2': 'has two <em>sides</em>…', front: 'Front', back: 'Back',
-        tagline: 'Damian · Senior Software Engineer · Taipei · Since 2017', scroll: 'Scroll down', skipstory: 'Skip the story',
+        'hero.l1': 'Every <em>system</em>', 'hero.l2': 'has two <em>sides</em>…', 'hero.l1b': 'I build', 'hero.l2b': '<em>both</em> sides.',
+        'hero.c1': 'Most engineers <em>pick a side.</em>', 'hero.c2': 'This one <em>carries both.</em>',
+        front: 'Front', back: 'Back', scroll: 'Scroll down', skipstory: 'Skip the story',
         'nav.factory': 'Factory',
         's02.k': 'The street', 's02.h': 'The front is what people see.', 'hint.side': '← Scroll sideways →',
         'sf.k': 'The factory', 'sf.h': 'Behind the shops, <em>a factory.</em>', 'sf.hint': 'Scroll down, the belt moves sideways', 'sf.shipped': 'shipped',
@@ -315,6 +317,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
 const hero = $('#hero');
 const sections = $$('#nav a').map(a => ({ a, el: $(a.getAttribute('href')) }));
 function onScroll() {
+    updateStory();
     updateBelt();
     $('#top').classList.toggle('solid', scrollY > hero.offsetHeight - 80);
     const y = scrollY + 140;
@@ -323,7 +326,7 @@ function onScroll() {
     sections.forEach(s => s.a.classList.toggle('on', s === cur));
 }
 addEventListener('scroll', onScroll, { passive: true });
-addEventListener('resize', layoutBelt);
+addEventListener('resize', () => { layoutStory(); layoutBelt(); });
 
 // Taipei clock
 function tick() {
@@ -332,20 +335,68 @@ function tick() {
 }
 tick(); setInterval(tick, 20000);
 
-// hero divider follows the pointer (desktop only), eased
-const heroEl = $('#hero');
-let target = 50, split = 50, raf = 0;
-function glide() {
-    split += (target - split) * 0.12;
-    heroEl.style.setProperty('--split', split.toFixed(2) + '%');
-    raf = Math.abs(target - split) > 0.05 ? requestAnimationFrame(glide) : 0;
+// ---- hero story: scroll progress u (0..1 across the pinned stretch) drives everything
+//   0.00-0.10  FRONT vs BACK pill and hint fade out, headline swaps to its second line
+//   0.00-0.50  halves part like doors; figure rises on the stage
+//   0.12-0.88  centre line: "pick a side" -> "carries both"; name tag appears
+//   0.62-0.92  halves close again behind the figure
+const storyEl = hero;
+const storyPin = $('#story-pin');
+const S = {
+    halfF: $('#half-f'), halfB: $('#half-b'), figure: $('#figure'), vs: $('#vs'), cue: $('#cue'), tag: $('#nametag'),
+    a: $$('.hl .s.a', storyEl), b: $$('.hl .s.b', storyEl), c1: $('.c1', storyEl), c2: $('.c2', storyEl), cl: $('#center-line'), hl: $$('.hl', storyEl)
+};
+const STORY_NODES = [S.halfF, S.halfB, S.figure, S.vs, S.cue, S.tag, S.cl, ...S.hl, ...S.a, ...S.b, S.c1, S.c2];
+let staticStory = true;
+let storyLen = 1;
+const clamp01 = x => Math.min(1, Math.max(0, x));
+const seg = (u, a, b) => clamp01((u - a) / (b - a));
+const ease = x => x * x * (3 - 2 * x);
+
+function layoutStory() {
+    staticStory = reduced || innerWidth <= 900;
+    storyEl.classList.toggle('static', staticStory);
+    $('#top').classList.remove('on-dark');
+    if (staticStory) {
+        storyEl.style.height = '';
+        STORY_NODES.forEach(n => n.removeAttribute('style'));
+        return;
+    }
+    storyLen = innerHeight * 3.4;
+    storyEl.style.height = `${storyPin.offsetHeight + storyLen}px`;
+    updateStory();
 }
-heroEl.addEventListener('pointermove', e => {
-    if (reduced || innerWidth <= 900) return;
-    target = Math.min(60, Math.max(40, (e.clientX / innerWidth) * 100));
-    if (!raf) raf = requestAnimationFrame(glide);
-});
-heroEl.addEventListener('pointerleave', () => { target = 50; if (!raf) raf = requestAnimationFrame(glide); });
+
+function updateStory() {
+    if (staticStory) return;
+    const u = clamp01(-storyEl.getBoundingClientRect().top / storyLen);
+    const open = ease(seg(u, 0, 0.5)) * 0.62 * (1 - ease(seg(u, 0.62, 0.92)));
+    const w = innerWidth / 2;
+    S.halfF.style.transform = `translate3d(${(-open * w).toFixed(1)}px,0,0)`;
+    S.halfB.style.transform = `translate3d(${(open * w).toFixed(1)}px,0,0)`;
+    S.figure.style.transform = `translate(-50%, ${((1 - ease(seg(u, 0.02, 0.5))) * 0.85 * innerHeight).toFixed(1)}px)`;
+
+    const pill = 1 - seg(u, 0, 0.1);
+    [S.vs, S.cue].forEach(n => { n.style.opacity = pill.toFixed(3); n.style.scale = (0.85 + 0.15 * pill).toFixed(3); n.style.pointerEvents = pill < 0.2 ? 'none' : ''; });
+
+    // the halves' own headline swaps lines, then clears the way for the centre line (and returns when they close)
+    const swap = ease(seg(u, 0.03, 0.08));
+    const hlOpacity = (1 - seg(u, 0.12, 0.24)) + seg(u, 0.86, 0.94);
+    S.hl.forEach(n => n.style.setProperty('--hl', Math.min(1, hlOpacity).toFixed(3)));
+    S.a.forEach(n => { n.style.opacity = ((1 - swap) * hlOpacity).toFixed(3); });
+    S.b.forEach(n => { n.style.opacity = (swap * hlOpacity).toFixed(3); });
+
+    // centre lines only show once the stage is wide enough to hold them
+    const c1 = seg(u, 0.26, 0.32) * (1 - seg(u, 0.4, 0.45));
+    const c2 = seg(u, 0.46, 0.5) * (1 - seg(u, 0.72, 0.78));
+    S.c1.style.opacity = c1.toFixed(3);
+    S.c2.style.opacity = c2.toFixed(3);
+    S.cl.style.setProperty('--cl', Math.max(c1, c2).toFixed(3));
+    S.tag.style.opacity = seg(u, 0.3, 0.45).toFixed(3);
+
+    // the logo is ink on the cream half; switch to cream once that half has slid past it
+    $('#top').classList.toggle('on-dark', w - open * w < 150);
+}
 
 // terminal typing
 function typeTerm() {
@@ -380,6 +431,7 @@ $$('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
 
 $('#year').textContent = new Date().getFullYear();
 if (!staticBelt) buildGears();
+layoutStory();
 render();
 typeTerm();
 onScroll();

@@ -36,50 +36,92 @@
     </header>
 
     <main id="main">
-        <!-- 01 HERO: two layers, the dark one is clipped to the right of the divider -->
-        <section class="hero" id="hero">
+        <!-- 01 HERO: pinned scroll story. The halves part, the figure rises on the stage, the halves close -->
+        <section class="story" id="hero">
             <h1 class="sr">Damian Lin — Senior Software Engineer, Taipei</h1>
+            <div class="story-pin" id="story-pin">
 
-            <div class="layer light">
-                <p class="hl hl-l" aria-hidden="true"><span data-i="hero.l1"></span></p>
-                <div class="art art-front" aria-hidden="true">
-                    <div class="win">
-                        <div class="win-bar"><i></i><i></i><i></i></div>
-                        <div class="win-body">
-                            <div class="ui-title"></div>
-                            <div class="ui-line"></div><div class="ui-line s"></div><div class="ui-line m"></div>
-                            <div class="ui-img"><b></b></div>
-                            <div class="ui-btn"></div>
-                            <div class="ui-sw"><i></i><i></i><i></i><i></i></div>
+                <div class="stage" aria-hidden="true">
+                    <div class="stage-bg"></div>
+                    <p class="center-line" id="center-line">
+                        <span class="c c1" data-i="hero.c1"></span>
+                        <span class="c c2" data-i="hero.c2"></span>
+                    </p>
+                    <div class="figure" id="figure">
+                        <svg viewBox="0 0 560 620" fill="none">
+                            <defs>
+                                <clipPath id="fig-left"><rect x="0" y="0" width="280" height="620"/></clipPath>
+                                <clipPath id="fig-right"><rect x="280" y="0" width="280" height="620"/></clipPath>
+                                <clipPath id="fig-shape">
+                                    <path d="M280 10C170 10 120 120 120 250c0 80 30 130 60 160h200c30-30 60-80 60-160C440 120 390 10 280 10Z"/>
+                                    <path d="M60 620c0-110 70-160 220-170 150 10 220 60 220 170Z"/>
+                                </clipPath>
+                                <pattern id="fig-scan" width="10" height="24" patternUnits="userSpaceOnUse"><line x1="0" y1="12" x2="10" y2="12" stroke="#ffb03a" stroke-width="1.5" opacity=".55"/></pattern>
+                            </defs>
+                            <g clip-path="url(#fig-left)">
+                                <path d="M280 10C170 10 120 120 120 250c0 80 30 130 60 160h200c30-30 60-80 60-160C440 120 390 10 280 10Z" fill="#ea1d10"/>
+                                <path d="M60 620c0-110 70-160 220-170 150 10 220 60 220 170Z" fill="#b9170c"/>
+                                <ellipse cx="280" cy="250" rx="88" ry="108" fill="#15110f"/>
+                                <rect x="212" y="238" width="46" height="26" rx="6" fill="#f3efe6"/>
+                                <path d="M246 500v-50M246 500l-10 22" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+                                <path d="M280 500l-28 16v34l28 16" stroke="#fff" stroke-width="9" stroke-linecap="square"/>
+                            </g>
+                            <g clip-path="url(#fig-right)" stroke="#ffb03a" stroke-width="3" stroke-linejoin="round">
+                                <rect x="280" y="0" width="280" height="620" fill="url(#fig-scan)" clip-path="url(#fig-shape)" stroke="none"/>
+                                <path d="M280 10C170 10 120 120 120 250c0 80 30 130 60 160h200c30-30 60-80 60-160C440 120 390 10 280 10Z"/>
+                                <path d="M60 620c0-110 70-160 220-170 150 10 220 60 220 170"/>
+                                <ellipse cx="280" cy="250" rx="88" ry="108" fill="#0c0f15"/>
+                                <rect x="302" y="238" width="46" height="26" rx="6"/>
+                                <path d="M314 500v-50" stroke-linecap="round"/>
+                                <circle cx="314" cy="526" r="6"/>
+                                <path d="M280 500l28 16v34l-28 16"/>
+                            </g>
+                            <path d="M280 10V620" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-dasharray="3 6"/>
+                        </svg>
+                    </div>
+                    <p class="nametag" id="nametag"><span class="marq"><span>DAMIAN LIN · SENIOR SOFTWARE ENGINEER · TAIPEI · SINCE 2017</span><span>DAMIAN LIN · SENIOR SOFTWARE ENGINEER · TAIPEI · SINCE 2017</span></span></p>
+                </div>
+
+                <div class="half half-front" id="half-f">
+                    <p class="hl hl-l" aria-hidden="true"><span class="s a" data-i="hero.l1"></span><span class="s b" data-i="hero.l1b"></span></p>
+                    <div class="art art-front" aria-hidden="true">
+                        <div class="win">
+                            <div class="win-bar"><i></i><i></i><i></i></div>
+                            <div class="win-body">
+                                <div class="ui-title"></div>
+                                <div class="ui-line"></div><div class="ui-line s"></div><div class="ui-line m"></div>
+                                <div class="ui-img"><b></b></div>
+                                <div class="ui-btn"></div>
+                                <div class="ui-sw"><i></i><i></i><i></i><i></i></div>
+                            </div>
                         </div>
+                        <div class="phone"><div class="phone-bar"></div><div class="phone-card"></div><div class="phone-card"></div></div>
+                        <div class="aa">Aa</div>
+                        <div class="toggle"><i></i></div>
                     </div>
-                    <div class="phone"><div class="phone-bar"></div><div class="phone-card"></div><div class="phone-card"></div></div>
-                    <div class="aa">Aa</div>
-                    <div class="toggle"><i></i></div>
                 </div>
-            </div>
 
-            <div class="layer dark" id="dark-layer">
-                <p class="hl hl-r" aria-hidden="true"><span data-i="hero.l2"></span></p>
-                <div class="art art-back" aria-hidden="true">
-                    <div class="win term">
-                        <div class="win-bar"><i></i><i></i><i></i></div>
-                        <pre class="term-body" id="term"></pre>
+                <div class="half half-back" id="half-b">
+                    <p class="hl hl-r" aria-hidden="true"><span class="s a" data-i="hero.l2"></span><span class="s b" data-i="hero.l2b"></span></p>
+                    <div class="art art-back" aria-hidden="true">
+                        <div class="win term">
+                            <div class="win-bar"><i></i><i></i><i></i></div>
+                            <pre class="term-body" id="term"></pre>
+                        </div>
+                        <div class="rack"><i></i><i></i><i></i><i></i></div>
+                        <div class="db"><i></i></div>
                     </div>
-                    <div class="rack"><i></i><i></i><i></i><i></i></div>
-                    <div class="db"><i></i></div>
                 </div>
-            </div>
 
-            <div class="vs" aria-hidden="true">
-                <span class="vs-l" data-i="front">Front</span>
-                <span class="vs-hex">vs</span>
-                <span class="vs-r" data-i="back">Back</span>
-            </div>
+                <div class="vs" id="vs" aria-hidden="true">
+                    <span class="vs-l" data-i="front">Front</span>
+                    <span class="vs-hex">vs</span>
+                    <span class="vs-r" data-i="back">Back</span>
+                </div>
 
-            <p class="tagline" data-i="tagline"></p>
-            <a class="scroll-cue" href="#work" data-i="scroll">Scroll down</a>
-            <a class="skip-story" href="#hood" data-i="skipstory">Skip the story</a>
+                <a class="scroll-cue" id="cue" href="#work" data-i="scroll">Scroll down</a>
+                <a class="skip-story" href="#work" data-i="skipstory">Skip the story</a>
+            </div>
         </section>
 
         <!-- 02 WORK: horizontal strip -->
