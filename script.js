@@ -10,9 +10,9 @@ const EXTRA = {
         'nav.factory': '工廠',
         's02.k': '街道', 's02.h': '前台，是使用者看得到的。', 'hint.side': '← 左右滑動 →',
         'sf.k': '工廠', 'sf.h': '幕後，<em>是一座工廠。</em>', 'sf.hint': '往下滑，輸送帶會橫向移動', 'sf.shipped': '已出貨',
-        'type.system': '系統', 'type.wip': '開發中', 'sf.wip': '開發中', 'type.stream': '即時串流', 'type.bot': 'LINE Bot', 'type.research': '研究', 'type.pipeline': '管線', 'type.tool': '工具', 'type.personal': '個人專案', 'type.more': '更多',
+        'type.system': '系統', 'type.wip': '開發中', 'sf.wip': '開發中', 'sf.research': '研究專案', 'sf.s.dims': '向量維度', 'sf.s.bench': '基準比較', 'sf.s.nofw': '框架依賴', 'type.stream': '即時串流', 'type.bot': 'LINE Bot', 'type.research': '研究', 'type.pipeline': '管線', 'type.tool': '工具', 'type.personal': '個人專案', 'type.more': '更多',
         'sf.d.wcs': '連接 WMS 與 PLC 的倉儲控制系統，支援 Siemens S7-1500 與 Mitsubishi SLMP。',
-        'sf.d.rag': '不依賴框架的 RAG 檢索研究系統，與 GraphRAG、LightRAG、Self-RAG 做系統性比較。',
+        'sf.d.rag': '不依賴框架的 RAG 檢索研究系統，與 GraphRAG、LightRAG、Self-RAG 做系統性比較。研究系統，未上線。',
         'sf.d.pipeline': 'OCR → 摘要 → 向量化 → 向量資料庫的文件處理管線，含 chunk 級去重。',
         'sf.d.scan': '整合 composer audit、npm audit、gitleaks、semgrep、enlightn 的資安掃描腳本。',
         'sf.d.agents': '視覺化 PM / SWE / QA / DevOps AI agent 協作的多代理開發平台（個人專案）。',
@@ -35,9 +35,9 @@ const EXTRA = {
         'nav.factory': 'Factory',
         's02.k': 'The street', 's02.h': 'The front is what people see.', 'hint.side': '← Scroll sideways →',
         'sf.k': 'The factory', 'sf.h': 'Behind the shops, <em>a factory.</em>', 'sf.hint': 'Scroll down, the belt moves sideways', 'sf.shipped': 'shipped',
-        'type.system': 'System', 'type.wip': 'In progress', 'sf.wip': 'In progress', 'type.stream': 'Streaming', 'type.bot': 'LINE Bot', 'type.research': 'Research', 'type.pipeline': 'Pipeline', 'type.tool': 'Tool', 'type.personal': 'Personal', 'type.more': 'More',
+        'type.system': 'System', 'type.wip': 'In progress', 'sf.wip': 'In progress', 'sf.research': 'Research', 'sf.s.dims': 'Embedding dims', 'sf.s.bench': 'Benchmarks', 'sf.s.nofw': 'Framework deps', 'type.stream': 'Streaming', 'type.bot': 'LINE Bot', 'type.research': 'Research', 'type.pipeline': 'Pipeline', 'type.tool': 'Tool', 'type.personal': 'Personal', 'type.more': 'More',
         'sf.d.wcs': 'Warehouse control system bridging the WMS and PLCs; Siemens S7-1500 and Mitsubishi SLMP.',
-        'sf.d.rag': 'Framework-free RAG research system, benchmarked against GraphRAG, LightRAG and Self-RAG.',
+        'sf.d.rag': 'Framework-free RAG research system, benchmarked against GraphRAG, LightRAG and Self-RAG. A research system, not in production.',
         'sf.d.pipeline': 'OCR → summary → embedding → vector DB document pipeline with chunk-level dedup.',
         'sf.d.scan': 'Security scan script combining composer audit, npm audit, gitleaks, semgrep and enlightn.',
         'sf.d.agents': 'Multi-agent dev platform visualizing PM / SWE / QA / DevOps AI agents at work (personal project).',
@@ -85,16 +85,16 @@ const PROJECTS = [
 const BELT = [
     { id: 'cube', name: 'cube_test', type: 'stream', repo: 'https://github.com/itsdamian/cube_test' },
     { id: 'wcs', name: 'WCS', type: 'system' },
-    { id: 'rag', name: 'SOP-LLM', type: 'research' },
+    { id: 'rag', name: 'SOP-LLM', type: 'research', stamp: 'research', stats: [['1024', 'sf.s.dims'], ['3', 'sf.s.bench'], ['0', 'sf.s.nofw']] },
     { id: 'pipeline', name: 'doc-pipeline', type: 'pipeline' },
     { id: 'linebot', name: 'line_genai_services', type: 'bot', repo: 'https://github.com/itsdamian/line_genai_services' },
     { id: 'laravelbot', name: 'new_gen_PDA', type: 'bot', repo: 'https://github.com/itsdamian/new_gen_PDA' },
     { id: 'scan', name: 'security-scan', type: 'tool' },
     { id: 'agents', name: 'agent-factory', type: 'personal' },
-    { id: 'jobagent', name: 'job-agent', type: 'wip', wip: true },
+    { id: 'jobagent', name: 'job-agent', type: 'wip', stamp: 'wip' },
     { id: 'github', name: 'GitHub ↗', type: 'more', href: 'https://github.com/itsdamian' }
 ];
-const SHIPPABLE = BELT.filter(b => !b.href && !b.wip).length;
+const SHIPPABLE = BELT.filter(b => !b.href && !b.stamp).length;
 
 const TERM_LINES = [
     ['$ docker compose up -d', ''],
@@ -207,8 +207,8 @@ function renderBelt() {
     boxesEl.innerHTML = BELT.map((b, i) => {
         const faces = `<span class="face raw">${CODE_ICON}<span class="box-name">${b.name}</span><span class="box-type">${t(`type.${b.type}`)}</span></span>
             <span class="face done"><i class="hazard"></i>
-                <span class="done-body"><span class="d-by">Damian /</span><span class="d-name">${b.name}</span><span class="d-desc">${t(`sf.d.${b.id}`)}</span></span>
-                <span class="d-foot">${t(`type.${b.type}`)}${b.repo ? ' · GitHub ↗' : ''}</span>${b.href ? '' : `<span class="stamp${b.wip ? ' wip' : ''}">${t(b.wip ? 'sf.wip' : 'sf.shipped')}</span>`}</span>`;
+                <span class="done-body"><span class="d-by">Damian /</span><span class="d-name">${b.name}</span>${b.stats ? `<span class="d-stats">${b.stats.map(([n, k]) => `<span><b>${n}</b>${t(k)}</span>`).join('')}</span>` : ''}<span class="d-desc${b.stats ? ' short' : ''}">${t(`sf.d.${b.id}`)}</span></span>
+                <span class="d-foot">${t(`type.${b.type}`)}${b.repo ? ' · GitHub ↗' : ''}</span>${b.href ? '' : `<span class="stamp${b.stamp ? ' ' + b.stamp : ''}">${t(b.stamp ? `sf.${b.stamp}` : 'sf.shipped')}</span>`}</span>`;
         const url = b.href || b.repo;
         const hit = url
             ? `<a class="box-in" href="${url}" target="_blank" rel="noopener">${faces}</a>`
@@ -252,7 +252,7 @@ function updateBelt() {
         if (b.href) return; // the link-out box is never pressed
         bestPress = Math.min(bestPress, Math.abs(c - B.cx));
         const done = c < B.cx;
-        if (done && !b.wip) shipped++;
+        if (done && !b.stamp) shipped++;
         // crossing the press flips the crate to its stamped face (and squashes it on the way in)
         if (done !== boxes[i].classList.contains('is-done')) {
             boxes[i].classList.toggle('is-done', done);
