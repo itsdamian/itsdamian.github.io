@@ -137,7 +137,7 @@ section { position: relative; }
 .work, .hood, .stack { padding: clamp(70px, 10vw, 130px) 0; }
 
 /* work strip */
-.strip { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px clamp(16px, 4vw, 48px) 24px; scrollbar-width: thin; scrollbar-color: var(--red) transparent; }
+.strip { --edge: max(clamp(16px, 4vw, 48px), calc((100vw - 1200px) / 2 + clamp(16px, 4vw, 48px))); display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--edge); padding: 6px var(--edge) 24px; scrollbar-width: thin; scrollbar-color: var(--red) transparent; }
 .proj { flex: 0 0 min(380px, 82vw); scroll-snap-align: start; background: var(--cream-2); border: 1px solid var(--line); border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px; transition: transform .25s, background .25s, color .25s; }
 .proj:hover { transform: translateY(-6px); background: var(--ink); color: var(--cream); }
 .proj.featured { background: var(--red); color: #fff; border-color: var(--red); }
@@ -229,8 +229,16 @@ section { position: relative; }
     .burger { display: block; z-index: 2; }
     .clock { display: none; }
     .top .brand, .top .top-tools { position: relative; z-index: 2; }
-    .top.solid .top-tools { color: var(--ink); }
-    .nav.open ~ .top-tools, .nav.open ~ .top-tools * { color: #fff; }
+    /* the first screen is cream on mobile, so the bar is always solid with dark text.
+       No backdrop-filter here: it would make the fixed menu overlay size to the bar. */
+    .top, .top.solid { background: var(--cream); backdrop-filter: none; border-bottom: 1px solid var(--line); padding-block: 12px; }
+    .top .top-tools, .top.solid .top-tools { color: var(--ink); }
+    .top .lang, .top.solid .lang { border-color: var(--ink); }
+    .top .nav, .top.solid .nav { color: #fff; }
+    .nav.open ~ .top-tools { color: #fff; }
+    .nav.open ~ .top-tools .lang { border-color: #fff; }
+    .hl-l::after { left: 0; right: auto; }
+    .hl { top: 84px; }
 
     .hero { height: auto; min-height: 0; }
     .layer { position: relative; min-height: 78vh; clip-path: none !important; }
