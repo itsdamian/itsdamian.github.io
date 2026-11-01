@@ -157,6 +157,7 @@ function renderExtra() {
 const beltSec = $('#factory');
 const boxesEl = $('#boxes');
 const bandEl = $('#band');
+const pressEl = $('#press');
 const CODE_ICON = '<svg viewBox="0 0 48 28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4 3 14l11 10M34 4l11 10-11 10M28 2 20 26"/></svg>';
 const B = { travel: 1, x0: 0, cx: 0, step: 0, bw: 0, active: -1, shipped: -1 };
 let staticBelt = reduced;
@@ -190,10 +191,13 @@ function buildGears() {
 
 function renderBelt() {
     boxesEl.innerHTML = BELT.map((b, i) => {
-        const inner = `${CODE_ICON}<span class="box-name">${b.name}</span><span class="box-type">${t(`type.${b.type}`)}</span>`;
+        const faces = `<span class="face raw">${CODE_ICON}<span class="box-name">${b.name}</span><span class="box-type">${t(`type.${b.type}`)}</span></span>
+            <span class="face done"><i class="hazard"></i>
+                <span class="done-body"><span class="d-by">Damian /</span><span class="d-name">${b.name}</span><span class="d-desc">${t(`sf.d.${b.id}`)}</span></span>
+                <span class="d-foot">${t(`type.${b.type}`)}</span>${b.href ? '' : `<span class="stamp">${t('sf.shipped')}</span>`}</span>`;
         const hit = b.href
-            ? `<a class="box-in" href="${b.href}" target="_blank" rel="noopener">${inner}</a>`
-            : `<button class="box-in" type="button">${inner}</button>`;
+            ? `<a class="box-in" href="${b.href}" target="_blank" rel="noopener">${faces}</a>`
+            : `<button class="box-in" type="button">${faces}</button>`;
         return `<li class="box" data-n="${i}">${hit}<p class="box-desc">${t(`sf.d.${b.id}`)}</p></li>`;
     }).join('');
     $('#shipped-total').textContent = String(SHIPPABLE).padStart(2, '0');
@@ -225,12 +229,28 @@ function updateBelt() {
     bandEl.style.setProperty('--hz', `${(-shift).toFixed(1)}px`);
     gears.forEach(g => { g.el.style.transform = `rotate(${(shift * g.speed / 3).toFixed(1)}deg)`; });
 
-    let active = 0, best = Infinity, shipped = 0;
+    const boxes = $$('.box', boxesEl);
+    let active = 0, best = Infinity, bestPress = Infinity, shipped = 0;
     BELT.forEach((b, i) => {
         const c = B.x0 + i * B.step + B.bw / 2 - shift;
         if (Math.abs(c - B.cx) < best) { best = Math.abs(c - B.cx); active = i; }
-        if (!b.href && c < B.cx) shipped++;
+        if (b.href) return; // the link-out box is never pressed
+        bestPress = Math.min(bestPress, Math.abs(c - B.cx));
+        const done = c < B.cx;
+        if (done) shipped++;
+        // crossing the press flips the crate to its stamped face (and squashes it on the way in)
+        if (done !== boxes[i].classList.contains('is-done')) {
+            boxes[i].classList.toggle('is-done', done);
+            if (done) {
+                boxes[i].classList.remove('hit');
+                void boxes[i].offsetWidth;
+                boxes[i].classList.add('hit');
+            }
+        }
     });
+    // piston follows how close the nearest box is to the press: fully down when it is right under it
+    const near = Math.max(0, 1 - bestPress / (B.bw * 0.5));
+    pressEl.style.setProperty('--dip', `${(26 * near * near * (3 - 2 * near)).toFixed(1)}px`);
     if (active !== B.active) {
         B.active = active;
         $$('.box', boxesEl).forEach((el, i) => el.classList.toggle('on', i === active));
@@ -242,6 +262,7 @@ function updateBelt() {
     }
 }
 
+boxesEl.addEventListener('animationend', e => { if (e.animationName === 'squash') e.target.classList.remove('hit'); });
 boxesEl.addEventListener('click', e => {
     const li = e.target.closest('.box');
     if (!li || staticBelt || e.target.closest('a')) return;

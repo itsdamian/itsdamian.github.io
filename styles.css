@@ -184,22 +184,48 @@ section { position: relative; }
 .belt-hint { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 8px; font: 500 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #8892a8; }
 .belt-hint i { width: 48px; height: 1px; background: var(--amber); }
 
-.crane { position: absolute; left: 50%; transform: translateX(-50%); z-index: 2; bottom: calc(var(--floor) + var(--bh) + 28px); width: 170px; }
+.crane { position: absolute; left: 50%; transform: translateX(-50%); z-index: 2; bottom: calc(var(--floor) + var(--bh) + 34px); width: 170px; }
 .crane::before { content: ''; position: absolute; left: -100vw; right: -100vw; top: -2px; height: 6px; background: #2a3142; }
 .trolley { position: relative; margin-top: 6px; height: 44px; background: #2a3142; border-radius: 4px; display: flex; justify-content: center; align-items: center; gap: 14px; }
 .trolley i { width: 11px; height: 11px; border-radius: 50%; background: var(--amber); }
 .trolley i:nth-child(2) { background: #4a2d2a; }
-.crane-bar { margin: 6px auto 0; width: 136px; height: 10px; background: var(--red); border-radius: 2px; }
+/* the press: piston + head travel down by --dip (set from scroll) as a box passes underneath */
+.press-drop { width: 136px; margin: 0 auto; transform: translateY(var(--dip, 0px)); will-change: transform; }
+.rod { width: 14px; height: 12px; margin: 0 auto; background: #8d96a6; }
+.crane-bar { width: 136px; height: 10px; background: var(--red); border-radius: 2px; }
 
 .boxes { position: absolute; left: 0; bottom: var(--floor); height: var(--bh); z-index: 2; will-change: transform; }
 .box { position: absolute; bottom: 0; width: calc(var(--bh) * .9); height: var(--bh); border: 2px dashed var(--amber); background: rgba(12, 15, 21, .72); color: var(--amber); transition: background .25s, box-shadow .25s; }
-.box-in { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 14px; text-align: center; }
+.box-in { all: unset; box-sizing: border-box; cursor: pointer; display: block; position: relative; width: 100%; height: 100%; }
 .box-in:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
 .box:hover, .box.on { background: rgba(255, 176, 58, .1); box-shadow: 0 0 0 4px rgba(255, 176, 58, .12); }
+.face { position: absolute; inset: 0; display: flex; flex-direction: column; box-sizing: border-box; }
+.face.raw { align-items: center; justify-content: center; gap: 16px; padding: 14px; text-align: center; }
 .box svg { width: 52px; height: auto; }
 .box-name { font: 500 12px/1.6 var(--mono); letter-spacing: .22em; text-transform: uppercase; color: #aab1c2; word-break: break-word; }
 .box-type { position: absolute; bottom: 12px; font: 500 10px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
 .box-desc { display: none; }
+
+/* after the press: the raw crate becomes a finished, stamped card */
+.face.done { display: none; background: var(--cream); color: var(--ink); text-align: left; }
+.box.is-done, .box.is-done:hover, .box.is-done.on { border-color: transparent; background: var(--cream); box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
+.box.is-done .face.raw { display: none; }
+.box.is-done .face.done { display: flex; }
+.hazard { flex: none; height: 26px; background: repeating-linear-gradient(115deg, var(--red) 0 12px, #b9170c 12px 24px); }
+.done-body { flex: 1; min-height: 0; overflow: hidden; padding: 12px 16px 0; }
+.d-by { display: block; font: 500 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; opacity: .55; margin-bottom: 4px; }
+.d-name { display: block; font: 800 clamp(18px, 1.9vw, 24px)/1.1 var(--display); text-transform: uppercase; margin-bottom: 10px; word-break: break-word; }
+.d-desc { display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; font: 400 12.5px/1.55 var(--body); color: #3b3d46; }
+.d-foot { flex: none; margin: 0 16px; padding: 10px 0 12px; border-top: 1px solid rgba(21, 22, 27, .16); font: 500 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+.stamp { position: absolute; top: 34px; right: 10px; border: 2px solid var(--red); color: var(--red); background: rgba(243, 239, 230, .7); font: 700 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; padding: 2px 8px; transform: rotate(-8deg); }
+.box.is-done .stamp { animation: stamp .36s cubic-bezier(.2, .8, .3, 1) both; }
+@keyframes stamp {
+    0% { opacity: 0; transform: rotate(-8deg) scale(2.6); }
+    70% { opacity: 1; transform: rotate(-8deg) scale(.92); }
+    100% { opacity: 1; transform: rotate(-8deg) scale(1); }
+}
+.box.hit { animation: squash .3s ease-out; transform-origin: 50% 100%; }
+@keyframes squash { 40% { transform: scaleY(.93); } }
 
 .floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor); background: #161b26; z-index: 1; }
 .band { position: absolute; left: 0; right: 0; top: 0; height: 30px; background: #2b3244; border-top: 3px solid #8892a8;
@@ -216,7 +242,9 @@ section { position: relative; }
 .belt.static .belt-cap { display: none; }
 .belt.static .boxes { position: static; height: auto; transform: none !important; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; padding: 40px clamp(16px, 4vw, 48px) 0; max-width: 1200px; margin: 0 auto; }
 .belt.static .box { position: static; width: auto; height: auto; min-height: 200px; text-align: left; padding: 20px; }
-.belt.static .box-in { height: auto; align-items: flex-start; text-align: left; padding: 0 0 14px; gap: 12px; }
+.belt.static .box-in { height: auto; }
+.belt.static .face.raw { position: static; align-items: flex-start; text-align: left; padding: 0 0 14px; gap: 12px; }
+.belt.static .face.done { display: none !important; }
 .belt.static .box-type { position: static; }
 .belt.static .box-desc { display: block; font-size: 14px; color: #c7cddb; }
 
